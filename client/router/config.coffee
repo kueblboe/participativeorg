@@ -12,5 +12,23 @@ Router.map ->
   @route 'home',
     path: '/'
 
-  @route 'slack',
-    path: '/slack'
+  @route 'slack'
+
+  @route 'slackNew',
+    path: '/slack/new'
+
+  @route 'slackPage',
+    path: '/slack/:_id',
+    data: -> Slack.findOne(this.params._id)
+
+requireLogin = ->
+  unless Meteor.user()
+    if Meteor.loggingIn()
+      @render @loadingTemplate
+    else
+      @render "accessDenied"
+    @stop()
+
+Router.before requireLogin,
+  only: "slackNew"
+

@@ -14,10 +14,11 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="/slack">Slack</a></li>
+            <li><a href="{{pathFor 'slack'}}">Slack</a></li>
           </ul>
           <ul class="nav navbar-nav navbar-right">
-
+            {{#if currentUser}}<li><a href="{{pathFor 'slackNew'}}"><i class="fa fa-plus"></i></a></li>{{/if}}
+            <li>{{loginButtons}}</li>
           </ul>
         </div>
       </div>

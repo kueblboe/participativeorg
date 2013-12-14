@@ -1,0 +1,12 @@
+<template name="slackEvent">
+  <div id="{{_id}}" class="post">
+    <h3><a href="{{pathFor 'slackPage'}}">{{title}}</a></h3>
+    <div>{{description}}</div>
+    <ul class="tags">
+      <li>{{date}}</li>
+      <li>{{category}}</li>
+      <li>{{effort}} h</li>
+      <li>{{cost}} €</li>
+    </ul>
+  </div>
+</template>

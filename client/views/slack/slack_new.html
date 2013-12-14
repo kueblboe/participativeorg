@@ -1,0 +1,39 @@
+<template name="slackNew">
+  <form role="form">
+    <div class="form-group">
+      <label for="title">Title</label>
+      <input type="text" class="form-control" id="title" placeholder="My latest slack" required>
+    </div>
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea class="form-control" id="description" placeholder="What I learned and might be interesting to my colleagues..."></textarea>
+    </div>
+    <div class="form-group">
+      <label for="category">Category</label>
+      <select id="category">
+        <option>book</option>
+        <option>event</option>
+        <option selected>other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="date">Date</label>
+      <input type="date" class="form-control" id="date" required>
+    </div>
+    <div class="form-group">
+      <label for="effort">Effort</label>
+      <div class="input-group">
+        <input type="number" min="1" placeholder="it took me" class="form-control" id="effort" required>
+        <span class="input-group-addon">h</span>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="cost">Cost</label>
+      <div class="input-group">
+        <input type="number" min="0" placeholder="it cost" class="form-control" id="cost">
+        <span class="input-group-addon">€</span>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+</template>
