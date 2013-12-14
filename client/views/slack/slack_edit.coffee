@@ -20,8 +20,10 @@ Template.slackEdit.events
     else
       console.log "Adding"
       Meteor.call "addSlack", slackProperties, (error, id) ->
-        return alert(error.reason) if error
-        Router.go "slack"
+        if error
+          throwError error.reason
+        else
+          Router.go "slack"
 
   "click .delete": (e) ->
     e.preventDefault()

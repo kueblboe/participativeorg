@@ -5,6 +5,8 @@ Router.configure
   yieldTemplates:
     header:
       to: 'header'
+    errors:
+      to: 'errors'
     footer:
       to: 'footer'
 
@@ -37,4 +39,6 @@ requireLogin = ->
 
 Router.before requireLogin,
   only: "slackNew"
+
+Router.before -> clearErrors()
 
