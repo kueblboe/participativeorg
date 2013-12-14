@@ -1,5 +1,13 @@
 @Slack = new Meteor.Collection("slack")
 
+Slack.allow
+  update: ownsDocument
+  remove: ownsDocument
+
+Slack.deny update: (userId, slack, fieldNames) ->
+  # may only edit the following fields:
+  _.without(fieldNames, "title", "description", "category", "date", "effort", "cost").length > 0
+
 Meteor.methods(
   addSlack: (slackAttributes) ->
     # ensure the user is logged in

@@ -15,10 +15,16 @@ Router.map ->
   @route 'slack'
 
   @route 'slackNew',
-    path: '/slack/new'
+    path: '/slack/new',
+    template: 'slackEdit'
+    data: {date: new Date().toJSON().slice(0,10)}
 
   @route 'slackPage',
     path: '/slack/:_id',
+    data: -> Slack.findOne(this.params._id)
+
+  @route 'slackEdit',
+    path: '/slack/:_id/edit',
     data: -> Slack.findOne(this.params._id)
 
 requireLogin = ->
