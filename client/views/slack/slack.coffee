@@ -1,3 +1,8 @@
+Session.set('slackSortBy', 'date')
+Session.set('slackSortOrder', -1)
+
 Template.slack.helpers
   slackEvents: ->
-    Slack.find({userId: Meteor.userId()}, {sort: {date: -1}}) if Meteor.user()
+    filter = {sort: {}}
+    filter.sort[Session.get('slackSortBy')] = Session.get('slackSortOrder')
+    Slack.find({userId: Meteor.userId()}, filter) if Meteor.user()

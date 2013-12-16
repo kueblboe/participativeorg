@@ -6,19 +6,17 @@ Template.slackEdit.events
       title: $(e.target).find("#title").val()
       description: $(e.target).find("#description").val()
       category: $(e.target).find("#category").val()
-      date: $(e.target).find("#date").val()
-      effort: $(e.target).find("#effort").val()
-      cost: $(e.target).find("#cost").val()
+      date: new Date($(e.target).find("#date").val())
+      effort: parseInt($(e.target).find("#effort").val(), 10)
+      cost: parseInt($(e.target).find("#cost").val(), 10)
 
     if currentSlackId
-      console.log "Updating"
       Slack.update currentSlackId, { $set: slackProperties }, (error) ->
         if error
           throwError error.reason
         else
           Router.go "slack"
     else
-      console.log "Adding"
       Meteor.call "addSlack", slackProperties, (error, id) ->
         if error
           throwError error.reason

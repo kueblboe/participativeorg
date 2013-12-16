@@ -1,13 +1,14 @@
 <template name="slackEvent">
-  <div id="{{_id}}" class="post">
-    <h3><a href="{{pathFor 'slackPage'}}">{{title}}</a></h3>
+  <div id="{{_id}}" class="item">
+    <i class="fa fa-{{categorySymbol category}}"></i>
+    <b><a href="{{pathFor 'slackPage'}}">{{title}}</a></b>
+    <div class="tags">
+      <span>{{date}}</span>
+      <span>{{category}}</span>
+      <span>{{effort}} h</span>
+      {{#if cost}}<span>{{cost}} €</span>{{/if}}
+    </div>
     <div>{{description}}</div>
-    <ul class="tags">
-      <li>{{date}}</li>
-      <li>{{category}}</li>
-      <li>{{effort}} h</li>
-      <li>{{cost}} €</li>
-    </ul>
-    {{#if ownSlack}}<a href="{{pathFor 'slackEdit'}}">Edit</a>{{/if}}
+    {{#if ownSlack}}<a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
   </div>
 </template>

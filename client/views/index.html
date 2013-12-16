@@ -9,7 +9,9 @@
   <![endif]-->
 
   {{yield 'header'}}
-  {{yield 'errors'}}
-  {{yield}}
+  <div class="container">
+    {{yield 'errors'}}
+    {{yield}}
+  </div>
   {{yield 'footer'}}
 </template>

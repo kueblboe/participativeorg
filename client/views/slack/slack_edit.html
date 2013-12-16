@@ -1,7 +1,7 @@
 <template name="slackEdit">
   <form role="form">
     <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required>
-    <textarea class="form-control" id="description" value="{{description}}" placeholder="What I learned and might be interesting to my colleagues..."></textarea>
+    <textarea class="form-control" id="description" placeholder="What I learned and might be interesting to my colleagues...">{{description}}</textarea>
     <select id="category" value="{{category}}">
       <option>book</option>
       <option>event</option>
@@ -17,6 +17,6 @@
       <span class="input-group-addon">€</span>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
-    {{#if _id}}<a class="btn btn-danger delete" href="#">Delete</a>{{/if}}
+    {{#if _id}}<a class="btn btn-danger delete" href="#"><i class="fa fa-trash-o"></i> Delete</a>{{/if}}
   </form>
 </template>
