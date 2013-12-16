@@ -1,6 +1,8 @@
 <template name="slack">
   <div id="slack">
-    {{> slackSummary}}
+    {{#if slackEvents}}
+      {{> slackSummary}}
+    {{/if}}
     {{#each slackEvents}}
       {{> slackEvent}}
     {{/each}}
