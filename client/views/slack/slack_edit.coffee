@@ -14,6 +14,8 @@ Template.slackEdit.events
       date: new Date($(e.target).find("#date").val())
       effort: parseInt($(e.target).find("#effort").val(), 10)
       cost: parseInt($(e.target).find("#cost").val(), 10)
+      url: $(e.target).find("#url").val()
+      ranking: parseInt($(e.target).find("#ranking").val(), 10)
 
     if currentSlackId
       Slack.update currentSlackId, { $set: slackProperties }, (error) ->

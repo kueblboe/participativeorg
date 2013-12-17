@@ -7,8 +7,19 @@
       <span>{{category}}</span>
       <span>{{effort}} h</span>
       {{#if cost}}<span>{{cost}} €</span>{{/if}}
+      <span class="rating">
+        {{#times ranking}}
+        <i class="fa fa-star"></i>
+        {{/times}}
+        {{#times rankingNeg}}
+        <i class="fa fa-star-o"></i>
+        {{/times}}
+      </span>
     </div>
     <div class="text">{{description}}</div>
+    {{#if url}}
+    <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
+    {{/if}}
     {{#if ownSlack}}<a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
   </div>
 </template>

@@ -22,6 +22,14 @@
       <input type="number" min="0" placeholder="it cost" class="form-control" id="cost" value="{{cost}}" required>
       <span class="input-group-addon">€</span>
     </div>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-globe"></i></span>
+      <input type="url" placeholder="url" class="form-control" id="url" value="{{url}}">
+    </div>
+    <div class="input-group">
+      <span class="input-group-addon"><i class="fa fa-star"></i></span>
+      <input type="number" placeholder="ranking 0-5" class="form-control" id="ranking" value="{{ranking}}">
+    </div>
     <button type="submit" class="btn btn-default">Submit</button>
     <a class="btn btn-default" href="/slack">Cancel</a>
     {{#if _id}}<a class="btn btn-danger delete" href="#"><i class="fa fa-trash-o"></i> Delete</a>{{/if}}

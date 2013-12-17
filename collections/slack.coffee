@@ -6,7 +6,7 @@ Slack.allow
 
 Slack.deny update: (userId, slack, fieldNames) ->
   # may only edit the following fields:
-  _.without(fieldNames, "title", "description", "category", "date", "effort", "cost").length > 0
+  _.without(fieldNames, "title", "description", "category", "date", "effort", "cost", "url", "ranking").length > 0
 
 Meteor.methods(
   addSlack: (slackAttributes) ->
