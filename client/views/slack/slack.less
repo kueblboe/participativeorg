@@ -9,3 +9,33 @@
 .text {
   white-space: pre-wrap;
 }
+
+.book {
+  border-left: @primary-1 3px solid;
+  .watermark {
+    color: @primary-bg;
+  }
+}
+
+.event {
+  border-left: @secondary-a-1 3px solid;
+  .watermark {
+    color: @secondary-a-bg;
+  }
+}
+
+.other {
+  border-left: @secondary-b-1 3px solid;
+  .watermark {
+    color: @secondary-b-bg;
+  }
+}
+
+.watermark {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  height: 56px;
+}
