@@ -1,7 +1,11 @@
 <template name="slack">
   <div id="slack">
-    {{#if slackEvents}}
-      {{> slackSummary}}
+    {{#if currentUser}}
+      {{#if hasSlackEvents}}
+        {{> slackSummary}}
+      {{else}}
+        {{> slackEmpty}}
+      {{/if}}
     {{/if}}
     {{#each slackEvents}}
       {{> slackEvent}}

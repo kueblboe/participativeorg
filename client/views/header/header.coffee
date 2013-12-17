@@ -1,4 +1,4 @@
-Template.header.helpers(
+Template.header.helpers
   activeRouteClass: ->
     args = Array::slice.call(arguments, 0)
     args.pop()
@@ -12,10 +12,6 @@ Template.header.helpers(
 
   selectedUserName: ->
     Session.get('selectedUser').profile.name
-
-  selectedSelf: ->
-    Session.get('selectedUser')._id is Meteor.userId()
-)
 
 Template.header.events
   'click .dropdown-toggle': (e) ->

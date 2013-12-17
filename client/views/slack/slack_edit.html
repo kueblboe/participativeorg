@@ -2,21 +2,28 @@
   <form role="form">
     <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required>
     <textarea class="form-control" id="description" placeholder="What I learned and might be interesting to my colleagues...">{{description}}</textarea>
-    <select id="category" value="{{category}}">
-      <option>book</option>
-      <option>event</option>
-      <option>other</option>
-    </select>
-    <input type="date" class="form-control" id="date" value="{{date}}" required>
+    <div class="btn-group btn-group-justified" id="category" data-toggle="buttons">
+      <label class="btn btn-default {{isActiveCategory 'book'}}">
+        <input type="radio" name="options" value="book"> book
+      </label>
+      <label class="btn btn-default {{isActiveCategory 'event'}}">
+        <input type="radio" name="options" value="event"> event
+      </label>
+      <label class="btn btn-default {{isActiveCategory 'other'}}">
+        <input type="radio" name="options" value="other"> other
+      </label>
+    </div>
+    <input type="date" class="form-control" id="date" value="{{rfcDate date}}" required>
     <div class="input-group">
       <input type="number" min="1" placeholder="it took me" class="form-control" id="effort" value="{{effort}}" required>
       <span class="input-group-addon">h</span>
     </div>
     <div class="input-group">
-      <input type="number" min="0" placeholder="it cost" class="form-control" id="cost" value="{{cost}}">
+      <input type="number" min="0" placeholder="it cost" class="form-control" id="cost" value="{{cost}}" required>
       <span class="input-group-addon">€</span>
     </div>
     <button type="submit" class="btn btn-default">Submit</button>
+    <a class="btn btn-default" href="/slack">Cancel</a>
     {{#if _id}}<a class="btn btn-danger delete" href="#"><i class="fa fa-trash-o"></i> Delete</a>{{/if}}
   </form>
 </template>

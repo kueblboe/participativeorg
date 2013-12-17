@@ -5,4 +5,7 @@ Template.slack.helpers
   slackEvents: ->
     filter = {sort: {}}
     filter.sort[Session.get('slackSortBy')] = Session.get('slackSortOrder')
-    Slack.find({userId: Session.get('selectedUser')._id}, filter)
+    Slack.find({}, filter)
+
+  hasSlackEvents: ->
+    Slack.find({}).count() > 0

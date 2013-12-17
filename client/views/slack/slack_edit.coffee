@@ -1,3 +1,8 @@
+Template.slackEdit.helpers
+  isActiveCategory: (category) ->
+    if category is this.category
+      'active'
+
 Template.slackEdit.events
   "submit form": (e) ->
     e.preventDefault()
@@ -5,7 +10,7 @@ Template.slackEdit.events
     slackProperties =
       title: $(e.target).find("#title").val()
       description: $(e.target).find("#description").val()
-      category: $(e.target).find("#category").val()
+      category: $(e.target).find("#category .active input").val()
       date: new Date($(e.target).find("#date").val())
       effort: parseInt($(e.target).find("#effort").val(), 10)
       cost: parseInt($(e.target).find("#cost").val(), 10)

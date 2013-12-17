@@ -3,7 +3,7 @@
     <i class="fa fa-{{categorySymbol category}}"></i>
     <b><a href="{{pathFor 'slackPage'}}">{{title}}</a></b>
     <div class="tags">
-      <span>{{date}}</span>
+      <span>{{formattedDate date}}</span>
       <span>{{category}}</span>
       <span>{{effort}} h</span>
       {{#if cost}}<span>{{cost}} €</span>{{/if}}
