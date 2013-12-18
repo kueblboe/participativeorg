@@ -5,9 +5,9 @@
     <div class="tags">
       <span>{{formattedDate date}}</span>
       <span>{{category}}</span>
-      <span>{{effort}} h</span>
-      {{#if cost}}<span>{{cost}} €</span>{{/if}}
-      <span class="rating">
+      <span class="{{highlightEffort}}">{{effort}} h</span>
+      {{#if cost}}<span class="{{highlightCost}}">{{cost}} €</span>{{/if}}
+      <span class="rating {{highlightRanking}}">
         {{#times ranking}}
         <i class="fa fa-star"></i>
         {{/times}}

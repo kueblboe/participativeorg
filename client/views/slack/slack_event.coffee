@@ -12,3 +12,12 @@ Template.slackEvent.helpers
 
   rankingNeg: ->
     5 - this.ranking
+
+  highlightEffort: ->
+    'highlight' if this.effort > 16
+
+  highlightCost: ->
+    'highlight' if this.cost > 500
+
+  highlightRanking: ->
+    'highlight' if this.ranking > 4
