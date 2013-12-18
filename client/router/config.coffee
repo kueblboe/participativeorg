@@ -20,7 +20,7 @@ Router.map ->
   @route 'slackNew',
     path: '/slack/new',
     template: 'slackEdit'
-    data: {date: new Date().toJSON().slice(0,10), cost: 0}
+    data: {date: new Date().toJSON().slice(0,10), category: 'other'}
 
   @route 'slackPage',
     path: '/slack/:_id',
