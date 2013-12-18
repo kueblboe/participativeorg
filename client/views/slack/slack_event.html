@@ -1,7 +1,8 @@
 <template name="slackEvent">
   <div id="{{_id}}" class="item {{category}}">
     <i class="watermark fa fa-3x fa-{{categorySymbol category}}"></i>
-    <b><a href="{{pathFor 'slackPage'}}">{{title}}</a></b>
+    <!-- <b><a href="{{pathFor 'slackPage'}}">{{title}}</a></b> -->
+    <b>{{title}}</b>
     <div class="tags">
       <span>{{formattedDate date}}</span>
       <span>{{category}}</span>
