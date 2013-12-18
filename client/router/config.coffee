@@ -14,7 +14,8 @@ Router.map ->
   @route 'home',
     path: '/'
 
-  @route 'slack'
+  @route 'slack',
+    waitOn: -> Meteor.subscribe "slack", Session.get('selectedUser')._id
 
   @route 'slackNew',
     path: '/slack/new',
