@@ -2,11 +2,22 @@
 @import '../../stylesheets/variables';
 
 #othersSlack {
-	float: right;
+  float: right;
   font-weight: bold;
 
-  img {
-    margin-left: 50px;
+  img#point-left {
+    @media @phone {
+      display: none;
+    }
+    margin-left: 60px;
+    margin-bottom: -10px;
+  }
+
+  img#point-right {
+    @media @tablet {
+      display: none;
+    }
+    margin-left: 150px;
     margin-bottom: -10px;
   }
 

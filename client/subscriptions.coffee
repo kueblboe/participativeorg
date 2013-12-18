@@ -1,4 +1,4 @@
-initialUser =  Meteor.user() || {_id: null, profile: {name: ''}}
+initialUser = Meteor.user() || {_id: null, profile: {name: ''}}
 Session.set('selectedUser', initialUser)
 
 Deps.autorun ->
