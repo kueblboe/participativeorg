@@ -1,6 +1,7 @@
 Template.slackSummary.helpers
   totalCost: -> 462
   totalEffort: -> 120
+  goals: -> Goals.find()
 
 Template.slackSummary.events
   'click #totalCost': (e) ->

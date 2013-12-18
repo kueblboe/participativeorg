@@ -1,7 +1,12 @@
 <template name="slackSummary">
+  {{#each goals}}
+    {{> slackGoal}}
+  {{/each}}
   <h3 class="summary">
     <span id="year" class="label label-default">2013</span>
     <span id="totalCost" class="label label-default">{{totalCost}} €</span>
     <span id="totalEffort" class="label label-default">{{totalEffort}} h</span>
+    <div id="goals">
+    </div>
   </h3>
 </template>
