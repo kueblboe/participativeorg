@@ -17,7 +17,7 @@ Meteor.methods(
     throw new Meteor.Error(422, "Please fill in a title") unless slackAttributes.title
     
     # pick out the whitelisted keys
-    slack = _.extend(_.pick(slackAttributes, "title", "description", "category", "date", "effort", "cost"),
+    slack = _.extend(_.pick(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking"),
       userId: Meteor.userId()
       createdAt: new Date()
     )
