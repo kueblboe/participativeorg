@@ -16,6 +16,20 @@ img {
   &:hover {
     background-color: #f8f8f8;
   }
+  .details {
+    display: none;
+  }
+  .preview {
+    display: inherit;
+  }
+  &.active {
+    .details {
+      display: inherit;
+    }
+    .preview {
+      display: none;
+    }
+  }
 }
 
 .tags {

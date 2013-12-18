@@ -15,3 +15,9 @@ Handlebars.registerHelper "times", (n, block) ->
     accum += block.fn(i)
     ++i
   accum
+
+Handlebars.registerHelper "preview", (text) ->
+  if text.length > 50
+    text.substring(0, 50) + '…'
+  else
+    text

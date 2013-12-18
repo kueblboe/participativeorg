@@ -21,3 +21,7 @@ Template.slackEvent.helpers
 
   highlightRanking: ->
     'highlight' if this.ranking > 4
+
+Template.slackEvent.events
+  'click .item': (e) ->
+    $('#' + e.currentTarget.id).toggleClass('active')

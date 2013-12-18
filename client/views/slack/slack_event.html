@@ -16,10 +16,13 @@
         {{/times}}
       </span>
     </div>
-    <div class="text">{{description}}</div>
-    {{#if url}}
-    <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
-    {{/if}}
-    {{#if ownSlack}}<a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
+    <div class="preview">{{preview description}}</div>
+    <div class="details">
+      <div class="text">{{description}}</div>
+      {{#if url}}
+      <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
+      {{/if}}
+      {{#if ownSlack}}<a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
+    </div>
   </div>
 </template>
