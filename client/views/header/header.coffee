@@ -13,6 +13,9 @@ Template.header.helpers
   selectedUserName: ->
     Session.get('selectedUser').profile.name
 
+  selectedUserAvatar: ->
+    Session.get('selectedUser').profile.avatar
+
 Template.header.events
   'click .dropdown-toggle': (e) ->
     e.preventDefault()
