@@ -3,12 +3,12 @@ Template.slackSummary.helpers
     if Meteor.userId() is 'MQpnyNnL2gT5Swyse'
       2960
     else
-      1111
+      '???'
   totalEffort: ->
     if Meteor.userId() is 'MQpnyNnL2gT5Swyse'
       186
     else
-      111
+      '???'
   goals: -> Goals.find()
 
 Template.slackSummary.events
