@@ -15,7 +15,7 @@ Router.map ->
     path: '/'
 
   @route 'slack',
-    waitOn: -> Meteor.subscribe "slack", Session.get('selectedUser')._id
+    waitOn: -> Meteor.subscribe "slack", Session.get('selectedUser')._id if Meteor.user()
 
   @route 'slackNew',
     path: '/slack/new',
@@ -35,11 +35,9 @@ requireLogin = ->
     if Meteor.loggingIn()
       @render @loadingTemplate
     else
-      @render "accessDenied"
-    @stop()
+      @render "accessDenied", {to: 'status'}
 
-Router.before requireLogin,
-  only: "slackNew"
+Router.before requireLogin
 
 Router.before -> clearErrors()
 
