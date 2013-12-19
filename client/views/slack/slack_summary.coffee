@@ -1,18 +1,6 @@
 Template.slackSummary.helpers
-  totalCost: ->
-    if Meteor.userId() is 'MQpnyNnL2gT5Swyse'
-      3006
-    else if Meteor.userId() is 'FpX3CtJGsq96xPpr2'
-      2349
-    else
-      '???'
-  totalEffort: ->
-    if Meteor.userId() is 'MQpnyNnL2gT5Swyse'
-      202
-    else if Meteor.userId() is 'FpX3CtJGsq96xPpr2'
-      65
-    else
-      '???'
+  totalCost: -> Slack.find().fetch().map((s) -> s.cost).reduce((c, sum) -> c + sum)
+  totalEffort: -> Slack.find().fetch().map((s) -> s.effort).reduce((e, sum) -> e + sum)
   goals: -> Goals.find()
 
 Template.slackSummary.events
