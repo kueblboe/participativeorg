@@ -8,7 +8,7 @@ Template.header.helpers
     active and "active"
 
   users: ->
-    Meteor.users.find()
+    Meteor.users.find({}, {sort: {'profile.name': 1}})
 
   selectedUserName: ->
     Session.get('selectedUser').profile.name
