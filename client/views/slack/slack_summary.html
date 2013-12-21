@@ -1,12 +1,10 @@
 <template name="slackSummary">
-  {{#each goals}}
-    {{> slackGoal}}
-  {{/each}}
   <h3 class="summary">
     <a href="#" id="year" class="label label-default">2013</a>
     <a href="#" id="totalCost" class="label label-default">{{totalCost}} €</a>
     <a href="#" id="totalEffort" class="label label-default">{{totalEffort}} h</a>
-    <div id="goals">
-    </div>
+    {{#if selectedSelf}}
+    <span class="pull-right"><a class="label label-default" href="{{pathFor 'slackNew'}}"><i class="fa fa-plus"></i></a></span>
+    {{/if}}
   </h3>
 </template>

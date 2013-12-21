@@ -1,7 +1,6 @@
 Template.slackSummary.helpers
   totalCost: -> Slack.find().fetch().map((s) -> s.cost).reduce((c, sum) -> c + sum)
   totalEffort: -> Slack.find().fetch().map((s) -> s.effort).reduce((e, sum) -> e + sum)
-  goals: -> Goals.find()
 
 Template.slackSummary.events
   'click #totalCost': (e) ->

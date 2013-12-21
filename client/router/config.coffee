@@ -30,6 +30,14 @@ Router.map ->
     path: '/slack/:_id/edit',
     data: -> Slack.findOne(this.params._id)
 
+  @route 'slackGoalNew',
+    path: '/slack/goal/new',
+    template: 'slackGoalEdit'
+
+  @route 'slackGoalEdit',
+    path: '/slack/goal/:_id/edit',
+    data: -> Goals.findOne(this.params._id)
+
 requireLogin = ->
   unless Meteor.user()
     if Meteor.loggingIn()

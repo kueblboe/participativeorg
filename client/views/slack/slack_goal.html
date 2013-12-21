@@ -1,5 +1,7 @@
 <template name="slackGoal">
   <div class="goal well">
-    <i class="fa fa-flag-checkered"></i> {{description}}
+    <i class="fa fa-flag-checkered"></i>
+    <span class="description">{{description}}</span>
+    {{#if ownGoal}}<div><a href="{{pathFor 'slackGoalEdit'}}"><i class="fa fa-pencil"></i> Edit</a></div>{{/if}}
   </div>
 </template>

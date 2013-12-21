@@ -1,6 +1,10 @@
 @import '../../stylesheets/mixins';
 @import '../../stylesheets/variables';
 
+#slack {
+  margin-top: 5px;
+}
+
 .summary span:hover {
   text-decoration: underline;
   cursor: pointer;
@@ -54,6 +58,8 @@
 .goal {
   margin-bottom: 5px;
   padding: 5px;
-  font-weight: bold;
   background-color: @secondary-b-bg;
+  .description {
+    font-weight: bold;
+  }
 }
