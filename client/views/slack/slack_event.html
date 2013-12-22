@@ -24,7 +24,16 @@
       {{#if url}}
       <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
       {{/if}}
-      {{#if ownSlack}}<a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
+      <div class="copies">
+        {{#each copies}}
+          <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
+        {{/each}}
+      </div>
+      {{#if ownSlack}}
+      <a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>
+      {{else}}
+        {{#if notPartYet}}<a href="{{pathFor 'slackCopy'}}"><i class="fa fa-copy"></i> Copy</a>{{/if}}
+      {{/if}}
     </div>
   </div>
 </template>

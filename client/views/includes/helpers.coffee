@@ -21,3 +21,10 @@ Handlebars.registerHelper "preview", (text) ->
     text.substring(0, 50) + '…'
   else
     text
+
+Handlebars.registerHelper "avatar", (userId) ->
+  user = Meteor.users.findOne(userId)
+  if user?.profile.avatar
+    user.profile.avatar
+  else
+    '/img/anonymous.png'

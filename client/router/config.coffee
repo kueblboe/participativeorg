@@ -30,6 +30,11 @@ Router.map ->
     path: '/slack/:_id/edit',
     data: -> Slack.findOne(this.params._id)
 
+  @route 'slackCopy',
+    path: '/slack/:_id/copy',
+    template: 'slackEdit'
+    data: -> _.extend(_.omit(Slack.findOne(this.params._id), '_id'), {copyOf: this.params._id})
+
   @route 'slackGoalNew',
     path: '/slack/goal/new',
     template: 'slackGoalEdit'

@@ -16,6 +16,7 @@ Template.slackEdit.events
       cost: parseInt($(e.target).find("#cost").val(), 10)
       url: $(e.target).find("#url").val()
       ranking: parseInt($(e.target).find("#ranking").val(), 10)
+      copyOf: this.copyOf
 
     if currentSlackId
       Slack.update currentSlackId, { $set: slackProperties }, (error) ->

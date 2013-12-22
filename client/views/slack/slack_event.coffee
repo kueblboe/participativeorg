@@ -2,6 +2,9 @@ Template.slackEvent.helpers
   ownSlack: ->
     @userId is Meteor.userId()
 
+  notPartYet: ->
+    not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
+
   categorySymbol: ->
     if this.category is 'book'
       'book'
@@ -26,3 +29,7 @@ Template.slackEvent.events
   'click a.background-link': (e) ->
     e.preventDefault()
     $('#' + e.currentTarget.id.substring(5)).toggleClass('active')
+
+  'click .coworker': (e) ->
+    e.preventDefault()
+    Session.set('selectedUser', Meteor.users.findOne(this.userId))

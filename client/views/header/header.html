@@ -30,14 +30,7 @@
               <ul class="dropdown-menu">
                 {{#each users}}
                 <li>
-                  <a href="#" class="coworker">
-                    {{#if profile.avatar}}
-                    <img class="img-circle avatar" src="{{profile.avatar}}">
-                    {{else}}
-                    <img class="img-circle avatar" src="/img/anonymous.png">
-                    {{/if}}
-                    {{profile.name}}
-                  </a>
+                  <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar _id}}"> {{profile.name}}</a>
                 </li>
                 {{/each}}
               </ul>
