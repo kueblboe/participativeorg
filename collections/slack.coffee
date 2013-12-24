@@ -2,7 +2,6 @@
 
 Slack.allow
   update: ownsDocument
-  remove: ownsDocument
 
 Slack.deny update: (userId, slack, fieldNames) ->
   # may only edit the following fields:
@@ -29,4 +28,13 @@ Meteor.methods(
       Slack.update(original._id, { $set: {copies: _.without(_.union(original.copies, {slackId: newSlackId, userId: Meteor.userId()}), null, undefined)} })
 
     newSlackId
+
+  removeSlack: (slackId) ->
+    if Meteor.isServer
+      slack = Slack.findOne(slackId)
+      for copyId in _.pluck(slack.copies, 'slackId')
+        copy = Slack.findOne(copyId)
+        if copy
+          Slack.update(copyId, { $set: {copies: (c for c in copy.copies when not _.isEqual(c, {slackId: slackId, userId: Meteor.userId()}))}})
+    Slack.remove(slackId)
 )

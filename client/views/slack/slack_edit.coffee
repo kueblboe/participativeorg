@@ -34,6 +34,5 @@ Template.slackEdit.events
   "click .delete": (e) ->
     e.preventDefault()
     if confirm("Delete this slack?")
-      currentSlackId = @_id
-      Slack.remove currentSlackId
+      Meteor.call 'removeSlack', @_id
       Router.go "slack"
