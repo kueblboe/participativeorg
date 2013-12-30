@@ -1,5 +1,5 @@
 Handlebars.registerHelper "selectedSelf", ->
-  Session.get('selectedUser')._id is Meteor.userId()
+  Session.get('selectedUserId') is Meteor.userId()
 
 Handlebars.registerHelper "formattedDate", (date) ->
   moment(date).format('DD.MM.YYYY')

@@ -1,8 +1,8 @@
 <template name="slackSummary">
   <h3 class="summary">
     <a href="#" id="year" class="label label-default">{{year}}</a>
-    <a href="#" id="totalCost" class="label label-default">{{totalCost}} €</a>
-    <a href="#" id="totalEffort" class="label label-default">{{totalEffort}} h</a>
+    <a href="#" id="total-cost" class="label label-default">{{totalCost}} €</a>
+    <a href="#" id="total-effort" class="label label-default">{{totalEffort}} h</a>
     {{#if hasNextSlack}}
     <span class="pull-right"><a href="#" id="next-year" class="label label-default" disabled><span class="year-long">{{nextYear}}</span> <i class="fa fa-step-forward"></i></a></span>
     {{/if}}

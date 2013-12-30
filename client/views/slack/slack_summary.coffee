@@ -7,14 +7,14 @@ Template.slackSummary.helpers
   hasPreviousSlack: -> Slack.find({date: { $gte: startOfYear(this.year - 1), $lte: endOfYear(this.year - 1) } }).count() > 0
 
 Template.slackSummary.events
-  'click #totalCost': (e) ->
+  'click #total-cost': (e) ->
     e.preventDefault()
     if Session.get('slackSortBy') is 'cost'
       Session.set('slackSortOrder', -Session.get('slackSortOrder'))
     else
       Session.set('slackSortBy', 'cost')
 
-  'click #totalEffort': (e) ->
+  'click #total-effort': (e) ->
     e.preventDefault()
     if Session.get('slackSortBy') is 'effort'
       Session.set('slackSortOrder', -Session.get('slackSortOrder'))

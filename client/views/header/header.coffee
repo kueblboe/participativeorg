@@ -11,10 +11,10 @@ Template.header.helpers
     Meteor.users.find({}, {sort: {'profile.name': 1}})
 
   selectedUserName: ->
-    Session.get('selectedUser').profile.name
+    Meteor.users.findOne(Session.get('selectedUserId'))?.profile.name
 
   selectedUserAvatar: ->
-    Session.get('selectedUser').profile.avatar
+    Meteor.users.findOne(Session.get('selectedUserId'))?.profile.avatar
 
 Template.header.events
   'click .dropdown-toggle': (e) ->
@@ -22,4 +22,4 @@ Template.header.events
 
   'click .coworker': (e) ->
     e.preventDefault()
-    Session.set('selectedUser', Meteor.users.findOne(@._id))
+    Session.set('selectedUserId', @._id)

@@ -22,8 +22,8 @@ Router.map ->
   @route 'slack',
     waitOn: ->
       if Meteor.user()
-        Meteor.subscribe("slack", Session.get('selectedUser')._id, Session.get('selectedYear'))
-        Meteor.subscribe("goals", Session.get('selectedUser')._id, Session.get('selectedYear'))
+        Meteor.subscribe("slack", Session.get('selectedUserId'), Session.get('selectedYear'))
+        Meteor.subscribe("goals", Session.get('selectedUserId'), Session.get('selectedYear'))
     data: -> {year: Session.get('selectedYear')}
 
   @route 'slackPage',
@@ -58,6 +58,10 @@ requireLogin = ->
       @render "accessDenied", {to: 'status'}
 
 Router.before requireLogin
+Router.before clearErrors
+Router.before -> Meteor.subscribe "coworkers", Meteor.userId()
 
-Router.before -> clearErrors()
+Router.load ->
+  Session.set('selectedUserId', this.params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
+  Session.set('selectedYear', parseInt(this.params.year) || Session.get('selectedYear') || moment().year())
 

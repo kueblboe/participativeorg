@@ -32,4 +32,4 @@ Template.slackEvent.events
 
   'click .coworker': (e) ->
     e.preventDefault()
-    Session.set('selectedUser', Meteor.users.findOne(this.userId))
+    Session.set('selectedUserId', this.userId)
