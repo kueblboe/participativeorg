@@ -1,5 +1,5 @@
-initialUser = Meteor.user() || {_id: null, profile: {name: ''}}
-Session.set('selectedUser', initialUser)
+Session.set('selectedUser', Meteor.user() || {_id: null, profile: {name: ''}})
+Session.set('selectedYear', moment().year())
 
 Deps.autorun ->
   Meteor.subscribe "coworkers", Meteor.userId()

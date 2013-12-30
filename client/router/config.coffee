@@ -22,10 +22,9 @@ Router.map ->
   @route 'slack',
     waitOn: ->
       if Meteor.user()
-        year = parseInt(this.params.year) || moment().year()
-        Meteor.subscribe("slack", Session.get('selectedUser')._id, year)
-        Meteor.subscribe("goals", Session.get('selectedUser')._id, year)
-    data: -> {year: parseInt(this.params.year) || moment().year()}
+        Meteor.subscribe("slack", Session.get('selectedUser')._id, Session.get('selectedYear'))
+        Meteor.subscribe("goals", Session.get('selectedUser')._id, Session.get('selectedYear'))
+    data: -> {year: Session.get('selectedYear')}
 
   @route 'slackPage',
     path: '/slack/:_id',

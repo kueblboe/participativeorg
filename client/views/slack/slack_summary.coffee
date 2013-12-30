@@ -27,3 +27,11 @@ Template.slackSummary.events
       Session.set('slackSortOrder', -Session.get('slackSortOrder'))
     else
       Session.set('slackSortBy', 'date')
+
+  'click #next-year': (e) ->
+    e.preventDefault()
+    Session.set('selectedYear', parseInt(this.year) + 1)
+
+  'click #last-year': (e) ->
+    e.preventDefault()
+    Session.set('selectedYear', parseInt(this.year) - 1)
