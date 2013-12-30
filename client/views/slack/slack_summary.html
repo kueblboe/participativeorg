@@ -1,16 +1,17 @@
 <template name="slackSummary">
-  <h3 class="summary">
+  <h4 class="summary">
     <a href="#" id="year" class="label label-default">{{year}}</a>
     <a href="#" id="total-cost" class="label label-default">{{totalCost}} €</a>
     <a href="#" id="total-effort" class="label label-default">{{totalEffort}} h</a>
+    <span class="pull-right"><a href="{{urlFor 'slack'}}/?year={{year}}&userId={{userId}}" id="permalink" class="label label-white" disabled><i class="fa fa-link"></i></a></span>
     {{#if hasNextSlack}}
-    <span class="pull-right"><a href="#" id="next-year" class="label label-default" disabled><span class="year-long">{{nextYear}}</span> <i class="fa fa-step-forward"></i></a></span>
+    <span class="pull-right"><a href="#" id="next-year" class="label label-white" disabled><span class="year-long">{{nextYear}}</span> <i class="fa fa-step-forward"></i></a></span>
     {{/if}}
     {{#if hasPreviousSlack}}
-    <span class="pull-right"><a href="#" id="last-year" class="label label-default"><i class="fa fa-step-backward"></i> <span class="year-long">{{previousYear}}</span></a></span>
+    <span class="pull-right"><a href="#" id="last-year" class="label label-white"><i class="fa fa-step-backward"></i> <span class="year-long">{{previousYear}}</span></a></span>
     {{/if}}
     {{#if selectedSelf}}
     <span class="pull-right"><a class="label label-primary" href="{{pathFor 'slackNew'}}"><i class="fa fa-plus"></i></a></span>
     {{/if}}
-  </h3>
+  </h4>
 </template>

@@ -5,6 +5,7 @@ Template.slackSummary.helpers
   previousYear: -> parseInt(this.year) - 1
   hasNextSlack: -> Slack.find({date: { $gte: startOfYear(this.year + 1), $lte: endOfYear(this.year + 1) } }).count() > 0
   hasPreviousSlack: -> Slack.find({date: { $gte: startOfYear(this.year - 1), $lte: endOfYear(this.year - 1) } }).count() > 0
+  userId: -> Session.get('selectedUserId')
 
 Template.slackSummary.events
   'click #total-cost': (e) ->
@@ -35,3 +36,7 @@ Template.slackSummary.events
   'click #last-year': (e) ->
     e.preventDefault()
     Session.set('selectedYear', parseInt(this.year) - 1)
+
+  'click #permalink': (e) ->
+    console.log $(e.target).context.baseURI
+    window.prompt("Copy this link to share it with others.", $(e.target).context.baseURI)

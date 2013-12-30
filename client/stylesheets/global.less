@@ -46,7 +46,7 @@ img {
 }
 
 .tags {
-  color: #B6B6B6;
+  color: @light-grey;
   span {
     margin-right: 10px;
   }
@@ -60,7 +60,7 @@ input, button, select, textarea, form .input-group, .btn-group, a.btn {
   margin-top: 0;
 }
 
-h3 {
+h3, h4 {
   margin-top: 5px;
 }
 
@@ -77,6 +77,16 @@ h3 {
   font-weight: bold;
   .well {
     background-color: #EBB950;
+  }
+}
+
+.label-white {
+  background-color: white;
+  color: @light-grey;
+  border: @light-grey 1px solid;
+
+  &[href]:hover {
+    color: @dark-grey;
   }
 }
 
