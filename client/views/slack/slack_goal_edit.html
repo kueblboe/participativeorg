@@ -1,6 +1,7 @@
 <template name="slackGoalEdit">
   <form role="form">
     <textarea class="form-control" id="description" placeholder="What I am planning to achieve with my slack this year...">{{description}}</textarea>
+    <input type="date" class="form-control" id="date" value="{{rfcDate date}}" required>
     <button type="submit" class="btn btn-default">Submit</button>
     <a class="btn btn-default" href="/slack">Cancel</a>
     {{#if _id}}<a class="btn btn-danger delete" href="#"><i class="fa fa-trash-o"></i> Delete</a>{{/if}}

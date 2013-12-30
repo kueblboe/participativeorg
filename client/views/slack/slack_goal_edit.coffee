@@ -4,6 +4,7 @@ Template.slackGoalEdit.events
     currentGoalId = @_id
     goalProperties =
       description: $(e.target).find("#description").val()
+      date: new Date($(e.target).find("#date").val())
 
     if currentGoalId
       Goals.update currentGoalId, { $set: goalProperties }, (error) ->

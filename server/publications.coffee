@@ -3,13 +3,17 @@ isInMyDomain = (userId, currentUserId) ->
   me   = Meteor.users.findOne(currentUserId)
   user and me and user.profile.domain is me.profile.domain
 
-Meteor.publish "slack", (userId) ->
-  if isInMyDomain(userId, this.userId)
-    Slack.find {userId: userId}
+Meteor.publish "singleSlack", (slackId) -> Slack.find(slackId)
 
-Meteor.publish "goals", (userId) ->
-  if isInMyDomain(userId, this.userId)
-    Goals.find {userId: userId}
+Meteor.publish "slack", (userId, year) ->
+  if isInMyDomain(userId, this.userId) and year
+    Slack.find {userId: userId, date: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } }
+
+Meteor.publish "goal", (goalId) -> Goals.find(goalId)
+
+Meteor.publish "goals", (userId, year) ->
+  if isInMyDomain(userId, this.userId) and year
+    Goals.find {userId: userId, date: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } }
 
 Meteor.publish "coworkers", ->
   me =  Meteor.users.findOne(this.userId)

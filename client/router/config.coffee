@@ -14,13 +14,18 @@ Router.map ->
   @route 'home',
     path: '/'
 
-  @route 'slack',
-    waitOn: -> Meteor.subscribe "slack", Session.get('selectedUser')._id if Meteor.user()
-
   @route 'slackNew',
     path: '/slack/new',
     template: 'slackEdit'
     data: {date: new Date().toJSON().slice(0,10), category: 'other'}
+
+  @route 'slack',
+    waitOn: ->
+      if Meteor.user()
+        year = parseInt(this.params.year) || moment().year()
+        Meteor.subscribe("slack", Session.get('selectedUser')._id, year)
+        Meteor.subscribe("goals", Session.get('selectedUser')._id, year)
+    data: -> {year: parseInt(this.params.year) || moment().year()}
 
   @route 'slackPage',
     path: '/slack/:_id',
@@ -28,11 +33,13 @@ Router.map ->
 
   @route 'slackEdit',
     path: '/slack/:_id/edit',
+    waitOn: -> Meteor.subscribe("singleSlack", this.params._id)
     data: -> Slack.findOne(this.params._id)
 
   @route 'slackCopy',
     path: '/slack/:_id/copy',
     template: 'slackEdit'
+    waitOn: -> Meteor.subscribe("singleSlack", this.params._id)
     data: -> _.extend(_.omit(Slack.findOne(this.params._id), '_id'), {copyOf: this.params._id})
 
   @route 'slackGoalNew',
@@ -41,6 +48,7 @@ Router.map ->
 
   @route 'slackGoalEdit',
     path: '/slack/goal/:_id/edit',
+    waitOn: -> Meteor.subscribe("goal", this.params._id)
     data: -> Goals.findOne(this.params._id)
 
 requireLogin = ->
