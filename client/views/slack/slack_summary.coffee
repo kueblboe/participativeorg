@@ -6,6 +6,8 @@ Template.slackSummary.helpers
   hasNextSlack: -> Slack.find({date: { $gte: startOfYear(this.year + 1), $lte: endOfYear(this.year + 1) } }).count() > 0
   hasPreviousSlack: -> Slack.find({date: { $gte: startOfYear(this.year - 1), $lte: endOfYear(this.year - 1) } }).count() > 0
   userId: -> Session.get('selectedUserId')
+  isComplete: -> Completions.findOne()
+  completionId: -> Completions.findOne()._id
 
 Template.slackSummary.events
   'click #total-cost': (e) ->
@@ -39,3 +41,13 @@ Template.slackSummary.events
 
   'click #permalink': (e) ->
     window.prompt("Copy this link to share it with others.", $(e.target).parent('#permalink').addBack('#permalink').attr('href'))
+
+  'click #complete-year': (e) ->
+    e.preventDefault()
+    Meteor.call "completeYear", {year: this.year}, (error, id) ->
+      if error
+        throwError error.reason
+
+  'click .uncomplete-year': (e) ->
+    e.preventDefault()
+    Completions.remove($(e.target).parents('.uncomplete-year').addBack('.uncomplete-year').attr('id'))

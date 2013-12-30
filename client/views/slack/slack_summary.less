@@ -1,7 +1,7 @@
 @import '../../stylesheets/mixins';
 @import '../../stylesheets/variables';
 
-.year-long {
+.long {
   @media @phone {
     display: none;
   }
@@ -9,4 +9,28 @@
 
 .summary > span.pull-right {
   margin-left: 4px;
+}
+
+.label-white {
+  background-color: white;
+  color: @light-grey;
+  border: @light-grey 1px solid;
+
+  &[href]:hover {
+    color: @dark-grey;
+  }
+}
+
+.secondary-action {
+  @media @phone-horizontal {
+    display: none;
+  }
+}
+
+#complete-sign, .uncomplete-year {
+  color: @secondary-b-3-fadeout;
+
+  &[href]:hover {
+    color: darken(@secondary-b-3-fadeout, 10%);
+  }
 }

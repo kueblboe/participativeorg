@@ -24,6 +24,7 @@ Router.map ->
       if Meteor.user()
         Meteor.subscribe("slack", Session.get('selectedUserId'), Session.get('selectedYear'))
         Meteor.subscribe("goals", Session.get('selectedUserId'), Session.get('selectedYear'))
+        Meteor.subscribe "completions", Session.get('selectedUserId'), Session.get('selectedYear')
     data: -> {year: Session.get('selectedYear')}
 
   @route 'slackPage',
