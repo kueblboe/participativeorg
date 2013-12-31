@@ -1,5 +1,18 @@
 <template name="slackEmpty">
-  Nothing to see here yet.
+  <div class="alert alert-warning">
+    <span>Nothing to see here yet.</span>
+    {{#if selectedSelf}}
+      <a href="{{pathFor 'slackNew'}}" class="long">Add some slack now.</a>
+    {{/if}}
+  </div>
+  <div id="slack-definition" class="well">
+    <h4>Slack <em>/slæk/</em></h4>
+    <strong>noun</strong>
+    <ol>
+      <li>Tasks that can be instantly postponed, indefinitely.</li>
+      <li>Tasks that are important but not urgent.</li>
+    </ol>
+  </div>
   <div id="others-slack" class="message-box">
     <img id="point-left" src="/img/arrow-point-left.png">
     <img id="point-right" src="/img/arrow-point-right.png">
