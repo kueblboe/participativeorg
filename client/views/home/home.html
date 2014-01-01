@@ -1,6 +1,40 @@
 <template name="home">
   <div class="jumbotron">
-    <h1>participativeorg</h1>
+    <h2>participativeorg</h2>
     <p>Providing transparency amongst colleagues.</p>
+  </div>
+  <div id="home-nav">
+    <span class="col-xs-12 col-sm-3">
+      <a href="{{pathFor 'slack'}}" class="btn btn-default btn-lg" role="button">
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-flask fa-stack-1x"></i>
+        </span> Slack
+      </a>
+    </span>
+    <span class="col-xs-12 col-sm-3">
+      <a href="{{pathFor 'feedback'}}" class="btn btn-default btn-lg soonish-stamp" role="button" disabled>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-refresh fa-stack-1x"></i>
+        </span> Feedback
+      </a>
+    </span>
+    <span class="col-xs-12 col-sm-3">
+      <a href="{{pathFor 'economics'}}" class="btn btn-default btn-lg later-stamp" role="button" disabled>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-eur fa-stack-1x"></i>
+        </span> Economics
+      </a>
+    </span>
+    <span class="col-xs-12 col-sm-3">
+      <a href="{{pathFor 'decisions'}}" class="btn btn-default btn-lg maybe-stamp" role="button" disabled>
+        <span class="fa-stack fa-lg">
+          <i class="fa fa-circle fa-stack-2x"></i>
+          <i class="fa fa-comments fa-stack-1x"></i>
+        </span> Decisions
+      </a>
+    </span>
   </div>
 </template>
