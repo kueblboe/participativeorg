@@ -1,7 +1,25 @@
+@import '../../stylesheets/variables';
+
 .login-buttons-dropdown-align-left {
   padding: 12px 15px;
 }
 
-#login-buttons .login-display-name {
-	display: none;
+#login-buttons {
+  .login-display-name {
+    display: none;
+  }
+
+  .login-button {
+    background-color: white;
+    background-image: none;
+    color: #777777;
+    text-shadow: none;
+    box-shadow: none;
+    border-color: @border-grey;
+
+    &:hover, &:active {
+      background-color: @bg-grey;
+      background-image: none;
+    }
+  }
 }
