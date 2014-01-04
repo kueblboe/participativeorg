@@ -69,8 +69,10 @@ h3, h4 {
 }
 
 #coworkers {
-  max-height: 300px;
-  overflow: auto;
+  @media @tablet {
+    max-height: 300px;
+    overflow: auto;
+  }
 
   > li > a.coworker {
     padding-right: 45px;
