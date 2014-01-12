@@ -3,11 +3,22 @@ Template.slackEdit.helpers
     if category is this.category
       'active'
 
+  users: ->
+    alreadyPartOf = _.pluck(this.copies, "userId").concat(Meteor.userId()).concat(this.userId)
+    Meteor.users.find({ _id: { $nin: alreadyPartOf } }, {sort: {'profile.name': 1}})
+
+  hasUsersNotAlreadyPartOf: ->
+    alreadyPartOf = _.pluck(this.copies, "userId").concat(Meteor.userId()).concat(this.userId)
+    Meteor.users.find({ _id: { $nin: alreadyPartOf } }).fetch().length > 0
+
+  name: (userId) ->
+    Meteor.users.findOne(userId)?.profile.name
+
 Template.slackEdit.events
   "submit form": (e) ->
     e.preventDefault()
-    currentSlackId = @_id
     slackProperties =
+      _id: @_id
       title: $(e.target).find("#title").val()
       description: $(e.target).find("#description").val()
       category: $(e.target).find("#category .active input").val()
@@ -17,22 +28,19 @@ Template.slackEdit.events
       url: $(e.target).find("#url").val()
       ranking: parseInt($(e.target).find("#ranking").val(), 10)
       copyOf: this.copyOf
+      participants: $.map($("#coworkers input:checked"), (c) -> $(c).data("participant"))
 
-    if currentSlackId
-      Slack.update currentSlackId, { $set: slackProperties }, (error) ->
-        if error
-          throwError error.reason
-        else
-          Router.go "slack"
-    else
-      Meteor.call "addSlack", slackProperties, (error, id) ->
-        if error
-          throwError error.reason
-        else
-          Router.go "slack"
+    Meteor.call "upsertSlack", slackProperties, (error) ->
+      if error
+        throwError error.reason
+      else
+        Router.go "slack"
 
   "click .delete": (e) ->
     e.preventDefault()
     if confirm("Delete this slack?")
       Meteor.call 'removeSlack', @_id
       Router.go "slack"
+
+  "click .dropdown-menu-form": (e) ->
+    e.stopPropagation()

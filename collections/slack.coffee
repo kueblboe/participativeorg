@@ -1,33 +1,48 @@
 @Slack = new Meteor.Collection("slack")
 
-Slack.allow
-  update: ownsDocument
+@upsertSlackWithCopies = (slack, slackAttributes) ->
+  # get all the copies from the original
+  if slackAttributes.copyOf
+    original = Slack.findOne(slackAttributes.copyOf)
+    slack.copies = _.without(_.union(original.copies, {slackId: original._id, userId: original.userId}), null, undefined)
 
-Slack.deny update: (userId, slack, fieldNames) ->
-  # may only edit the following fields:
-  _.without(fieldNames, "title", "description", "category", "date", "effort", "cost", "url", "ranking").length > 0
+  # add / update slack
+  changes = Slack.upsert(slackAttributes._id, { $set: slack })
+
+  # update all copies with new copy
+  if slackAttributes.copyOf and changes.insertedId
+    for copy in slack.copies
+      copiedSlack = Slack.findOne(copy.slackId)
+      newSlack = Slack.findOne(changes.insertedId)
+      Slack.update(copiedSlack._id, { $set: {copies: _.without(_.union(copiedSlack.copies, {slackId: newSlack._id, userId: newSlack.userId}), null, undefined)} })
+
+  changes
 
 Meteor.methods(
-  addSlack: (slackAttributes) ->
+  upsertSlack: (slackAttributes) ->
     throw new Meteor.Error(401, "You need to login to add slack") unless Meteor.user()
     throw new Meteor.Error(422, "Please fill in a title") unless slackAttributes.title
     
     # pick out the whitelisted keys and add userId and createdAt
     slack = _.extend(_.pick(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking"),
-      userId: Meteor.userId()
-      createdAt: new Date()
+      indicatedBy: undefined
     )
+    unless slackAttributes._id
+      slack = _.extend(slack,
+        userId: Meteor.userId()
+        createdAt: new Date()
+      )
 
-    if slackAttributes.copyOf
-      original = Slack.findOne(slackAttributes.copyOf)
-      slack.copies = _.without(_.union(original.copies, {slackId: original._id, userId: original.userId}), null, undefined)
+    changes = upsertSlackWithCopies(slack, slackAttributes)
 
-    newSlackId = Slack.insert(slack)
+    # create slack for all participants
+    if slackAttributes.participants
+      for participant in slackAttributes.participants
+        participantSlack = _.extend(_.omit(slack, ['description', 'ranking']), {userId: participant, indicatedBy: Meteor.userId()})
+        participantSlackAttributes = _.extend(_.omit(slackAttributes, '_id'), {copyOf: changes.insertedId || slackAttributes._id})
+        upsertSlackWithCopies(participantSlack, participantSlackAttributes)
 
-    if slackAttributes.copyOf
-      Slack.update(original._id, { $set: {copies: _.without(_.union(original.copies, {slackId: newSlackId, userId: Meteor.userId()}), null, undefined)} })
-
-    newSlackId
+    changes
 
   removeSlack: (slackId) ->
     if Meteor.isServer

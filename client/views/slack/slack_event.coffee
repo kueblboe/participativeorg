@@ -25,6 +25,9 @@ Template.slackEvent.helpers
   highlightRanking: ->
     'highlight' if this.ranking > 4
 
+  unconfirmed: ->
+    if !!this.indicatedBy then 'unconfirmed'
+
 Template.slackEvent.events
   'click a.background-link': (e) ->
     e.preventDefault()

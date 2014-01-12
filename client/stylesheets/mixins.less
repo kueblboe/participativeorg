@@ -2,18 +2,18 @@
     LESS MIXINS
    =============================== */
 
-.stamp(@content) {
+.stamp(@content, @font-size: 20px) {
   position:relative;
 
   &:after {
     .transform(rotate(-35deg));
     content: @content;
     position: absolute;
-    top: 9px;
-    left: 35px;
+    top: 15px;
+    right: 55px;
     z-index: 1;
     font-weight: bold;
-    font-size: 20px;
+    font-size: @font-size;
     color: #c00;
     background: #fff;
     border: solid 2px #c00;

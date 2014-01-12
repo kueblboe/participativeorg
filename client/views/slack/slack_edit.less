@@ -1,0 +1,23 @@
+@import '../../stylesheets/variables';
+
+@plus-height: @avatar-height * 1.1;
+
+.copies {
+  .fa-stack {
+    margin: 5px;
+    width: @avatar-height;
+    height: @avatar-height;
+    line-height: @plus-height;
+
+    .fa-stack-2x {
+      font-size: @plus-height;
+      color: @secondary-b-3-fadeout;
+    }
+
+    &:hover {
+      .fa-stack-2x {
+        color: @secondary-b-3;
+      }
+    }
+  }
+}

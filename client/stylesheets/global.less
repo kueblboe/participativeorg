@@ -49,6 +49,11 @@ img {
   }
 }
 
+.alert {
+  padding: 6px 12px;
+  margin-bottom: 10px;
+}
+
 .tags {
   color: @border-grey;
   span {
@@ -68,6 +73,22 @@ h3, h4 {
   margin-top: 5px;
 }
 
+label.checkbox {
+  padding-left: 30px;
+  font-weight: normal;
+  margin: 0;
+  white-space: nowrap;
+
+  input[type="checkbox"] {
+    margin-top: 6px;
+  }
+
+  span {
+    padding-right: 35px;
+    white-space: nowrap;
+  }
+}
+
 #coworkers {
   @media @tablet {
     max-height: 300px;
@@ -79,9 +100,17 @@ h3, h4 {
   }
 }
 
-.avatar {
-  height: 25px;
+.nav .avatar {
   margin: -5px 0;
+}
+
+.dropdown li .avatar {
+  margin: 1px;
+}
+
+.avatar {
+  height: @avatar-height;
+  margin: 5px 0;
 }
 
 .message-box .well {
