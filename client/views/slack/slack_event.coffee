@@ -13,6 +13,12 @@ Template.slackEvent.helpers
     else
       'question-circle'
 
+  hashtagSymbol: ->
+    if /#freizeit/.test(this.description)
+      'moon-o'
+    else if /#ausland/.test(this.description)
+      'suitcase'
+
   rankingNeg: ->
     5 - this.ranking
 
@@ -32,6 +38,7 @@ Template.slackEvent.events
   'click a.background-link': (e) ->
     e.preventDefault()
     $('#' + e.currentTarget.id.substring(5)).toggleClass('active')
+    $(e.target).parent().find('.text').highlightTextFragment(/\B#\S+/, 'hashtag')
 
   'click .coworker': (e) ->
     e.preventDefault()

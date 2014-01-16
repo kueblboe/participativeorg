@@ -1,12 +1,13 @@
 <template name="slackEvent">
   <div id="{{_id}}" class="item {{category}} {{unconfirmed}}">
     <a href="#" id="link_{{_id}}" class="background-link"></a>
-    <i class="watermark fa fa-3x fa-{{categorySymbol category}} hidden-print"></i>
+    <i class="watermark fa fa-3x fa-{{categorySymbol}} hidden-print"></i>
     <!-- <b><a href="{{pathFor 'slackPage'}}">{{title}}</a></b> -->
     <b>{{title}}</b>
     <div class="tags">
       <span>{{formattedDate date}}</span>
       <span>{{category}}</span>
+      {{#if hashtagSymbol}}<span><i class="fa fa-{{hashtagSymbol}}"></i></span>{{/if}}
       <span class="{{highlightEffort}}">{{effort}} h</span>
       {{#if cost}}<span class="{{highlightCost}}">{{cost}} €</span>{{/if}}
       <span class="rating {{highlightRanking}}">
