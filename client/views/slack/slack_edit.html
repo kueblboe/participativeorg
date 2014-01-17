@@ -9,13 +9,13 @@
     <textarea class="form-control" id="description" placeholder="What I learned and might be interesting to my colleagues...">{{description}}</textarea>
     <div class="btn-group btn-group-justified" id="category" data-toggle="buttons">
       <label class="btn btn-default {{isActiveCategory 'book'}}">
-        <input type="radio" name="options" value="book"> book
+        <input type="radio" name="options" value="book"><i class="fa fa-book"></i> book
       </label>
       <label class="btn btn-default {{isActiveCategory 'event'}}">
-        <input type="radio" name="options" value="event"> event
+        <input type="radio" name="options" value="event"><i class="fa fa-users"></i> event
       </label>
       <label class="btn btn-default {{isActiveCategory 'other'}}">
-        <input type="radio" name="options" value="other"> other
+        <input type="radio" name="options" value="other"><i class="fa fa-question-circle"></i> other
       </label>
     </div>
     <input type="date" class="form-control" id="date" value="{{rfcDate date}}" required>
