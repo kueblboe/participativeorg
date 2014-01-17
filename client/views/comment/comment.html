@@ -1,0 +1,10 @@
+<template name="comment">
+  <li class="item">
+    <div>{{body}}</div>
+    <div class="tags">
+      <img class="img-circle avatar" src="{{avatar userId}}">
+      <span>{{name userId}}</span>
+      <span class="date">{{ago createdAt}}</span>
+    </div>
+  </li>
+</template>

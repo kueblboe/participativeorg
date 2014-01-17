@@ -5,22 +5,13 @@ Template.slackEvent.helpers
   notPartYet: ->
     not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
 
-  categorySymbol: ->
-    if this.category is 'book'
-      'book'
-    else if this.category is 'event'
-      'users'
-    else
-      'question-circle'
-
   hashtagSymbol: ->
     if /#freizeit/.test(this.description)
       'moon-o'
+    else if /#vortrag/.test(this.description)
+      'bullhorn'
     else if /#ausland/.test(this.description)
       'suitcase'
-
-  rankingNeg: ->
-    5 - this.ranking
 
   highlightEffort: ->
     'highlight' if this.effort > 16
@@ -34,11 +25,16 @@ Template.slackEvent.helpers
   unconfirmed: ->
     if !!this.indicatedBy then 'unconfirmed'
 
+  commenters: ->
+    ({userId: userId} for userId in _.uniq(_.pluck(this.comments, 'userId')))
+
+  commentersCount: ->
+    _.uniq(_.pluck(this.comments, 'userId')).length
+
 Template.slackEvent.events
   'click a.background-link': (e) ->
     e.preventDefault()
     $('#' + e.currentTarget.id.substring(5)).toggleClass('active')
-    $(e.target).parent().find('.text').highlightTextFragment(/\B#\S+/, 'hashtag')
 
   'click .coworker': (e) ->
     e.preventDefault()
