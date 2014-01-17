@@ -6,6 +6,11 @@
     original = Slack.findOne(slackAttributes.copyOf)
     slack.copies = _.without(_.union(original.copies, {slackId: original._id, userId: original.userId}), null, undefined)
 
+  # check if own slack
+  if slackAttributes._id
+    existingSlack = Slack.findOne(slackAttributes._id)
+    throw new Meteor.Error(422, "Can't update other people's slack") if existingSlack._id and existingSlack.userId isnt Meteor.userId()
+
   # add / update slack
   changes = Slack.upsert(slackAttributes._id, { $set: slack })
 
@@ -22,7 +27,6 @@ Meteor.methods(
   upsertSlack: (slackAttributes) ->
     throw new Meteor.Error(401, "You need to login to add slack") unless Meteor.user()
     throw new Meteor.Error(422, "Please fill in a title") unless slackAttributes.title
-    throw new Meteor.Error(422, "Can't update other people's slack") if slackAttributes._id and slackAttributes.userId isnt Meteor.userId()
 
     # pick out the whitelisted keys and add userId and createdAt
     slack = _.extend(_.pick(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking"),
