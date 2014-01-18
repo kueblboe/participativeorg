@@ -40,7 +40,7 @@ Template.slackSummary.events
     Session.set('selectedYear', parseInt(this.year) - 1)
 
   'click #permalink': (e) ->
-    window.prompt("Copy this link to share it with others.", $(e.target).parent('#permalink').addBack('#permalink').attr('href'))
+    window.prompt("Copy this link to share this page with others.", $(e.target).parent('#permalink').addBack('#permalink').attr('href'))
 
   'click #complete-year': (e) ->
     e.preventDefault()
