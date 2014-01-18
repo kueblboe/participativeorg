@@ -2,6 +2,8 @@
   <div class="goal well">
     <i class="watermark fa fa-3x fa-flag-checkered hidden-print"></i>
     <span class="description">{{description}}</span>
-    {{#if ownGoal}}<div><a href="{{pathFor 'slackGoalEdit'}}"><i class="fa fa-pencil"></i> Edit</a></div>{{/if}}
+    <div class="actions">
+      {{#if ownGoal}}<a href="{{pathFor 'slackGoalEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
+    </div>
   </div>
 </template>
