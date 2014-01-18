@@ -57,18 +57,4 @@ Meteor.methods(
         if copy
           Slack.update(copyId, { $set: {copies: (c for c in copy.copies when not _.isEqual(c, {slackId: slackId, userId: Meteor.userId()}))}})
     Slack.remove(slackId)
-
-  addSlackComment: (commentAttributes) ->
-    throw new Meteor.Error(401, "You need to login to add a comment") unless Meteor.user()
-    throw new Meteor.Error(422, "Please fill in a message") unless commentAttributes.body
-    throw new Meteor.Error(422, "Which slack activity did you want to comment on?") unless commentAttributes.slackId
-    
-    # pick out the whitelisted keys and add userId and createdAt
-    comment = _.extend(_.pick(commentAttributes, "body"),
-      userId: Meteor.userId()
-      createdAt: new Date()
-    )
-
-    slack = Slack.findOne(commentAttributes.slackId)
-    Slack.update(slack._id, { $set: {comments: (slack.comments || []).concat comment} })
 )

@@ -25,12 +25,6 @@ Template.slackEvent.helpers
   unconfirmed: ->
     if !!this.indicatedBy then 'unconfirmed'
 
-  commenters: ->
-    ({userId: userId} for userId in _.uniq(_.pluck(this.comments, 'userId')))
-
-  commentersCount: ->
-    _.uniq(_.pluck(this.comments, 'userId')).length
-
 Template.slackEvent.events
   'click a.background-link': (e) ->
     e.preventDefault()

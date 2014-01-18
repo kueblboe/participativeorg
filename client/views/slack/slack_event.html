@@ -33,8 +33,8 @@
         <span>
           <a href="{{pathFor 'slackPage'}}"><i class="fa fa-comment-o"></i>
           {{#if comments}}
-          {{commentersCount}} commented
-          {{#each commenters}}
+          {{commentersCount comments}} commented
+          {{#each commenters comments}}
           <img class="img-circle avatar" src="{{avatar userId}}">
           {{/each}}
           {{else}}

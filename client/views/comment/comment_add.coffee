@@ -3,10 +3,10 @@ Template.commentAdd.events
     e.preventDefault()
     $body = $(e.target).find("#body")
     commentProperties =
-      slackId: @_id
+      commentedId: @_id
       body: $body.val()
 
-    Meteor.call "addSlackComment", commentProperties, (error) ->
+    Meteor.call "addComment", commentProperties, (error) ->
       if error
         throwError error.reason
       else

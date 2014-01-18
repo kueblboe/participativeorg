@@ -43,3 +43,13 @@ Handlebars.registerHelper "categorySymbol", (category) ->
 
 Handlebars.registerHelper "rankingNeg", (ranking) ->
   5 - ranking
+
+Handlebars.registerHelper "commenters", (comments) ->
+  console.log comments
+  ({userId: userId} for userId in _.uniq(_.pluck(comments, 'userId')))
+
+Handlebars.registerHelper "commentersCount", (comments) ->
+  _.uniq(_.pluck(comments, 'userId')).length
+
+Handlebars.registerHelper "commentsList", (comments) ->
+  _.sortBy(this.comments, (c) -> - c.createdAt)

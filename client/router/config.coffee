@@ -43,6 +43,11 @@ Router.map ->
     path: '/slack/goal/new',
     template: 'slackGoalEdit'
 
+  @route 'slackGoalPage',
+    path: '/slack/goal/:_id',
+    waitOn: -> Meteor.subscribe("goal", this.params._id)
+    data: -> Goals.findOne(this.params._id)
+
   @route 'slackGoalEdit',
     path: '/slack/goal/:_id/edit',
     waitOn: -> Meteor.subscribe("goal", this.params._id)

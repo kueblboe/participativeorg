@@ -1,0 +1,13 @@
+<template name="slackGoalPage">
+  <div id="{{_id}}" class="goal well">
+    <i class="watermark fa fa-3x fa-flag-checkered hidden-print"></i>
+    <span class="description">{{description}}</span>
+  </div>
+
+  <ul id="comments" class="list">
+    {{> commentAdd}}
+    {{#each commentsList comments}}
+      {{> comment}}
+    {{/each}}
+  </ul>
+</template>
