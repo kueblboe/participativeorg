@@ -7,9 +7,6 @@ Handlebars.registerHelper "formattedDate", (date) ->
 Handlebars.registerHelper "rfcDate", (date) ->
   moment(date).format('YYYY-MM-DD')
 
-Handlebars.registerHelper "ago", (date) ->
-  moment(date).fromNow()
-
 Handlebars.registerHelper "times", (n, block) ->
   accum = ""
   i = 0
