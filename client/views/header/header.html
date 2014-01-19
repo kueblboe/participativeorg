@@ -10,12 +10,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">participativeorg</a>
+          <a class="navbar-brand" href="/">participative<em>org</em></a>
         </div>
         <div class="navbar-collapse collapse">
           {{#if currentUser}}
           <ul class="nav navbar-nav">
-            <li class="{{activeRouteClass 'slack' 'slackEdit' 'slackNew'}}"><a href="{{pathFor 'slack'}}"><i class="fa fa-flask"></i> Slack</a></li>
+            <li class="{{activeRouteClass 'slack' 'slackEdit' 'slackPage' 'slackNew'}}"><a href="{{pathFor 'slack'}}"><i class="fa fa-flask"></i> Slack</a></li>
           </ul>
           {{/if}}
           <ul class="nav navbar-nav navbar-right">
