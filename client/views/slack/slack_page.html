@@ -1,6 +1,6 @@
 <template name="slackPage">
   <div id="{{_id}}" class="item {{category}}">
-    <i class="watermark fa fa-3x fa-{{categorySymbol category}} hidden-print"></i>
+    <i class="watermark fa fa-3x fa-{{categorySymbol}} hidden-print"></i>
     <b>{{title}}</b>
     <div class="tags">
       <span>{{formattedDate date}}</span>
@@ -11,7 +11,7 @@
         {{#times ranking}}
         <i class="fa fa-star"></i>
         {{/times}}
-        {{#times rankingNeg ranking}}
+        {{#times rankingNeg}}
         <i class="fa fa-star-o"></i>
         {{/times}}
       </span>
@@ -25,11 +25,19 @@
         <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
       {{/each}}
     </div>
+    <div class="actions">
+      {{> likeLinks}}
+      {{#if owns}}
+      <a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>
+      {{else}}
+        {{#if notPartYet}}<a href="{{pathFor 'slackCopy'}}"><i class="fa fa-copy"></i> Copy to my slack</a>{{/if}}
+      {{/if}}
+    </div>
   </div>
 
   <ul id="comments" class="list">
     {{> commentAdd}}
-    {{#each commentsList comments}}
+    {{#each commentsList}}
       {{> comment}}
     {{/each}}
   </ul>

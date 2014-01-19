@@ -3,11 +3,12 @@
     <i class="watermark fa fa-3x fa-flag-checkered hidden-print"></i>
     <span class="description">{{description}}</span>
     <div class="actions">
+      {{> likeLinks}}
       <span>
         <a href="{{pathFor 'slackGoalPage'}}"><i class="fa fa-comment-o"></i>
         {{#if comments}}
-        {{commentersCount comments}} commented
-        {{#each commenters comments}}
+        {{commentersCount}} commented
+        {{#each commenters}}
         <img class="img-circle avatar" src="{{avatar userId}}">
         {{/each}}
         {{else}}
@@ -15,7 +16,7 @@
         {{/if}}
         </a>
       </span>
-      {{#if ownGoal}}<a href="{{pathFor 'slackGoalEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
+      {{#if owns}}<a href="{{pathFor 'slackGoalEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
     </div>
   </div>
 </template>

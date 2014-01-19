@@ -1,7 +1,7 @@
 <template name="slackEvent">
   <div id="{{_id}}" class="item {{category}} {{unconfirmed}}">
-    <a href="#" id="link_{{_id}}" class="background-link"></a>
-    <i class="watermark fa fa-3x fa-{{categorySymbol category}} hidden-print"></i>
+    <a href="#" class="background-link"></a>
+    <i class="watermark fa fa-3x fa-{{categorySymbol}} hidden-print"></i>
     <b>{{title}}</b>
     <div class="tags">
       <span>{{formattedDate date}}</span>
@@ -13,7 +13,7 @@
         {{#times ranking}}
         <i class="fa fa-star"></i>
         {{/times}}
-        {{#times rankingNeg ranking}}
+        {{#times rankingNeg}}
         <i class="fa fa-star-o"></i>
         {{/times}}
       </span>
@@ -30,11 +30,12 @@
         {{/each}}
       </div>
       <div class="actions">
+        {{> likeLinks}}
         <span>
           <a href="{{pathFor 'slackPage'}}"><i class="fa fa-comment-o"></i>
           {{#if comments}}
-          {{commentersCount comments}} commented
-          {{#each commenters comments}}
+          {{commentersCount}} commented
+          {{#each commenters}}
           <img class="img-circle avatar" src="{{avatar userId}}">
           {{/each}}
           {{else}}
@@ -42,7 +43,7 @@
           {{/if}}
           </a>
         </span>
-        {{#if ownSlack}}
+        {{#if owns}}
         <a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>
         {{else}}
           {{#if notPartYet}}<a href="{{pathFor 'slackCopy'}}"><i class="fa fa-copy"></i> Copy to my slack</a>{{/if}}

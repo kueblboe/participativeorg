@@ -29,11 +29,17 @@ Handlebars.registerHelper "avatar", (userId) ->
   else
     '/img/anonymous.png'
 
+Handlebars.registerHelper "owns", ->
+    this.userId is Meteor.userId()
+
+Handlebars.registerHelper "notPartYet", ->
+    not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
+
 Handlebars.registerHelper "name", (userId) ->
   user = Meteor.users.findOne(userId)
   user?.profile?.name
 
-Handlebars.registerHelper "categorySymbol", (category) ->
+Handlebars.registerHelper "categorySymbol", ->
   if this.category is 'book'
     'book'
   else if this.category is 'event'
@@ -41,15 +47,20 @@ Handlebars.registerHelper "categorySymbol", (category) ->
   else
     'question-circle'
 
-Handlebars.registerHelper "rankingNeg", (ranking) ->
-  5 - ranking
+Handlebars.registerHelper "rankingNeg", ->
+  5 - this.ranking
 
-Handlebars.registerHelper "commenters", (comments) ->
-  console.log comments
-  ({userId: userId} for userId in _.uniq(_.pluck(comments, 'userId')))
+Handlebars.registerHelper "liker", ->
+  ({userId: userId} for userId in _.uniq(_.pluck(this.likes, 'userId')))
 
-Handlebars.registerHelper "commentersCount", (comments) ->
-  _.uniq(_.pluck(comments, 'userId')).length
+Handlebars.registerHelper "commenters", ->
+  ({userId: userId} for userId in _.uniq(_.pluck(this.comments, 'userId')))
 
-Handlebars.registerHelper "commentsList", (comments) ->
+Handlebars.registerHelper "commentersCount", ->
+  _.uniq(_.pluck(this.comments, 'userId')).length
+
+Handlebars.registerHelper "commentsList", ->
   _.sortBy(this.comments, (c) -> - c.createdAt)
+
+Handlebars.registerHelper "likedByMe", ->
+  _.contains(_.pluck(this.likes, 'userId'), Meteor.userId())

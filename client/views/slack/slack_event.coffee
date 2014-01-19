@@ -1,10 +1,4 @@
 Template.slackEvent.helpers
-  ownSlack: ->
-    @userId is Meteor.userId()
-
-  notPartYet: ->
-    not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
-
   hashtagSymbol: ->
     if /#freizeit/.test(this.description)
       'moon-o'
@@ -28,8 +22,20 @@ Template.slackEvent.helpers
 Template.slackEvent.events
   'click a.background-link': (e) ->
     e.preventDefault()
-    $('#' + e.currentTarget.id.substring(5)).toggleClass('active')
+    activeSlack = (Session.get('activeSlack') || [])
+    index = activeSlack.indexOf(this._id)
+    if index isnt -1
+      activeSlack.splice(index, 1)
+      $('#' + this._id).removeClass('active')
+    else
+      activeSlack = activeSlack.concat [this._id]
+      $('#' + this._id).addClass('active')
+    Session.set('activeSlack', activeSlack)
 
   'click .coworker': (e) ->
     e.preventDefault()
     Session.set('selectedUserId', this.userId)
+
+Template.slackEvent.rendered = ->
+  if _.contains((Session.get('activeSlack') || []), this.data._id)
+    $('#' + this.data._id).addClass('active')
