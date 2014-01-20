@@ -5,7 +5,7 @@
       <img class="img-circle avatar" src="{{avatar indicatedBy}}"> {{name indicatedBy}} indicated that you took part in this as well.
     </div>
     {{/if}}
-    <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required>
+    <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required autofocus>
     <textarea class="form-control" id="description" placeholder="What I am expecting to learn / have learned and might be interesting to my colleagues...">{{description}}</textarea>
     <div class="btn-group btn-group-justified" id="category" data-toggle="buttons">
       <label class="btn btn-default {{isActiveCategory 'book'}}">
