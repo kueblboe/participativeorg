@@ -1,21 +1,20 @@
-<head>
-  <title>participativeorg - Transparency in participative organizations</title>
-  <meta name="description" content="Providing transparency amongst colleagues in a participative organization.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script>
-  var _prum = [['id', '52c6b449abe53dcc4c000000'],
-               ['mark', 'firstbyte', (new Date()).getTime()]];
-  (function() {
-      var s = document.getElementsByTagName('script')[0]
-        , p = document.createElement('script');
-      p.async = 'async';
-      p.src = '//rum-static.pingdom.net/prum.min.js';
-      s.parentNode.insertBefore(p, s);
-  })();
-  </script>
-</head>
-
 <template name="layout">
+  <head>
+    <title>{{#if notificationCount}}({{notificationCount}}) {{/if}}participativeorg - Transparency in participative organizations</title>
+    <meta name="description" content="Providing transparency amongst colleagues in a participative organization.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script>
+    var _prum = [['id', '52c6b449abe53dcc4c000000'],
+                 ['mark', 'firstbyte', (new Date()).getTime()]];
+    (function() {
+        var s = document.getElementsByTagName('script')[0]
+          , p = document.createElement('script');
+        p.async = 'async';
+        p.src = '//rum-static.pingdom.net/prum.min.js';
+        s.parentNode.insertBefore(p, s);
+    })();
+    </script>
+  </head>
   <!--[if lt IE 9]>
     <p class="browser-warning"><strong><i class="icon-exclamation-sign"></i> Warning</strong> - You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/" target="_blank">upgrade your browser</a> to properly view this website.</p>
   <![endif]-->
