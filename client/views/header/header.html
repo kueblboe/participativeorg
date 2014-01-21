@@ -14,27 +14,32 @@
         </div>
         <div class="navbar-collapse collapse">
           {{#if currentUser}}
-          <ul class="nav navbar-nav">
-            <li class="{{activeRouteClass 'slack' 'slackEdit' 'slackPage' 'slackNew'}}"><a href="{{pathFor 'slack'}}"><i class="fa fa-flask"></i> Slack</a></li>
-          </ul>
+            <ul class="nav navbar-nav">
+              <li class="{{activeRouteClass 'slack' 'slackEdit' 'slackPage' 'slackNew'}}"><a href="{{pathFor 'slack'}}"><i class="fa fa-flask"></i> Slack</a></li>
+            </ul>
           {{/if}}
           <ul class="nav navbar-nav navbar-right">
             {{#if currentUser}}
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                {{#if selectedUserAvatar}}
-                <img class="img-circle avatar" src="{{selectedUserAvatar}}">
-                {{/if}}
-                {{selectedUserName}} <b class="caret"></b>
-              </a>
-              <ul id="coworkers" class="dropdown-menu">
-                {{#each users}}
-                <li>
-                  <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar _id}}"> {{profile.name}}</a>
-                </li>
-                {{/each}}
-              </ul>
-            </li>
+              <li class="dropdown">
+                {{> notifications}}
+              </li>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  {{#if selectedUserAvatar}}
+                    <img class="img-circle avatar" src="{{selectedUserAvatar}}">
+                  {{else}}
+                    {{selectedUserName}}
+                  {{/if}}
+                  <b class="caret"></b>
+                </a>
+                <ul id="coworkers" class="dropdown-menu">
+                  {{#each users}}
+                    <li>
+                      <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar _id}}"> {{profile.name}}</a>
+                    </li>
+                  {{/each}}
+                </ul>
+              </li>
             {{/if}}
             <li>{{loginButtons}}</li>
           </ul>

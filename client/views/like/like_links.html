@@ -1,21 +1,21 @@
 <template name="likeLinks">
   {{#unless owns}}
-  <span>
-    <a class="like" href="#"><i class="fa fa-thumbs-up"></i>
-    {{#if likedByMe}}
-    Unlike
-    {{else}}
-    Like
-    {{/if}}
-    </a>
-  </span>
+    <span>
+      <a class="like" href="#"><i class="fa fa-thumbs-up"></i>
+      {{#if likedByMe}}
+        Unlike
+      {{else}}
+        Like
+      {{/if}}
+      </a>
+    </span>
   {{/unless}}
   {{#if likes}}
-  <span>
-    liked by
-    {{#each liker}}
-    <img class="img-circle avatar" src="{{avatar userId}}">
-    {{/each}}
-  </span>
+    <span>
+      liked by
+      {{#each liker}}
+        <img class="img-circle avatar" src="{{avatar userId}}">
+      {{/each}}
+    </span>
   {{/if}}
 </template>

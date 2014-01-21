@@ -20,3 +20,5 @@ Meteor.publish "coworkers", ->
   me = Meteor.users.findOne(this.userId)
   if me
     Meteor.users.find { 'profile.domain': me.profile.domain }
+
+Meteor.publish "notifications", -> Notifications.find({ userId: this.userId, read: false })

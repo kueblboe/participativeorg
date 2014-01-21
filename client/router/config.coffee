@@ -62,7 +62,8 @@ requireLogin = ->
 
 Router.before requireLogin
 Router.before clearErrors
-Router.before -> Meteor.subscribe "coworkers", Meteor.userId()
+Router.before -> Meteor.subscribe "coworkers"
+Router.before -> Meteor.subscribe "notifications"
 
 Router.load ->
   Session.set('selectedUserId', this.params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
