@@ -12,13 +12,13 @@ Meteor.methods(
         updatedLikes = _.reject(slack.likes, (l) -> l.userId is Meteor.userId())
       else
         updatedLikes = (slack.likes || []).concat like
-        createNotification({ slackId: slack._id, userId: slack.userId, action: "likes" })
+        createNotification({ slackId: slack._id, userId: slack.userId, action: "likes your" })
       Slack.update(slack._id, { $set: {likes: updatedLikes} })
     else if goal = Goals.findOne(likeAttributes.likedId)
       if _.contains(_.pluck(goal.likes, 'userId'), Meteor.userId())
         updatedLikes = _.reject(goal.likes, (l) -> l.userId is Meteor.userId())
       else
         updatedLikes = (goal.likes || []).concat like
-        createNotification({ goalId: goal._id, userId: goal.userId, action: "likes" })
+        createNotification({ goalId: goal._id, userId: goal.userId, action: "likes your" })
       Goals.update(goal._id, { $set: {likes: updatedLikes} })
 )

@@ -12,8 +12,8 @@ Meteor.methods(
 
     if slack = Slack.findOne(commentAttributes.commentedId)
       Slack.update(slack._id, { $set: {comments: (slack.comments || []).concat comment} })
-      createNotification({ slackId: slack._id, userId: slack.userId, action: "commented on" })
+      createNotification({ slackId: slack._id, userId: slack.userId, action: "commented on your" })
     else if goal = Goals.findOne(commentAttributes.commentedId)
       Goals.update(goal._id, { $set: {comments: (goal.comments || []).concat comment} })
-      createNotification({ goalId: goal._id, userId: goal.userId, action: "commented on" })
+      createNotification({ goalId: goal._id, userId: goal.userId, action: "commented on your" })
 )
