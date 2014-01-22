@@ -12,9 +12,13 @@ Meteor.publish "slack", (userId, year) ->
       Goals.find({userId: userId, date: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } })
     ]
 
-Meteor.publish "singleSlack", (slackId) -> Slack.find(slackId)
+Meteor.publish "singleSlack", (slackId) ->
+  slack = Slack.find(slackId)
+  if isInMyDomain(Slack.findOne(slackId).userId, this.userId) then slack else []
 
-Meteor.publish "goal", (goalId) -> Goals.find(goalId)
+Meteor.publish "goal", (goalId) ->
+  goal = Goals.find(goalId)
+  if isInMyDomain(Goals.findOne(goalId).userId, this.userId) then goal else []
 
 Meteor.publish "coworkers", ->
   me = Meteor.users.findOne(this.userId)
