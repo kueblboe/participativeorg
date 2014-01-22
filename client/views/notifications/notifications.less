@@ -1,7 +1,21 @@
 @import '../../stylesheets/variables';
 
 .notification {
+  padding: 0;
   .avatar {
     height: @avatar-height-sm;
   }
+
+  .unread {
+    background-color: @bg-grey;
+  }
+
+  li.read > a {
+    color: @border-grey;
+  }
+}
+
+.unseen {
+  color: @red;
+  font-size: 18px;
 }

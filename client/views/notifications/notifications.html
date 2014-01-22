@@ -1,8 +1,7 @@
 <template name="notifications">
   {{#if notificationCount}}
     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      <i class="fa fa-bell"></i>
-      <span class="badge badge-inverse">{{notificationCount}}</span>
+      <i class="fa fa-bell {{seen}}"></i>
       <b class="caret"></b>
     </a>
     <ul class="notification dropdown-menu">

@@ -8,6 +8,8 @@ Notifications.allow
     notification = _.extend(_.pick(notificationAttributes, "userId", "action", "slackId", "goalId"),
       commenterId: Meteor.userId()
       read: false
+      seen: false
+      createdAt: new Date()
     )
 
     Notifications.insert(notification)

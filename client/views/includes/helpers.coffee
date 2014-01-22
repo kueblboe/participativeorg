@@ -65,5 +65,5 @@ Handlebars.registerHelper "commentsList", ->
 Handlebars.registerHelper "likedByMe", ->
   _.contains(_.pluck(this.likes, 'userId'), Meteor.userId())
 
-Handlebars.registerHelper "notificationCount", ->
-  Notifications.find().count()
+Handlebars.registerHelper "unseenNotificationCount", ->
+  Notifications.find({seen: false}).count()

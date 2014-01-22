@@ -11,6 +11,9 @@ Template.notification.helpers
     else if this.goalId
       "goal"
 
+  read: ->
+    if this.read then 'read' else 'unread'
+
 Template.notification.events
   "click a": ->
     Notifications.update(this._id, { $set: { read: true } })

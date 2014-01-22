@@ -21,4 +21,4 @@ Meteor.publish "coworkers", ->
   if me
     Meteor.users.find { 'profile.domain': me.profile.domain }
 
-Meteor.publish "notifications", -> Notifications.find({ userId: this.userId, read: false })
+Meteor.publish "notifications", -> Notifications.find({ userId: this.userId }, {sort: {createdAt: -1}, limit: 10})
