@@ -119,7 +119,7 @@ button.close {
   margin-top: -2px;
 }
 
-button:not(.navbar-toggle) {
+a.btn, button:not(.navbar-toggle) {
   min-width: 82px;
 
   &[type="submit"] {
@@ -129,6 +129,21 @@ button:not(.navbar-toggle) {
     &:hover {
       background-color: @secondary-b-bg;
     }
+  }
+
+  &.pull-right {
+    margin-left: 5px;
+  }
+}
+
+.btn-danger {
+  color: @text-grey;
+  background-color: white;
+  border-color: @red;
+
+  &:hover {
+    color: @text-grey;
+    background-color: @red-bg;
   }
 }
 
@@ -150,6 +165,14 @@ button:not(.navbar-toggle) {
 
   &:hover {
     background-color: @nav-grey;
+  }
+}
+
+.label-primary {
+  background-color: @secondary-b-1;
+
+  &[href]:hover {
+    background-color: @secondary-b-2;
   }
 }
 
