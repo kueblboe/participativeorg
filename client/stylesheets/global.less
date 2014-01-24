@@ -124,6 +124,11 @@ button:not(.navbar-toggle) {
 
   &[type="submit"] {
     border-color: @secondary-b-1;
+    font-weight: 500;
+
+    &:hover {
+      background-color: @secondary-b-bg;
+    }
   }
 }
 
@@ -138,6 +143,14 @@ button:not(.navbar-toggle) {
 
 .alert-danger {
   background-color: rgba(242, 222, 222, 0.5);
+}
+
+.label-default {
+  background-color: @border-grey;
+
+  &:hover {
+    background-color: @nav-grey;
+  }
 }
 
 // MISCELLANEOUS
