@@ -4,6 +4,9 @@ Handlebars.registerHelper "submitText", ->
 Handlebars.registerHelper "selectedSelf", ->
   Session.get('selectedUserId') is Meteor.userId()
 
+Handlebars.registerHelper "owns", ->
+    this.userId is Meteor.userId()
+
 Handlebars.registerHelper "formattedDate", (date) ->
   moment(date).format('DD.MM.YYYY')
 
@@ -11,19 +14,10 @@ Handlebars.registerHelper "rfcDate", (date) ->
   moment(date).format('YYYY-MM-DD')
 
 Handlebars.registerHelper "times", (n, block) ->
-  accum = ""
-  i = 0
-
-  while i < n
-    accum += block.fn(i)
-    ++i
-  accum
+  (block.fn(i) for i in [0...n]).join("")
 
 Handlebars.registerHelper "preview", (text) ->
-  if text?.length > 50
-    text.substring(0, 50) + '…'
-  else
-    text
+  if text?.length > 50 then text.substring(0, 50) + '…' else text
 
 Handlebars.registerHelper "avatar", (userId) ->
   user = Meteor.users.findOne(userId)
@@ -32,15 +26,11 @@ Handlebars.registerHelper "avatar", (userId) ->
   else
     '/img/anonymous.png'
 
-Handlebars.registerHelper "owns", ->
-    this.userId is Meteor.userId()
+Handlebars.registerHelper "name", (userId) ->
+  Meteor.users.findOne(userId)?.profile?.name
 
 Handlebars.registerHelper "notPartYet", ->
     not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
-
-Handlebars.registerHelper "name", (userId) ->
-  user = Meteor.users.findOne(userId)
-  user?.profile?.name
 
 Handlebars.registerHelper "categorySymbol", ->
   if this.category is 'book'

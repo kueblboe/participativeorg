@@ -1,3 +1,8 @@
-# meteor-boilerplate
+# participative*org*
 
-See our [documentation](http://github.differential.io/meteor-boilerplate/)
+## Providing transparency amongst colleagues.
+
+Design  guidelines:
+- simple
+- elegant
+- default to white
