@@ -1,3 +1,6 @@
+Handlebars.registerHelper "submitText", ->
+  if this._id then 'Edit' else 'Add'
+
 Handlebars.registerHelper "selectedSelf", ->
   Session.get('selectedUserId') is Meteor.userId()
 
