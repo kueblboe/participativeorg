@@ -23,3 +23,6 @@ Template.header.events
   'click .coworker': (e) ->
     e.preventDefault()
     Session.set('selectedUserId', @._id)
+
+Template.header.rendered = ->
+  $('#login-buttons-logout').html("<img class='img-circle avatar' src='#{Meteor.user().profile.avatar}'> See ya")
