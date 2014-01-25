@@ -22,7 +22,11 @@ Template.header.events
 
   'click .coworker': (e) ->
     e.preventDefault()
+    Router.go 'slack'
     Session.set('selectedUserId', @._id)
+
+  'click #login-buttons-logout': (e) ->
+    Router.go 'home'
 
 Template.header.rendered = ->
   $('#login-buttons-logout').html("<img class='img-circle avatar' src='#{Meteor.user().profile.avatar}'> See ya")
