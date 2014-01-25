@@ -8,11 +8,11 @@
     <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required autofocus>
     <textarea rows="3" class="form-control" id="description" placeholder="What I am expecting to learn / have learned and might be interesting to my colleagues...">{{description}}</textarea>
     <div class="btn-group btn-group-justified" id="category" data-toggle="buttons">
-      <label class="btn btn-default {{isActiveCategory 'book'}}">
-        <input type="radio" name="options" value="book"><i class="fa fa-book"></i> book
+      <label class="btn btn-default {{isActiveCategory 'read'}}">
+        <input type="radio" name="options" value="read"><i class="fa fa-book"></i> read
       </label>
-      <label class="btn btn-default {{isActiveCategory 'event'}}">
-        <input type="radio" name="options" value="event"><i class="fa fa-users"></i> event
+      <label class="btn btn-default {{isActiveCategory 'attend'}}">
+        <input type="radio" name="options" value="attend"><i class="fa fa-users"></i> attend
       </label>
       <label class="btn btn-default {{isActiveCategory 'other'}}">
         <input type="radio" name="options" value="other"><i class="fa fa-question-circle"></i> other

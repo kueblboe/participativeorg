@@ -33,9 +33,9 @@ Handlebars.registerHelper "notPartOfYet", ->
     not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
 
 Handlebars.registerHelper "categorySymbol", ->
-  if this.category is 'book'
+  if this.category is 'read'
     'book'
-  else if this.category is 'event'
+  else if this.category is 'attend'
     'users'
   else
     'question-circle'
