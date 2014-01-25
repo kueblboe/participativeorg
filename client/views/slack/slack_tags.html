@@ -1,0 +1,17 @@
+<template name="slackTags">
+  <div class="tags">
+    <span>{{formattedDate date}}</span>
+    <span>{{category}}</span>
+    {{#if hashtagSymbol}}<span><i class="fa fa-{{hashtagSymbol}}"></i></span>{{/if}}
+    <span class="{{highlightEffort}}">{{effort}} h</span>
+    {{#if cost}}<span class="{{highlightCost}}">{{cost}} €</span>{{/if}}
+    <span class="rating {{highlightRanking}}">
+      {{#times ranking}}
+        <i class="fa fa-star"></i>
+      {{/times}}
+      {{#times rankingNeg}}
+        <i class="fa fa-star-o"></i>
+      {{/times}}
+    </span>
+  </div>
+</template>

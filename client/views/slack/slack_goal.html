@@ -5,16 +5,7 @@
     <div class="actions">
       {{> likeLinks}}
       <span>
-        <a href="{{pathFor 'slackGoalPage'}}"><i class="fa fa-comment-o"></i>
-        {{#if comments}}
-        {{commentersCount}} commented
-        {{#each commenters}}
-        <img class="img-circle avatar" src="{{avatar userId}}">
-        {{/each}}
-        {{else}}
-        Comment
-        {{/if}}
-        </a>
+        <a href="{{pathFor 'slackGoalPage'}}"><i class="fa fa-comment-o"></i>{{> commentLinkText}}</a>
       </span>
       {{#if owns}}<a href="{{pathFor 'slackGoalEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
     </div>

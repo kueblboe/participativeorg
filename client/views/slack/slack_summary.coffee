@@ -1,13 +1,30 @@
 Template.slackSummary.helpers
-  totalCost: -> Slack.find({date: { $gte: startOfYear(this.year), $lte: endOfYear(this.year) } }).fetch().map((s) -> s.cost).reduce(((c, sum) -> c + sum), 0)
-  totalEffort: -> Slack.find({date: { $gte: startOfYear(this.year), $lte: endOfYear(this.year) } }).fetch().map((s) -> s.effort).reduce(((e, sum) -> e + sum), 0)
-  nextYear: -> parseInt(this.year) + 1
-  previousYear: -> parseInt(this.year) - 1
-  hasNextSlack: -> Slack.find({date: { $gte: startOfYear(this.year + 1), $lte: endOfYear(this.year + 1) } }).count() > 0
-  hasPreviousSlack: -> Slack.find({date: { $gte: startOfYear(this.year - 1), $lte: endOfYear(this.year - 1) } }).count() > 0
-  userId: -> Session.get('selectedUserId')
-  isComplete: -> Completions.findOne()
-  completionId: -> Completions.findOne()._id
+  totalCost: ->
+    Slack.find({date: { $gte: startOfYear(this.year), $lte: endOfYear(this.year) } }).fetch().map((s) -> s.cost).reduce(((c, sum) -> c + sum), 0)
+
+  totalEffort: ->
+    Slack.find({date: { $gte: startOfYear(this.year), $lte: endOfYear(this.year) } }).fetch().map((s) -> s.effort).reduce(((e, sum) -> e + sum), 0)
+
+  nextYear: ->
+    parseInt(this.year) + 1
+
+  previousYear: ->
+    parseInt(this.year) - 1
+
+  hasNextSlack: ->
+    Slack.find({date: { $gte: startOfYear(this.year + 1), $lte: endOfYear(this.year + 1) } }).count() > 0
+
+  hasPreviousSlack: ->
+    Slack.find({date: { $gte: startOfYear(this.year - 1), $lte: endOfYear(this.year - 1) } }).count() > 0
+
+  userId: ->
+    Session.get('selectedUserId')
+
+  isComplete: ->
+    Completions.findOne()
+
+  completionId: ->
+    Completions.findOne()._id
 
 Template.slackSummary.events
   'click #total-cost': (e) ->

@@ -1,4 +1,4 @@
-Handlebars.registerHelper "submitText", ->
+Handlebars.registerHelper "submitButtonText", ->
   if this._id then 'Edit' else 'Add'
 
 Handlebars.registerHelper "selectedSelf", ->
@@ -29,7 +29,7 @@ Handlebars.registerHelper "avatar", (userId) ->
 Handlebars.registerHelper "name", (userId) ->
   Meteor.users.findOne(userId)?.profile?.name
 
-Handlebars.registerHelper "notPartYet", ->
+Handlebars.registerHelper "notPartOfYet", ->
     not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
 
 Handlebars.registerHelper "categorySymbol", ->

@@ -1,9 +1,9 @@
 <template name="slackEdit">
   <form role="form">
     {{#if indicatedBy}}
-    <div class="alert alert-warning">
-      <img class="img-circle avatar" src="{{avatar indicatedBy}}"> {{name indicatedBy}} indicated that you took part in this as well.
-    </div>
+      <div class="alert alert-warning">
+        <img class="img-circle avatar" src="{{avatar indicatedBy}}"> {{name indicatedBy}} indicated that you took part in this as well.
+      </div>
     {{/if}}
     <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required autofocus>
     <textarea rows="3" class="form-control" id="description" placeholder="What I am expecting to learn / have learned and might be interesting to my colleagues...">{{description}}</textarea>
@@ -37,24 +37,24 @@
     </div>
     <div class="copies">
       {{#if userId}}
-      <img class="img-circle avatar" src="{{avatar userId}}">
+        <img class="img-circle avatar" src="{{avatar userId}}">
       {{/if}}
       {{#each copies}}
-      <img class="img-circle avatar" src="{{avatar userId}}">
+        <img class="img-circle avatar" src="{{avatar userId}}">
       {{/each}}
       {{#if hasUsersNotAlreadyPartOf}}
-      <span class="dropdown">
-      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-        <i class="fa fa-plus"></i> Add colleagues <span class="caret"></span>
-      </button>
-      <ul id="coworkers" class="dropdown-menu dropdown-menu-form">
-        {{#each users}}
-        <li>
-          <label class="checkbox"><input type="checkbox" data-participant="{{_id}}"><img class="img-circle avatar" src="{{avatar _id}}"> <span>{{profile.name}}</span></label>
-        </li>
-        {{/each}}
-      </ul>
-      </span>
+        <span class="dropdown">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          <i class="fa fa-plus"></i> Add colleagues <span class="caret"></span>
+        </button>
+        <ul id="coworkers" class="dropdown-menu dropdown-menu-form">
+          {{#each users}}
+            <li>
+              <label class="checkbox"><input type="checkbox" data-participant="{{_id}}"><img class="img-circle avatar" src="{{avatar _id}}"> <span>{{profile.name}}</span></label>
+            </li>
+          {{/each}}
+        </ul>
+        </span>
       {{/if}}
     </div>
     {{> editButtons}}

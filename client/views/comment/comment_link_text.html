@@ -1,0 +1,10 @@
+<template name="commentLinkText">
+  {{#if comments}}
+    {{commentersCount}} commented
+    {{#each commenters}}
+      <img class="img-circle avatar" src="{{avatar userId}}">
+    {{/each}}
+  {{else}}
+    Comment
+  {{/if}}
+</template>

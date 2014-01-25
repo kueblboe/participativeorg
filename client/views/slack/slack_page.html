@@ -2,23 +2,10 @@
   <div id="{{_id}}" class="item {{category}}">
     <i class="watermark fa fa-3x fa-{{categorySymbol}} hidden-print"></i>
     <b>{{title}}</b>
-    <div class="tags">
-      <span>{{formattedDate date}}</span>
-      <span>{{category}}</span>
-      <span>{{effort}} h</span>
-      {{#if cost}}<span>{{cost}} €</span>{{/if}}
-      <span class="rating">
-        {{#times ranking}}
-        <i class="fa fa-star"></i>
-        {{/times}}
-        {{#times rankingNeg}}
-        <i class="fa fa-star-o"></i>
-        {{/times}}
-      </span>
-    </div>
+    {{> slackTags}}
     <div class="text">{{description}}</div>
     {{#if url}}
-    <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
+      <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
     {{/if}}
     <div class="copies">
       {{#each copies}}
@@ -28,9 +15,9 @@
     <div class="actions">
       {{> likeLinks}}
       {{#if owns}}
-      <a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>
+        <a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>
       {{else}}
-        {{#if notPartYet}}<a href="{{pathFor 'slackCopy'}}"><i class="fa fa-copy"></i> Copy to my slack</a>{{/if}}
+        {{#if notPartOfYet}}<a href="{{pathFor 'slackCopy'}}"><i class="fa fa-copy"></i> Copy to my slack</a>{{/if}}
       {{/if}}
     </div>
   </div>
