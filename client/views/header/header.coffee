@@ -24,9 +24,11 @@ Template.header.events
     e.preventDefault()
     Router.go 'slack'
     Session.set('selectedUserId', @._id)
+    track('view other slack', { 'user': this.profile.name })
 
   'click #login-buttons-logout': (e) ->
     Router.go 'home'
 
 Template.header.rendered = ->
-  $('#login-buttons-logout').html("<img class='img-circle avatar' src='#{Meteor.user().profile.avatar}'> See ya")
+  if Meteor.user()?
+    $('#login-buttons-logout').html("<img class='img-circle avatar' src='#{Meteor.user().profile.avatar}'> See ya")

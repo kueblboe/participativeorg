@@ -64,6 +64,8 @@ Template.slackSummary.events
     Meteor.call "completeYear", {year: this.year}, (error, id) ->
       if error
         throwError error.reason
+      else
+        track('complete year', { 'year': this.year })
 
   'click .uncomplete-year': (e) ->
     e.preventDefault()

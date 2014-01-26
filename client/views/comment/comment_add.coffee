@@ -10,4 +10,5 @@ Template.commentAdd.events
       if error
         throwError error.reason
       else
+        track('add comment')
         $body.val('')

@@ -17,6 +17,7 @@ Template.slackGoalEdit.events
         if error
           throwError error.reason
         else
+          track('add goal', { 'date': goalProperties.date })
           Router.go "slack"
 
   "click .delete": (e) ->

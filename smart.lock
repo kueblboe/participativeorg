@@ -4,7 +4,8 @@
     "basePackages": {
       "iron-router": {},
       "momentjs": {},
-      "livestamp": {}
+      "livestamp": {},
+      "mixpanel-light": {}
     },
     "packages": {
       "iron-router": {
@@ -21,6 +22,11 @@
         "git": "https://github.com/colllin/meteor-livestamp.git",
         "tag": "v1.1.2.1",
         "commit": "070821be066925e5177daf1d3398c759c45b15b4"
+      },
+      "mixpanel-light": {
+        "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
+        "tag": "v0.1.0",
+        "commit": "eed9866415f2063521a3d170e58a766019a683d8"
       }
     }
   }

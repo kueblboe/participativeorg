@@ -34,13 +34,18 @@ Template.slackEdit.events
       if error
         throwError error.reason
       else
+        track('upsert slack', { 'category': slackProperties.category })
         Router.go "slack"
 
   "click .delete": (e) ->
     e.preventDefault()
     if confirm("Delete this slack?")
-      Meteor.call 'removeSlack', @_id
-      Router.go "slack"
+      Meteor.call 'removeSlack', @_id, (error) ->
+        if error
+          throwError error.reason
+        else
+          track('remove slack')
+          Router.go "slack"
 
   "click .dropdown-menu-form": (e) ->
     e.stopPropagation()

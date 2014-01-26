@@ -10,10 +10,7 @@ Goals.deny update: (userId, goal, fieldNames) ->
 
 Meteor.methods(
   addGoal: (goalAttributes) ->
-    # ensure the user is logged in
     throw new Meteor.Error(401, "You need to login to add a goal") unless Meteor.user()
-    
-    # ensure the goal has a description
     throw new Meteor.Error(422, "Please fill in a description") unless goalAttributes.description
     
     # pick out the whitelisted keys
