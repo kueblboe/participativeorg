@@ -2,7 +2,7 @@
   <form role="form">
     {{#if indicatedBy}}
       <div class="alert alert-warning">
-        <img class="img-circle avatar" src="{{avatar indicatedBy}}"> {{name indicatedBy}} indicated that you took part in this as well.
+        <img class="img-circle avatar" src="{{avatar indicatedBy}}"> {{name indicatedBy}} indicated that you took part in this as well. This is your <strong>personal copy</strong>. Edit or even delete at will. It won't affect other people's slack.
       </div>
     {{/if}}
     <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required autofocus>
