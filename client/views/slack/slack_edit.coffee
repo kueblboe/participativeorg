@@ -11,6 +11,9 @@ Template.slackEdit.helpers
     alreadyPartOf = _.pluck(this.copies, "userId").concat(Meteor.userId()).concat(this.userId)
     Meteor.users.find({ _id: { $nin: alreadyPartOf } }).fetch().length > 0
 
+  hasCopies: ->
+    this.copies?.length > 0
+
   name: (userId) ->
     Meteor.users.findOne(userId)?.profile.name
 

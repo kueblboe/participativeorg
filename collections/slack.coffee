@@ -14,6 +14,11 @@
   # add / update slack
   changes = Slack.upsert(slackAttributes._id, { $set: slack })
 
+  # update number of slack activities for user when adding slack
+  if slack.userId is Meteor.userId()
+    numSlack = Slack.find({userId: Meteor.userId()}).fetch().length
+    Meteor.users.update({_id: Meteor.userId()}, { $set: {'profile.numSlack': numSlack} })
+
   # update all copies with new copy
   if slackAttributes.copyOf and changes.insertedId
     for copy in slack.copies

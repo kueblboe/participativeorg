@@ -1,5 +1,8 @@
 <template name="slack">
   {{#if currentUser}}
+    {{#if isSlackNovice}}
+      {{> slackHomeAlert}}
+    {{/if}}
     {{#if hasSlackEvents}}
       {{#if hasGoals}}
         {{#each goals}}
@@ -22,4 +25,8 @@
       {{> slackEvent}}
     {{/each}}
   </div>
+
+  {{#if isSlackNovice}}
+    {{> slackMotivation}}
+  {{/if}}
 </template>
