@@ -1,10 +1,17 @@
 # participative*org*
 
-## Providing transparency amongst colleagues.
+This application aims to help organizations to be more participative by providing transparency about slack, peer ranking, economics and guidelines.
 
-This application aims to help organizations to be more participative by providing transparency about slack, peer ranking, economics and policies.
+## Contribute
 
-Design  guidelines:
+### Adding features
+
+- Optimize for maintainability. Be obvious, not clever.
+- **K**eep **I**t **S**imple **S**tupid
+- Think of "LOC spent". Is this new feature worth the added complexity?
+
+### Design  guidelines
+
 - simple
 - elegant
 - subtle
