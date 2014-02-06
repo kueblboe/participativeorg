@@ -2,7 +2,7 @@
 
 This application aims to enable decentralized decision-making within participative organizations by providing transparency about slack, peer ranking, economics and guidelines.
 
-[Desire engine](http://www.slideshare.net/nireyal/hooked-model) for slack feature link
+[Desire engine](http://www.slideshare.net/nireyal/hooked-model) for slack feature
 
 - Trigger: internal (planning slack), external (email notifications)
 - Action: enter slack activities
@@ -20,8 +20,7 @@ This application aims to enable decentralized decision-making within participati
 
 ### Coding style
 
-- Use functional style (e.g. [underscorejs](http://underscorejs.org/) instead of loops)
-  Don't know how? [Learn it here.](http://reactive-extensions.github.io/learnrx/)
+- Use functional style (e.g. [underscorejs](http://underscorejs.org/) instead of loops) Don't know how? [Learn it here.](http://reactive-extensions.github.io/learnrx/)
 
 ### Design  guidelines
 
