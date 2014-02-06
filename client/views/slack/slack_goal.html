@@ -1,7 +1,7 @@
 <template name="slackGoal">
   <div class="goal well">
     <i class="watermark fa fa-3x fa-flag-checkered hidden-print"></i>
-    <span class="description">{{description}}</span>
+    <span class="description">{{#markdown}}{{description}}{{/markdown}}</span>
     <div class="actions">
       {{> likeLinks}}
       <span>

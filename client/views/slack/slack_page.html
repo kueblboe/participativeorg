@@ -3,7 +3,7 @@
     <i class="watermark fa fa-3x fa-{{categorySymbol}} hidden-print"></i>
     <b>{{title}}</b>
     {{> slackTags}}
-    <div class="text">{{description}}</div>
+    <div>{{#markdown}}{{description}}{{/markdown}}</div>
     {{#if url}}
       <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
     {{/if}}

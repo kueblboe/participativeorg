@@ -6,7 +6,7 @@
     {{> slackTags}}
     <div class="preview">{{preview description}}</div>
     <div class="details">
-      <div class="text">{{description}}</div>
+      <div>{{#markdown}}{{description}}{{/markdown}}</div>
       {{#if url}}
       <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
       {{/if}}
