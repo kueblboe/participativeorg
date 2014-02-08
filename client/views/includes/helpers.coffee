@@ -62,4 +62,4 @@ Handlebars.registerHelper "unseenNotificationCount", ->
   Notifications.find({seen: false}).count()
 
 Handlebars.registerHelper "isSlackNovice", ->
-  not Meteor.user().profile.numSlack or Meteor.user().profile.numSlack < 4
+  not Meteor.user()?.profile.numSlack or Meteor.user().profile.numSlack < 4
