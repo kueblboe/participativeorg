@@ -25,5 +25,6 @@ Template.header.events
     Router.go 'home'
 
 Template.header.rendered = ->
+  $(".navbar-fixed-top").headroom()
   if Meteor.user()?
     $('#login-buttons-logout').html("<img class='img-circle avatar' src='#{Meteor.user().profile.avatar}'> See ya")
