@@ -20,6 +20,13 @@ Meteor.publish "goal", (goalId) ->
   goal = Goals.find(goalId)
   if isInMyDomain(Goals.findOne(goalId).userId, this.userId) then goal else []
 
+Meteor.publish "feedback", (userId, year) ->
+  if isInMyDomain(userId, this.userId) and year
+    if userId is this.userId
+      Feedback.find({receiver: userId, createdAt: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } }, {fields: {userId: 0}})
+    else
+      Feedback.find({userId: this.userId, receiver: userId, createdAt: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } })
+
 Meteor.publish "coworkers", ->
   me = Meteor.users.findOne(this.userId)
   if me

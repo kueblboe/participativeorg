@@ -29,6 +29,9 @@ Handlebars.registerHelper "avatar", (userId) ->
 Handlebars.registerHelper "name", (userId) ->
   Meteor.users.findOne(userId)?.profile?.name
 
+Handlebars.registerHelper "firstname", (userId) ->
+  Meteor.users.findOne(userId)?.profile?.firstname
+
 Handlebars.registerHelper "notPartOfYet", ->
     not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
 

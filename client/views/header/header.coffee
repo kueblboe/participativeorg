@@ -1,11 +1,7 @@
 Template.header.helpers
-  activeRouteClass: ->
-    args = Array::slice.call(arguments, 0)
-    args.pop()
-    active = _.any(args, (name) ->
-      Router.current().route.name is name
-    )
-    active and "active"
+  activeRouteClass: (args..., hash) ->
+    if _.any(args, (name) -> Router.current().route.name is name)
+      'active'
 
   users: ->
     Meteor.users.find({}, {sort: {'profile.name': 1}})
@@ -22,9 +18,8 @@ Template.header.events
 
   'click .coworker': (e) ->
     e.preventDefault()
-    Router.go 'slack'
-    Session.set('selectedUserId', @._id)
-    track('view other slack', { 'user': this.profile.name })
+    Session.set('selectedUserId', this._id)
+    track('view other slack', { 'user': this.profile.name }) unless this._id is Meteor.userId()
 
   'click #login-buttons-logout': (e) ->
     Router.go 'home'

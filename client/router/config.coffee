@@ -53,6 +53,10 @@ Router.map ->
     waitOn: -> Meteor.subscribe("goal", this.params._id)
     data: -> Goals.findOne(this.params._id)
 
+  @route 'feedback',
+    waitOn: -> Meteor.subscribe("feedback", Session.get('selectedUserId'), Session.get('selectedYear')) if Meteor.user()
+    data: -> {year: Session.get('selectedYear')}
+
 requireLogin = ->
   unless Meteor.user()
     if Meteor.loggingIn()

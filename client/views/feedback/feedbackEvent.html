@@ -1,0 +1,9 @@
+<template name="feedbackEvent">
+  <li class="item">
+    <div>{{#markdown}}{{body}}{{/markdown}}</div>
+    <div class="tags">
+      <img class="img-circle avatar" src="{{avatar userId}}">
+      <span data-livestamp="{{createdAt}}"></span>
+    </div>
+  </li>
+</template>
