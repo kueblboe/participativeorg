@@ -6,8 +6,8 @@ Template.header.helpers
   users: ->
     Meteor.users.find({}, {sort: {'profile.name': 1}})
 
-  selectedUserName: ->
-    Meteor.users.findOne(Session.get('selectedUserId'))?.profile.name
+  selectedUserFirstname: ->
+    Meteor.users.findOne(Session.get('selectedUserId'))?.profile.firstname
 
   selectedUserAvatar: ->
     Meteor.users.findOne(Session.get('selectedUserId'))?.profile.avatar

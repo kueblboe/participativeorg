@@ -7,7 +7,6 @@ Template.notification.helpers
     else if this.goalId
       Router.routes.slackGoalPage.path _id: this.goalId
     else if this.feedbackId
-      console.log "This feedback #{this.feedbackId}"
       Session.set('selectedUserId', Meteor.userId())
       Router.routes.feedback.path()
 
