@@ -1,9 +1,15 @@
 <template name="feedback">
   {{#unless selectedSelf}}
     <div class="alert alert-warning">
-      <span>Your feedback is <strong>anonymous</strong> and only {{firstnameSelectedUser}} can see it. {{firstnameSelectedUser}} will be able to ask clarifying questions without knowing who you are.</span>
+      Your feedback is <strong>anonymous</strong> and only {{firstnameSelectedUser}} can see it. {{firstnameSelectedUser}} will be able to ask clarifying questions without knowing who you are.
     </div>
     {{> feedbackAdd}}
+  {{else}}
+    {{#unless hasFeedbackEvents}}
+      <div class="alert alert-warning">
+        There is no feedback for you yet. Why don't you <a href="mailto:?subject=I would appreciate your feedback&body=Hi,%0D%0A%0D%0AI would appreciate your feedback. You can provide it anonymously here.%0D%0A{{urlFor 'feedback'}}/?userId={{currentUser._id}}%0D%0A%0D%0AThanks, {{firstnameSelectedUser}}">ask</a> your colleagues, if they’d give you some.
+      </div>
+    {{/unless}}
   {{/unless}}
 
   {{> feedbackSummary}}
