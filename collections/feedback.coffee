@@ -18,4 +18,24 @@ Meteor.methods(
       else
         createNotification({ feedbackId: id, userId: feedback.receiver, action: "someone gave you feedback", anonymous: true })
     )
+
+  addReply: (replyAttributes) ->
+    throw new Meteor.Error(401, "You need to login to add a reply") unless Meteor.user()
+    throw new Meteor.Error(422, "Please fill in a message") unless replyAttributes.body
+    throw new Meteor.Error(422, "Can't figure out what you are trying to reply to") unless replyAttributes.replyTo
+
+    # pick out the whitelisted keys and add userId and createdAt
+    reply = _.extend(_.pick(replyAttributes, "body"),
+      createdAt: new Date()
+    )
+
+    unless replyAttributes.anonymous
+      reply = _.extend(reply,
+        userId: Meteor.userId()
+      )
+
+    if feedback = Feedback.findOne(replyAttributes.replyTo)
+      Feedback.update(feedback._id, { $set: {replies: (feedback.replies || []).concat reply} })
+      for userId in _.reject([feedback.receiver, feedback.userId], (id) -> id is Meteor.userId())
+        createNotification({ feedbackId: feedback._id, userId: userId, action: "replied to your feedback", anonymous: replyAttributes.anonymous })
 )
