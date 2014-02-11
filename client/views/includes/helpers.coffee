@@ -21,7 +21,9 @@ Handlebars.registerHelper "preview", (text) ->
 
 Handlebars.registerHelper "avatar", (userId) ->
   user = Meteor.users.findOne(userId)
-  if user?.profile.avatar
+  if userId is undefined
+    'img/anonymous2.png'
+  else if user?.profile.avatar
     user.profile.avatar
   else
     '/img/anonymous.png'
@@ -31,7 +33,6 @@ Handlebars.registerHelper "name", (userId) ->
 
 Handlebars.registerHelper "firstname", (userId) ->
   Meteor.users.findOne(userId)?.profile?.firstname || 'someone'
-
 
 Handlebars.registerHelper "firstnameSelectedUser", ->
   Meteor.users.findOne(Session.get('selectedUserId'))?.profile?.firstname
