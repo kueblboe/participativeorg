@@ -27,10 +27,11 @@ Handlebars.registerHelper "avatar", (userId) ->
     '/img/anonymous.png'
 
 Handlebars.registerHelper "name", (userId) ->
-  Meteor.users.findOne(userId)?.profile?.name
+  Meteor.users.findOne(userId)?.profile?.name || 'someone'
 
 Handlebars.registerHelper "firstname", (userId) ->
-  Meteor.users.findOne(userId)?.profile?.firstname
+  Meteor.users.findOne(userId)?.profile?.firstname || 'someone'
+
 
 Handlebars.registerHelper "firstnameSelectedUser", ->
   Meteor.users.findOne(Session.get('selectedUserId'))?.profile?.firstname

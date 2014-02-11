@@ -5,7 +5,7 @@ Notifications.allow
 
 @createNotification = (notificationAttributes) ->
   if notificationAttributes.userId isnt Meteor.userId()
-    notification = _.extend(_.pick(notificationAttributes, "userId", "action", "openEdit", "slackId", "goalId", "feedbackId"),
+    notification = _.extend(_.pick(notificationAttributes, "userId", "ownerUserId", "action", "openEdit", "slackId", "goalId", "feedbackId"),
       read: false
       seen: false
       createdAt: new Date()
@@ -13,7 +13,7 @@ Notifications.allow
 
     unless notificationAttributes.anonymous
       notification = _.extend(notification,
-        commenterId: Meteor.userId()
+        actorUserId: Meteor.userId()
       )
 
     Notifications.insert(notification)

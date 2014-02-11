@@ -51,7 +51,7 @@ Meteor.methods(
         participantSlack = _.extend(_.omit(slack, ['description', 'ranking']), {userId: participant, indicatedBy: Meteor.userId()})
         participantSlackAttributes = _.extend(_.omit(slackAttributes, '_id'), {copyOf: changes.insertedId || slackAttributes._id})
         insert = upsertSlackWithCopies(participantSlack, participantSlackAttributes)
-        createNotification({ slackId: insert.insertedId, userId: participant, action: "indicated that you took part in her/his", openEdit: true })
+        createNotification({ slackId: insert.insertedId, ownerUserId: participant, userId: participant, action: "indicated that you took part in her/his", openEdit: true })
     changes
 
   removeSlack: (slackId) ->

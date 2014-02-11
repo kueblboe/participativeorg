@@ -9,11 +9,13 @@ Template.notification.helpers
     else if this.feedbackId
       Router.routes.feedback.path()
 
-  commentedItem: ->
+  actedOnItem: ->
     if this.slackId
       "slack activity"
     else if this.goalId
       "goal"
+    else if this.feedbackId
+      "feedback"
 
   read: ->
     if this.read then 'read' else 'unread'
@@ -21,3 +23,4 @@ Template.notification.helpers
 Template.notification.events
   "click a": ->
     Notifications.update(this._id, { $set: { read: true } })
+    Session.set('selectedUserId', this.ownerUserId) if this.ownerUserId

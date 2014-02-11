@@ -16,7 +16,7 @@ Meteor.methods(
       if error
         throwError error.reason
       else
-        createNotification({ feedbackId: id, userId: feedback.receiver, action: "someone gave you feedback", anonymous: true })
+        createNotification({ feedbackId: id, ownerUserId: feedback.receiver, userId: feedback.receiver, action: "gave you", anonymous: true })
     )
 
   addReply: (replyAttributes) ->
@@ -37,5 +37,5 @@ Meteor.methods(
     if feedback = Feedback.findOne(replyAttributes.replyTo)
       Feedback.update(feedback._id, { $set: {replies: (feedback.replies || []).concat reply} })
       for userId in _.reject([feedback.receiver, feedback.userId], (id) -> id is Meteor.userId())
-        createNotification({ feedbackId: feedback._id, userId: userId, action: "replied to your feedback", anonymous: replyAttributes.anonymous })
+        createNotification({ feedbackId: feedback._id, ownerUserId: feedback.receiver, userId: userId, action: "replied to your", anonymous: replyAttributes.anonymous })
 )
