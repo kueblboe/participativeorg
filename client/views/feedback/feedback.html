@@ -3,16 +3,10 @@
     <div class="alert alert-warning">
       <span>Your feedback is <strong>anonymous</strong> and only {{firstnameSelectedUser}} can see it. {{firstnameSelectedUser}} will be able to ask clarifying questions without knowing who you are.</span>
     </div>
-  {{/unless}}
-
-  {{#if currentUser}}
-    {{> feedbackSummary}}
-  {{/if}}
-
-  {{#unless selectedSelf}}
     {{> feedbackAdd}}
   {{/unless}}
 
+  {{> feedbackSummary}}
   <div id="feedback" class="list">
     {{#each feedbackEvents}}
       {{> feedbackEvent}}

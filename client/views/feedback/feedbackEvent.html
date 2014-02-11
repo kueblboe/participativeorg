@@ -10,9 +10,10 @@
         <a href="#" class="reply"><i class="fa fa-question-circle"></i> Ask</a>
         {{#unless thanked}}
           <a href="#" class="thank"><i class="fa fa-thumbs-up"></i> Thank</a>
-        {{else}}
-          <span class="notes">thanked</span>
         {{/unless}}
+      {{/if}}
+      {{#if thanked}}
+        <span class="notes">thanked</span>
       {{/if}}
     </div>
     <ul class="replies">

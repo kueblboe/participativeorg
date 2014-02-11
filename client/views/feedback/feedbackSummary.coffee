@@ -6,10 +6,10 @@ Template.feedbackSummary.helpers
     parseInt(this.year) - 1
 
   hasNextFeedback: ->
-    Feedback.find({date: { $gte: startOfYear(this.year + 1), $lte: endOfYear(this.year + 1) } }).count() > 0
+    Feedback.find({createdAt: { $gte: startOfYear(this.year + 1), $lte: endOfYear(this.year + 1) } }).count() > 0
 
   hasPreviousFeedback: ->
-    Feedback.find({date: { $gte: startOfYear(this.year - 1), $lte: endOfYear(this.year - 1) } }).count() > 0
+    Feedback.find({createdAt: { $gte: startOfYear(this.year - 1), $lte: endOfYear(this.year - 1) } }).count() > 0
 
 Template.feedbackSummary.events
   'click #next-year': (e) ->
