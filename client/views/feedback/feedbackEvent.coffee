@@ -31,3 +31,11 @@ Template.feedbackEvent.events
         track('add feedback reply')
         $body.val('')
         $(e.target).parent().height(0)
+
+  "click a.thank": (e) ->
+    e.preventDefault()
+    Meteor.call "thank", { replyTo: this._id }, (error) ->
+      if error
+        throwError error.reason
+      else
+        track('thanked for feedback')

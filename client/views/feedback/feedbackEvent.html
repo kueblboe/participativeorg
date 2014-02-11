@@ -4,14 +4,16 @@
     <div class="tags">
       <img class="img-circle avatar" src="{{avatar userId}}">
       <span data-livestamp="{{createdAt}}"></span>
-      <div class="actions">
-        {{#if owns}}
-          <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>
+      {{#if owns}}
+        <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>
+      {{else}}
+        <a href="#" class="reply"><i class="fa fa-question-circle"></i> Ask</a>
+        {{#unless thanked}}
+          <a href="#" class="thank"><i class="fa fa-thumbs-up"></i> Thank</a>
         {{else}}
-          <a href="#" class="reply"><i class="fa fa-question-circle"></i> Ask</a>
-          <!-- <a href="#"><i class="fa fa-thumbs-up"></i> Thank</a> -->
-        {{/if}}
-      </div>
+          <span class="notes">thanked</span>
+        {{/unless}}
+      {{/if}}
     </div>
     <ul class="replies">
       <li class="reply">
