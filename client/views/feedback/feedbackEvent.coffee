@@ -11,6 +11,10 @@ Template.feedbackEvent.helpers
     else
       'Ask'
 
+  repliesWithUserIds: ->
+    if this.replies
+      (_.defaults(reply, {userId: this.userId}) for reply in this.replies)
+
 Template.feedbackEvent.events
   "click a.reply": (e) ->
     e.preventDefault()
