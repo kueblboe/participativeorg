@@ -21,7 +21,7 @@ Handlebars.registerHelper "preview", (text) ->
 
 Handlebars.registerHelper "avatar", (userId) ->
   user = Meteor.users.findOne(userId)
-  if userId is undefined
+  if not userId? or not userId
     'img/anonymous2.png'
   else if user?.profile.avatar
     user.profile.avatar
