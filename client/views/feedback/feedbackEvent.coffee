@@ -12,8 +12,7 @@ Template.feedbackEvent.helpers
       'Ask'
 
   repliesWithUserIds: ->
-    if this.replies
-      (_.defaults(reply, {userId: this.userId}) for reply in this.replies)
+    (_.defaults(reply, {userId: this.userId}) for reply in this.replies) if this.replies
 
 Template.feedbackEvent.events
   "click a.reply": (e) ->

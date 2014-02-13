@@ -5,7 +5,7 @@ Handlebars.registerHelper "selectedSelf", ->
   Session.get('selectedUserId') is Meteor.userId()
 
 Handlebars.registerHelper "owns", ->
-    this.userId is Meteor.userId()
+  this.userId is Meteor.userId()
 
 Handlebars.registerHelper "formattedDate", (date) ->
   moment(date).format('DD.MM.YYYY')
@@ -38,7 +38,7 @@ Handlebars.registerHelper "firstnameSelectedUser", ->
   Meteor.users.findOne(Session.get('selectedUserId'))?.profile?.firstname
 
 Handlebars.registerHelper "notPartOfYet", ->
-    not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
+  not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
 
 Handlebars.registerHelper "categorySymbol", ->
   if this.category is 'read'
