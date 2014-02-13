@@ -41,6 +41,13 @@ Template.slackSummary.events
     else
       Session.set('slackSortBy', 'effort')
 
+  'dblclick #total-effort': (e) ->
+    e.preventDefault()
+    effort = $('#total-effort').html()
+    if effort.slice(-1) is 'h'
+      Meteor.defer ->
+        $('#total-effort').text("#{effort.slice(0, -2) / 8 + ' d'}")
+
   'click #year': (e) ->
     e.preventDefault()
     if Session.get('slackSortBy') is 'date'
