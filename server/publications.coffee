@@ -5,7 +5,7 @@ isInMyDomain = (userId, currentUserId) ->
   user and me and user.profile.domain is me.profile.domain
 
 Meteor.publish "slack", (userId, year) ->
-  if isInMyDomain(userId, this.userId) and year
+  if isInMyDomain(userId, @userId) and year
     [
       Slack.find({userId: userId, date: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } }),
       Completions.find({userId: userId, year: parseInt(year)}),
@@ -14,23 +14,23 @@ Meteor.publish "slack", (userId, year) ->
 
 Meteor.publish "singleSlack", (slackId) ->
   slack = Slack.find(slackId)
-  if isInMyDomain(Slack.findOne(slackId).userId, this.userId) then slack else []
+  if isInMyDomain(Slack.findOne(slackId).userId, @userId) then slack else []
 
 Meteor.publish "goal", (goalId) ->
   goal = Goals.find(goalId)
-  if isInMyDomain(Goals.findOne(goalId).userId, this.userId) then goal else []
+  if isInMyDomain(Goals.findOne(goalId).userId, @userId) then goal else []
 
 Meteor.publish "feedback", (userId, year) ->
-  if isInMyDomain(userId, this.userId) and year
-    if userId is this.userId
+  if isInMyDomain(userId, @userId) and year
+    if userId is @userId
       Feedback.find({receiver: userId, createdAt: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } }, {fields: {userId: 0}})
     else
-      Feedback.find({userId: this.userId, receiver: userId, createdAt: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } })
+      Feedback.find({userId: @userId, receiver: userId, createdAt: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } })
 
 Meteor.publish "coworkers", ->
-  me = Meteor.users.findOne(this.userId)
+  me = Meteor.users.findOne(@userId)
   if me
     Meteor.users.find { 'profile.domain': me.profile.domain }
 
 Meteor.publish "notifications", ->
-  Notifications.find({ userId: this.userId }, {sort: {createdAt: -1}, limit: 10})
+  Notifications.find({ userId: @userId }, {sort: {createdAt: -1}, limit: 10})

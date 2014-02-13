@@ -1,18 +1,18 @@
 Template.feedbackEvent.helpers
   replyPlaceholder: ->
-    if this.userId is Meteor.userId()
+    if @userId is Meteor.userId()
       'Reply with the goal of clarification, not justification.'
     else
       'Ask with the goal of clarification, not justification. Try not to be defensive about the received feedback.'
 
   replyButtonText: ->
-    if this.userId is Meteor.userId()
+    if @userId is Meteor.userId()
       'Reply'
     else
       'Ask'
 
   repliesWithUserIds: ->
-    (_.defaults(reply, {userId: this.userId}) for reply in this.replies) if this.replies
+    (_.defaults(reply, {userId: @userId}) for reply in @replies) if @replies
 
 Template.feedbackEvent.events
   "click a.reply": (e) ->
@@ -25,7 +25,7 @@ Template.feedbackEvent.events
     replyProperties =
       replyTo: @_id
       body: $body.val()
-      anonymous: this.userId is Meteor.userId()
+      anonymous: @userId is Meteor.userId()
 
     Meteor.call "addReply", replyProperties, (error) ->
       if error
@@ -37,7 +37,7 @@ Template.feedbackEvent.events
 
   "click a.thank": (e) ->
     e.preventDefault()
-    Meteor.call "thank", { replyTo: this._id }, (error) ->
+    Meteor.call "thank", { replyTo: @_id }, (error) ->
       if error
         throwError error.reason
       else

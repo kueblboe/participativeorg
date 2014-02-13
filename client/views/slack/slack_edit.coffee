@@ -1,18 +1,18 @@
 Template.slackEdit.helpers
   isActiveCategory: (category) ->
-    if category is this.category
+    if category is @category
       'active'
 
   users: ->
-    alreadyPartOf = _.pluck(this.copies, "userId").concat(Meteor.userId()).concat(this.userId)
+    alreadyPartOf = _.pluck(@copies, "userId").concat(Meteor.userId()).concat(@userId)
     Meteor.users.find({ _id: { $nin: alreadyPartOf } }, {sort: {'profile.name': 1}})
 
   hasUsersNotAlreadyPartOf: ->
-    alreadyPartOf = _.pluck(this.copies, "userId").concat(Meteor.userId()).concat(this.userId)
+    alreadyPartOf = _.pluck(@copies, "userId").concat(Meteor.userId()).concat(@userId)
     Meteor.users.find({ _id: { $nin: alreadyPartOf } }).fetch().length > 0
 
   hasCopies: ->
-    this.copies?.length > 0
+    @copies?.length > 0
 
   name: (userId) ->
     Meteor.users.findOne(userId)?.profile.name
@@ -30,7 +30,7 @@ Template.slackEdit.events
       cost: parseInt($(e.target).find("#cost").val(), 10)
       url: $(e.target).find("#url").val()
       ranking: parseInt($(e.target).find("#ranking").val(), 10)
-      copyOf: this.copyOf
+      copyOf: @copyOf
       participants: $.map($("#coworkers input:checked"), (c) -> $(c).data("participant"))
 
     Meteor.call "upsertSlack", slackProperties, (error) ->

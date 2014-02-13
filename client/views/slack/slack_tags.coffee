@@ -1,17 +1,17 @@
 Template.slackTags.helpers
   hashtagSymbol: ->
-    if /#freizeit/.test(this.description)
+    if /#freizeit/.test(@description)
       'moon-o'
-    else if /#vortrag/.test(this.description)
+    else if /#vortrag/.test(@description)
       'bullhorn'
-    else if /#ausland/.test(this.description)
+    else if /#ausland/.test(@description)
       'suitcase'
 
   highlightEffort: ->
-    'highlight' if this.effort > 16
+    'highlight' if @effort > 16
 
   highlightCost: ->
-    'highlight' if this.cost > 500
+    'highlight' if @cost > 500
 
   highlightRanking: ->
-    'highlight' if this.ranking > 4
+    'highlight' if @ranking > 4

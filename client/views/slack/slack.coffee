@@ -6,12 +6,12 @@ Template.slack.helpers
     Slack.find().count() > 0
 
   hasGoals: ->
-    Goals.find({date: { $gte: startOfYear(this.year), $lte: endOfYear(this.year) } }).count() > 0
+    Goals.find({date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).count() > 0
 
   goals: -> 
-    Goals.find({date: { $gte: startOfYear(this.year), $lte: endOfYear(this.year) } })
+    Goals.find({date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } })
 
   slackEvents: ->
     filter = {sort: {}}
     filter.sort[Session.get('slackSortBy')] = Session.get('slackSortOrder')
-    Slack.find({date: { $gte: startOfYear(this.year), $lte: endOfYear(this.year) } }, filter)
+    Slack.find({date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }, filter)

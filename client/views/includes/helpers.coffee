@@ -1,11 +1,11 @@
 Handlebars.registerHelper "submitButtonText", ->
-  if this._id then 'Edit' else 'Add'
+  if @_id then 'Edit' else 'Add'
 
 Handlebars.registerHelper "selectedSelf", ->
   Session.get('selectedUserId') is Meteor.userId()
 
 Handlebars.registerHelper "owns", ->
-  this.userId is Meteor.userId()
+  @userId is Meteor.userId()
 
 Handlebars.registerHelper "formattedDate", (date) ->
   moment(date).format('DD.MM.YYYY')
@@ -38,33 +38,33 @@ Handlebars.registerHelper "firstnameSelectedUser", ->
   Meteor.users.findOne(Session.get('selectedUserId'))?.profile?.firstname
 
 Handlebars.registerHelper "notPartOfYet", ->
-  not this.copies or not _.contains(_.pluck(this.copies, 'userId'), Meteor.userId())
+  not @copies or not _.contains(_.pluck(@copies, 'userId'), Meteor.userId())
 
 Handlebars.registerHelper "categorySymbol", ->
-  if this.category is 'read'
+  if @category is 'read'
     'book'
-  else if this.category is 'attend'
+  else if @category is 'attend'
     'users'
   else
     'question-circle'
 
 Handlebars.registerHelper "rankingNeg", ->
-  5 - this.ranking
+  5 - @ranking
 
 Handlebars.registerHelper "liker", ->
-  ({userId: userId} for userId in _.uniq(_.pluck(this.likes, 'userId')))
+  ({userId: userId} for userId in _.uniq(_.pluck(@likes, 'userId')))
 
 Handlebars.registerHelper "commenters", ->
-  ({userId: userId} for userId in _.uniq(_.pluck(this.comments, 'userId')))
+  ({userId: userId} for userId in _.uniq(_.pluck(@comments, 'userId')))
 
 Handlebars.registerHelper "commentersCount", ->
-  _.uniq(_.pluck(this.comments, 'userId')).length
+  _.uniq(_.pluck(@comments, 'userId')).length
 
 Handlebars.registerHelper "commentsList", ->
-  _.sortBy(this.comments, (c) -> - c.createdAt)
+  _.sortBy(@comments, (c) -> - c.createdAt)
 
 Handlebars.registerHelper "likedByMe", ->
-  _.contains(_.pluck(this.likes, 'userId'), Meteor.userId())
+  _.contains(_.pluck(@likes, 'userId'), Meteor.userId())
 
 Handlebars.registerHelper "unseenNotificationCount", ->
   Notifications.find({seen: false}).count()
