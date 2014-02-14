@@ -46,7 +46,7 @@ Template.slackSummary.events
     effort = $('#total-effort').html()
     if effort.slice(-1) is 'h'
       Meteor.defer ->
-        $('#total-effort').text("#{effort.slice(0, -2) / 8 + ' d'}")
+        $('#total-effort').text("#{Math.round(effort.slice(0, -2) / 0.8) / 10 + ' d'}")
 
   'click #year': (e) ->
     e.preventDefault()
