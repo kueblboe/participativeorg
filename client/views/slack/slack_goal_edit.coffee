@@ -23,6 +23,5 @@ Template.slackGoalEdit.events
   "click .delete": (e) ->
     e.preventDefault()
     if confirm("Delete this goal?")
-      currentGoalId = @_id
-      Goals.remove currentGoalId
+      Goals.remove @_id
       Router.go "slack"

@@ -1,3 +1,9 @@
+setOrToggleSortOrder = (sortBy) ->
+  if Session.get('slackSortBy') is sortBy
+    Session.set('slackSortOrder', -Session.get('slackSortOrder'))
+  else
+    Session.set('slackSortBy', sortBy)
+
 Template.slackSummary.helpers
   totalCost: ->
     Slack.find({date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).fetch().map((s) -> s.cost).reduce(((c, sum) -> c + sum), 0)
@@ -27,19 +33,17 @@ Template.slackSummary.helpers
     Completions.findOne()._id
 
 Template.slackSummary.events
+  'click #year': (e) ->
+    e.preventDefault()
+    setOrToggleSortOrder('date')
+
   'click #total-cost': (e) ->
     e.preventDefault()
-    if Session.get('slackSortBy') is 'cost'
-      Session.set('slackSortOrder', -Session.get('slackSortOrder'))
-    else
-      Session.set('slackSortBy', 'cost')
+    setOrToggleSortOrder('cost')
 
   'click #total-effort': (e) ->
     e.preventDefault()
-    if Session.get('slackSortBy') is 'effort'
-      Session.set('slackSortOrder', -Session.get('slackSortOrder'))
-    else
-      Session.set('slackSortBy', 'effort')
+    setOrToggleSortOrder('effort')
 
   'dblclick #total-effort': (e) ->
     e.preventDefault()
@@ -47,13 +51,6 @@ Template.slackSummary.events
     if effort.slice(-1) is 'h'
       Meteor.defer ->
         $('#total-effort').text("#{Math.round(effort.slice(0, -2) / 0.8) / 10 + ' d'}")
-
-  'click #year': (e) ->
-    e.preventDefault()
-    if Session.get('slackSortBy') is 'date'
-      Session.set('slackSortOrder', -Session.get('slackSortOrder'))
-    else
-      Session.set('slackSortBy', 'date')
 
   'click #next-year': (e) ->
     e.preventDefault()
