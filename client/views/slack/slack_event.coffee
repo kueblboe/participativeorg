@@ -11,7 +11,7 @@ Template.slackEvent.events
       activeSlack.splice(index, 1)
       $('#' + @_id).removeClass('active')
     else
-      activeSlack = activeSlack.concat [@_id]
+      activeSlack.push @_id
       $('#' + @_id).addClass('active')
     Session.set('activeSlack', activeSlack)
 
