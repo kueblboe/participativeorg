@@ -10,8 +10,8 @@
       <div>{{#markdown}}{{body}}{{/markdown}}</div>
       <div class="tags">
         <img class="img-circle avatar" src="{{avatar userId}}">
-        <span><i class="fa fa-star"></i> {{recommend}}</span>
-        <span><i class="fa fa-users"></i> {{know}}</span>
+        {{#if recommend}}<span><i class="fa fa-star"></i> {{recommend}}</span>{{/if}}
+        {{#if know}}<span><i class="fa fa-users"></i> {{know}}</span>{{/if}}
         <span data-livestamp="{{createdAt}}"></span>
         {{#if owns}}
           <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>
