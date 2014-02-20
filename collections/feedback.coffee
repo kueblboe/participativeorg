@@ -3,7 +3,7 @@
 Meteor.methods(
   addFeedback: (feedbackAttributes) ->
     throw new Meteor.Error(401, "You need to login to add feedback") unless Meteor.user()
-    throw new Meteor.Error(422, "Please fill in a message") unless feedbackAttributes.body
+    throw new Meteor.Error(422, "Please fill in a message or recommendation score") unless feedbackAttributes.body or feedbackAttributes.recommend
     throw new Meteor.Error(422, "Can't figure out who you want to give feedback to") unless feedbackAttributes.receiver
     
     # pick out the whitelisted keys and add userId and createdAt
