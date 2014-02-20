@@ -11,6 +11,7 @@ Template.feedbackAdd.events
       know: parseInt($know.val(), 10)
 
     Meteor.call "addFeedback", feedbackProperties, (error) ->
+      clearErrors()
       if error
         throwError error.reason
       else
