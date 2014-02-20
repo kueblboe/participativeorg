@@ -1,7 +1,7 @@
 @import '../../stylesheets/variables';
 
-#feedback {
-  padding-top: 30px;
+#feedback-form {
+  margin-bottom: 30px;
 }
 
 #feedback-form, .reply-form {
@@ -12,5 +12,26 @@
 
   button {
     margin: 0;
+  }
+}
+
+div.detract {
+  border-left: @primary-1 3px solid;
+  .watermark {
+    color: @primary-bg;
+  }
+}
+
+div.indifferent {
+  border-left: @border-grey 3px solid;
+  .watermark {
+    color: @watermark-grey;
+  }
+}
+
+div.promote {
+  border-left: @secondary-b-1 3px solid;
+  .watermark {
+    color: @secondary-b-bg;
   }
 }

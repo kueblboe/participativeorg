@@ -1,20 +1,30 @@
 <template name="feedbackEvent">
-  <li class="item">
-    <div>{{#markdown}}{{body}}{{/markdown}}</div>
-    <div class="tags">
-      <img class="img-circle avatar" src="{{avatar userId}}">
-      <span data-livestamp="{{createdAt}}"></span>
-      {{#if owns}}
-        <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>
-      {{else}}
-        <a href="#" class="reply"><i class="fa fa-question-circle"></i> Ask</a>
-        {{#unless thanked}}
-          <a href="#" class="thank"><i class="fa fa-thumbs-up"></i> Thank</a>
-        {{/unless}}
+  <div class="item {{recommendCategory}}">
+    <div class="feedbackEvent">
+      {{#if recommend}}
+        <span class="watermark fa-stack fa-2x">
+          <i class="fa fa-star fa-stack-2x"></i>
+          <i class="fa fa-inverse fa-stack-1x">{{recommend}}</i>
+        </span>
       {{/if}}
-      {{#if thanked}}
-        <span class="notes">thanked</span>
-      {{/if}}
+      <div>{{#markdown}}{{body}}{{/markdown}}</div>
+      <div class="tags">
+        <img class="img-circle avatar" src="{{avatar userId}}">
+        <span><i class="fa fa-star"></i> {{recommend}}</span>
+        <span><i class="fa fa-users"></i> {{know}}</span>
+        <span data-livestamp="{{createdAt}}"></span>
+        {{#if owns}}
+          <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>
+        {{else}}
+          <a href="#" class="reply"><i class="fa fa-question-circle"></i> Ask</a>
+          {{#unless thanked}}
+            <a href="#" class="thank"><i class="fa fa-thumbs-up"></i> Thank</a>
+          {{/unless}}
+        {{/if}}
+        {{#if thanked}}
+          <span class="notes">thanked</span>
+        {{/if}}
+      </div>
     </div>
     <ul class="replies">
       <li class="reply">
@@ -35,5 +45,5 @@
         </li>
       {{/each}}
     </ul>
-  </li>
+  </div>
 </template>

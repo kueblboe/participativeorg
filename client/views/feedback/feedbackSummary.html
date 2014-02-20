@@ -1,5 +1,8 @@
 <template name="feedbackSummary">
   <h4 class="summary">
+    <a href="#" id="year" class="label label-default">{{year}}</a>
+    {{#if averageRecommend}}<a href="#" id="average-recommend" class="label label-default"><i class="fa fa-star"></i> {{averageRecommend}}</a>{{/if}}
+    {{#if averageKnow}}<a href="#" id="average-know" class="label label-default"><i class="fa fa-users"></i> {{averageKnow}}</a>{{/if}}
     {{#if hasNextFeedback}}
       <span class="pull-right"><a href="#" id="next-year" class="label label-white hidden-print" disabled><span class="long">{{nextYear}}</span> <i class="fa fa-step-forward"></i></a></span>
     {{/if}}

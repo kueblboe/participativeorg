@@ -14,10 +14,18 @@ Template.feedbackEvent.helpers
   repliesWithUserIds: ->
     (_.defaults(reply, {userId: @userId}) for reply in @replies) if @replies
 
+  recommendCategory: ->
+    if @recommend > 8
+      'promote'
+    else if @recommend < 7
+      'detract'
+    else
+      'indifferent'
+
 Template.feedbackEvent.events
   "click a.reply": (e) ->
     e.preventDefault()
-    $(e.target).parents('li.item').find("li.reply").height(95)
+    $(e.target).parents('.item').find("li.reply").height(95)
 
   "submit .reply-form": (e) ->
     e.preventDefault()

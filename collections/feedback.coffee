@@ -7,7 +7,7 @@ Meteor.methods(
     throw new Meteor.Error(422, "Can't figure out who you want to give feedback to") unless feedbackAttributes.receiver
     
     # pick out the whitelisted keys and add userId and createdAt
-    feedback = _.extend(_.pick(feedbackAttributes, "body", "receiver"),
+    feedback = _.extend(_.pick(feedbackAttributes, "body", "recommend", "know", "receiver"),
       userId: Meteor.userId()
       createdAt: new Date()
     )
