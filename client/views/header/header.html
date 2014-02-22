@@ -37,6 +37,9 @@
                         <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar _id}}"> {{profile.name}}</a>
                       </li>
                     {{/each}}
+                    <li class="action">
+                      <a href="mailto:?subject=Come join participativeorg&body=Hi,%0D%0A%0D%0AI would appreciate, if you joined participativeorg, so I can%0D%0A - provide feedback for you and%0D%0A - learn from your slack activities%0D%0A%0D%0AJust log in here: {{urlFor 'home'}}%0D%0A%0D%0ASee you there,%0D%0A{{currentUser.profile.firstname}}"><i class="fa fa-user"></i> Invite colleagues</a>
+                    </li>
                   </ul>
                 </li>
               {{/unless}}
