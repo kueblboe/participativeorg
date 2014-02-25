@@ -25,7 +25,7 @@ Template.feedbackEvent.helpers
 Template.feedbackEvent.events
   "click a.reply": (e) ->
     e.preventDefault()
-    $(e.target).parents('.item').find("li.reply").height(135)
+    $(e.target).parents('.item').find("li.reply").height(155)
 
   "submit .reply-form": (e) ->
     e.preventDefault()
