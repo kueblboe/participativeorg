@@ -9,3 +9,15 @@ Template.feedback.helpers
     filter = {sort: {}}
     filter.sort[Session.get('feedbackSortBy')] = Session.get('feedbackSortOrder')
     Feedback.find({createdAt: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }, filter)
+
+  hasOptedOut: ->
+    Meteor.users.findOne(Session.get('selectedUserId'))?.profile?.noFeedback
+
+Template.feedback.events
+  "click #opt-out": (e) ->
+    Meteor.users.update(Meteor.userId(), { $set: {"profile.noFeedback": true} })
+    track('opt out feedback')
+
+  "click #opt-in": (e) ->
+    Meteor.users.update(Meteor.userId(), { $unset: {"profile.noFeedback": ""} })
+    track('opt in feedback')

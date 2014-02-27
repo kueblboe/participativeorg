@@ -1,13 +1,29 @@
 <template name="feedback">
   {{#unless selectedSelf}}
-    <div class="alert alert-warning">
-      Your feedback is <strong>anonymous</strong> and only {{firstnameSelectedUser}} can see it. {{firstnameSelectedUser}} will be able to ask clarifying questions without knowing who you are.
-    </div>
-    {{> feedbackAdd}}
-  {{else}}
-    {{#unless hasFeedbackEvents}}
+    {{#unless hasOptedOut}}
       <div class="alert alert-warning">
-        There is no feedback for you yet. Why don't you <a href="mailto:?subject=I would appreciate your feedback&body=Hi,%0D%0A%0D%0AI would appreciate your feedback. You can provide it anonymously here.%0D%0A{{urlFor 'feedback'}}/?userId={{currentUser._id}}%0D%0A%0D%0AThanks, {{firstnameSelectedUser}}">ask</a> your colleagues, if they’d give you some. Or start by giving. Just pick someone in the menu.
+        Your feedback is <strong>anonymous</strong> and only {{firstnameSelectedUser}} can see it. {{firstnameSelectedUser}} will be able to ask clarifying questions without knowing who you are.
+      </div>
+      {{> feedbackAdd}}
+    {{else}}
+      <div class="alert alert-warning">
+        {{firstnameSelectedUser}} prefers not to receive feedback here.
+      </div>
+    {{/unless}}
+  {{else}}
+    {{#unless hasOptedOut}}
+      <div class="alert alert-warning">
+        <a href="#" id="opt-out">No, thanks.</a> I'd prefer not to receive feedback here.
+      </div>
+      {{#unless hasFeedbackEvents}}
+        <div class="alert alert-warning">
+          There is no feedback for you yet. Why don't you <a href="mailto:?subject=I would appreciate your feedback&body=Hi,%0D%0A%0D%0AI would appreciate your feedback. You can provide it anonymously here.%0D%0A{{urlFor 'feedback'}}/?userId={{currentUser._id}}%0D%0A%0D%0AThanks, {{firstnameSelectedUser}}">ask</a> your colleagues, if they’d give you some. Or start by giving. Just pick someone in the menu.
+        </div>
+      {{/unless}}
+    {{else}}
+      <div class="alert alert-warning">
+        <strong>Your colleagues are currently not able to provide feedback for you.</strong>
+        <p><a href="#" id="opt-in">Yes, please.</a> Bring on the feedback.</p>
       </div>
     {{/unless}}
   {{/unless}}
