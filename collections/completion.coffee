@@ -19,6 +19,7 @@ Meteor.methods(
       createdAt: new Date()
     )
 
-    # add completion and return id
-    Completions.insert(completion)
+    completionId = Completions.insert(completion)
+    updateLatestActivity('check', 'marked slack activities as complete', "slack?userId=#{Meteor.userId()}")
+    completionId
 )

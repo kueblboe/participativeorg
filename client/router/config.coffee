@@ -57,6 +57,8 @@ Router.map ->
     waitOn: -> Meteor.subscribe("feedback", Session.get('selectedUserId'), Session.get('selectedYear')) if Meteor.user()
     data: -> {year: Session.get('selectedYear')}
 
+  @route 'colleagues', {}
+
 requireLogin = ->
   unless Meteor.user()
     if Meteor.loggingIn()

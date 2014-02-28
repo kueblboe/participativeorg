@@ -15,13 +15,14 @@
         <div class="navbar-collapse collapse">
           {{#if currentUser}}
             <ul class="nav navbar-nav">
+              <li class="{{activeRouteClass 'colleagues'}}"><a href="{{pathFor 'colleagues'}}"><i class="fa fa-users"></i> Colleagues</a></li>
               <li class="{{activeRouteClass 'slack' 'slackEdit' 'slackPage' 'slackNew' 'slackCopy' 'slackGoalNew' 'slackGoalPage' 'slackGoalEdit'}}"><a href="{{pathFor 'slack'}}"><i class="fa fa-flask"></i> Slack</a></li>
               <li class="{{activeRouteClass 'feedback'}}"><a href="{{pathFor 'feedback'}}"><i class="fa fa-refresh"></i> Feedback</a></li>
             </ul>
           {{/if}}
           <ul class="nav navbar-nav navbar-right">
             {{#if currentUser}}
-              {{#unless activeRouteClass 'home'}}
+              {{#unless activeRouteClass 'home' 'colleagues'}}
                 <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     {{#if selectedUserAvatar}}
@@ -38,7 +39,7 @@
                       </li>
                     {{/each}}
                     <li class="action">
-                      <a href="mailto:?subject=Come join participativeorg&body=Hi,%0D%0A%0D%0AI would appreciate, if you joined participativeorg, so I can%0D%0A - provide feedback for you and%0D%0A - learn from your slack activities%0D%0A%0D%0AJust log in here: {{urlFor 'home'}}%0D%0A%0D%0ASee you there,%0D%0A{{currentUser.profile.firstname}}"><i class="fa fa-user"></i> Invite colleagues</a>
+                      {{> inviteColleaguesLink}}
                     </li>
                   </ul>
                 </li>

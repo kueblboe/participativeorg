@@ -19,6 +19,7 @@ Meteor.methods(
       createdAt: new Date()
     )
 
-    # add goal and return id
-    Goals.insert(goal)
+    goalId = Goals.insert(goal)
+    updateLatestActivity('flag-checkered', 'updated slack goal', "slack/goal/#{goalId}?userId=#{Meteor.userId()}")
+    goalId
 )

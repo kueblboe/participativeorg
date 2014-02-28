@@ -4,6 +4,9 @@ Handlebars.registerHelper "submitButtonText", ->
 Handlebars.registerHelper "selectedSelf", ->
   Session.get('selectedUserId') is Meteor.userId()
 
+Handlebars.registerHelper "self", ->
+  @_id is Meteor.userId()
+
 Handlebars.registerHelper "owns", ->
   @userId is Meteor.userId()
 
@@ -22,7 +25,7 @@ Handlebars.registerHelper "preview", (text) ->
 Handlebars.registerHelper "avatar", (userId) ->
   user = Meteor.users.findOne(userId)
   if not userId? or not userId
-    'img/anonymous2.png'
+    '/img/anonymous2.png'
   else if user?.profile.avatar
     user.profile.avatar
   else

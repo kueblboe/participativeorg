@@ -30,7 +30,11 @@ Meteor.publish "feedback", (userId, year) ->
 Meteor.publish "coworkers", ->
   me = Meteor.users.findOne(@userId)
   if me
-    Meteor.users.find { 'profile.domain': me.profile.domain }
+    [
+      Meteor.users.find({ 'profile.domain': me.profile.domain }),
+      # TODO: only get the latest per colleague once aggreagtions are available
+      Feedback.find({userId: @userId})
+    ]
 
 Meteor.publish "notifications", ->
   Notifications.find({ userId: @userId }, {sort: {createdAt: -1}, limit: 10})

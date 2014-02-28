@@ -13,6 +13,7 @@ Meteor.methods(
       else
         updatedLikes = (slack.likes || []).concat like
         createNotification({ slackId: slack._id, ownerUserId: slack.userId, userId: slack.userId, action: "likes your" })
+      updateLatestActivity('thumbs-up', 'liked a slack activity', "slack/#{slack._id}?userId=#{slack.userId}")
       Slack.update(slack._id, { $set: {likes: updatedLikes} })
     else if goal = Goals.findOne(likeAttributes.likedId)
       if _.contains(_.pluck(goal.likes, 'userId'), Meteor.userId())
@@ -20,5 +21,6 @@ Meteor.methods(
       else
         updatedLikes = (goal.likes || []).concat like
         createNotification({ goalId: goal._id, ownerUserId: goal.userId, userId: goal.userId, action: "likes your" })
+      updateLatestActivity('thumbs-up', 'liked a goal', "slack/goal/#{goal._id}?userId=#{goal.userId}")
       Goals.update(goal._id, { $set: {likes: updatedLikes} })
 )

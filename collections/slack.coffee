@@ -44,14 +44,18 @@ Meteor.methods(
       )
 
     changes = upsertSlackWithCopies(slack, slackAttributes)
+    slackId = changes.insertedId || slackAttributes._id
 
     # create slack for all participants
     if slackAttributes.participants
       for participant in slackAttributes.participants
         participantSlack = _.extend(_.omit(slack, ['description', 'ranking']), {userId: participant, indicatedBy: Meteor.userId()})
-        participantSlackAttributes = _.extend(_.omit(slackAttributes, '_id'), {copyOf: changes.insertedId || slackAttributes._id})
+        participantSlackAttributes = _.extend(_.omit(slackAttributes, '_id'), {copyOf: slackId})
         insert = upsertSlackWithCopies(participantSlack, participantSlackAttributes)
         createNotification({ slackId: insert.insertedId, ownerUserId: participant, userId: participant, action: "indicated that you took part in her/his", openEdit: true })
+
+    updateLatestActivity('flask', 'updated slack activities', "slack/#{slackId}?userId=#{Meteor.userId()}")
+
     changes
 
   removeSlack: (slackId) ->

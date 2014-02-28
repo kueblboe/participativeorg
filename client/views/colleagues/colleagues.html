@@ -1,0 +1,10 @@
+<template name="colleagues">
+  <div id="colleagues" class="list">
+    {{#each colleagueList}}
+      {{> colleague}}
+    {{/each}}
+  </div>
+  <div class="alert alert-warning">
+    Someone's missing? {{> inviteColleaguesLink}}.
+  </div>
+</template>
