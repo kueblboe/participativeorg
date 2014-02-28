@@ -22,3 +22,8 @@ Template.colleague.events
     e.preventDefault()
     Session.set('selectedUserId', @_id)
     Router.go 'feedback'
+
+  'click a.slack': (e) ->
+    e.preventDefault()
+    Session.set('selectedUserId', @_id)
+    Router.go 'slack'
