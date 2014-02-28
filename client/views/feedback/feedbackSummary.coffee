@@ -5,7 +5,7 @@ setOrToggleSortOrder = (sortBy) ->
     Session.set('feedbackSortBy', sortBy)
 
 average = (mapping, year) ->
-  feedback = Feedback.find({createdAt: { $gte: startOfYear(year), $lte: endOfYear(year) } }).fetch()
+  feedback = Feedback.find({receiver: Session.get('selectedUserId'), createdAt: { $gte: startOfYear(year), $lte: endOfYear(year) } }).fetch()
   feedbackWithMapping = _.filter(feedback.map(mapping), (x) -> x)
   Math.round(feedbackWithMapping.reduce(((x, sum) -> x + sum), 0) * 10 / feedbackWithMapping.length) / 10
 
@@ -23,10 +23,10 @@ Template.feedbackSummary.helpers
     parseInt(@year) - 1
 
   hasNextFeedback: ->
-    Feedback.find({createdAt: { $gte: startOfYear(@year + 1), $lte: endOfYear(@year + 1) } }).count() > 0
+    Feedback.find({receiver: Session.get('selectedUserId'), createdAt: { $gte: startOfYear(@year + 1), $lte: endOfYear(@year + 1) } }).count() > 0
 
   hasPreviousFeedback: ->
-    Feedback.find({createdAt: { $gte: startOfYear(@year - 1), $lte: endOfYear(@year - 1) } }).count() > 0
+    Feedback.find({receiver: Session.get('selectedUserId'), createdAt: { $gte: startOfYear(@year - 1), $lte: endOfYear(@year - 1) } }).count() > 0
 
 Template.feedbackSummary.events
   'click #year': (e) ->
