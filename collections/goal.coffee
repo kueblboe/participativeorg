@@ -1,7 +1,9 @@
 @Goals = new Meteor.Collection("goals")
 
 Goals.allow
-  update: ownsDocument
+  update: (userId, goal) ->
+    updateLatestActivity('flag-checkered', 'updated slack goal', "slack/goal/#{goal._id}?userId=#{Meteor.userId()}")
+    ownsDocument(userId, goal)
   remove: ownsDocument
 
 Goals.deny update: (userId, goal, fieldNames) ->
