@@ -3,16 +3,16 @@ Template.colleague.helpers
     ''
 
   latestActivity: ->
-    Meteor.users.findOne(@_id)?.profile.latestActivity?.action
+    userProfile(@_id)?.latestActivity?.action
 
   latestActivityLink: ->
-    "/#{Meteor.users.findOne(@_id)?.profile.latestActivity?.link}"
+    "/#{userProfile(@_id)?.latestActivity?.link}"
 
   latestActivityDate: ->
-    Meteor.users.findOne(@_id)?.profile.latestActivity?.date
+    userProfile(@_id)?.latestActivity?.date
 
   latestActivityIcon: ->
-    Meteor.users.findOne(@_id)?.profile.latestActivity?.icon
+    userProfile(@_id)?.latestActivity?.icon
 
   latestFeedbackDate: ->
     Feedback.findOne({receiver: @_id}, {sort: {createdAt: -1}})?.createdAt

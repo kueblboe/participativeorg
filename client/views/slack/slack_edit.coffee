@@ -15,7 +15,7 @@ Template.slackEdit.helpers
     @copies?.length > 0
 
   name: (userId) ->
-    Meteor.users.findOne(userId)?.profile.name
+    userProfile(userId)?.name
 
 Template.slackEdit.events
   "submit form": (e) ->

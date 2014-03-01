@@ -1,3 +1,6 @@
+@userProfile = (userId) ->
+  Meteor.users.findOne(userId)?.profile
+
 Handlebars.registerHelper "submitButtonText", ->
   if @_id then 'Edit' else 'Add'
 
@@ -23,22 +26,22 @@ Handlebars.registerHelper "preview", (text) ->
   if text?.length > 50 then text.substring(0, 50) + '…' else text
 
 Handlebars.registerHelper "avatar", (userId) ->
-  user = Meteor.users.findOne(userId)
-  if not userId? or not userId
+  profile = userProfile(userId)
+  if not userId? or not profile
     '/img/anonymous2.png'
-  else if user?.profile.avatar
-    user.profile.avatar
+  else if profile.avatar
+    profile.avatar
   else
     '/img/anonymous.png'
 
 Handlebars.registerHelper "name", (userId) ->
-  Meteor.users.findOne(userId)?.profile?.name || 'someone'
+  userProfile(userId)?.name || 'someone'
 
 Handlebars.registerHelper "firstname", (userId) ->
-  Meteor.users.findOne(userId)?.profile?.firstname || 'someone'
+  userProfile(userId)?.firstname || 'someone'
 
 Handlebars.registerHelper "firstnameSelectedUser", ->
-  Meteor.users.findOne(Session.get('selectedUserId'))?.profile?.firstname
+  userProfile(Session.get('selectedUserId'))?.firstname
 
 Handlebars.registerHelper "notPartOfYet", ->
   not @copies or not _.contains(_.pluck(@copies, 'userId'), Meteor.userId())
@@ -77,4 +80,4 @@ Handlebars.registerHelper "isSlackNovice", ->
 
 Handlebars.registerHelper "hasOptedOutOfFeedback", ->
   userId = if typeof arguments[0] is "string" then arguments[0] else Session.get('selectedUserId')
-  Meteor.users.findOne(userId)?.profile?.noFeedback
+  userProfile(userId)?.noFeedback
