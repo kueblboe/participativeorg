@@ -7,12 +7,17 @@
       {{#if latestFeedbackDate}}
         <div><i class="fa fa-refresh"></i> latest feedback from you <span data-livestamp="{{latestFeedbackDate}}"></span></div>
       {{/if}}
+      {{#if hasOptedOutOfFeedback _id}}
+        <div><i class="warn fa fa-refresh"></i> prefers not to receive feedback here</div>
+      {{/if}}
       {{#if latestActivity}}
         <div><i class="fa fa-{{latestActivityIcon}}"></i> <a href="{{latestActivityLink}}">{{latestActivity}}</a> <span data-livestamp="{{latestActivityDate}}"></span></div>
       {{/if}}
       <div class="actions">
         {{#unless self}}
-          <a href="#" class="feedback"><i class="fa fa-refresh"></i> Give feedback</a>
+          {{#unless hasOptedOutOfFeedback _id}}
+            <a href="#" class="feedback"><i class="fa fa-refresh"></i> Give feedback</a>
+          {{/unless}}
         {{else}}
           <a href="#" class="feedback"><i class="fa fa-refresh"></i> View feedback</a>
         {{/unless}}

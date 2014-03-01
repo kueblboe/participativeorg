@@ -74,3 +74,7 @@ Handlebars.registerHelper "unseenNotificationCount", ->
 
 Handlebars.registerHelper "isSlackNovice", ->
   not Meteor.user()?.profile.numSlack or Meteor.user().profile.numSlack < 4
+
+Handlebars.registerHelper "hasOptedOutOfFeedback", ->
+  userId = if typeof arguments[0] is "string" then arguments[0] else Session.get('selectedUserId')
+  Meteor.users.findOne(userId)?.profile?.noFeedback

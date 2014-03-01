@@ -1,6 +1,6 @@
 <template name="feedback">
   {{#unless selectedSelf}}
-    {{#unless hasOptedOut}}
+    {{#unless hasOptedOutOfFeedback}}
       <div class="alert alert-warning">
         Your feedback is <strong>anonymous</strong> and only {{firstnameSelectedUser}} can see it. {{firstnameSelectedUser}} will be able to ask clarifying questions without knowing who you are.
       </div>
@@ -11,7 +11,7 @@
       </div>
     {{/unless}}
   {{else}}
-    {{#unless hasOptedOut}}
+    {{#unless hasOptedOutOfFeedback}}
       <div class="alert alert-warning">
         <a href="#" id="opt-out">No, thanks.</a> I'd prefer not to receive feedback here.
       </div>
