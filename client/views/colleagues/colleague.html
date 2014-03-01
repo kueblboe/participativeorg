@@ -4,11 +4,11 @@
     <img class="img-circle main-avatar" src="{{avatar _id}}">
     <div class="details">
       <strong>{{profile.name}}</strong>
-      {{#if latestActivity}}
-        <div><i class="fa fa-{{latestActivityIcon}}"></i> <a href="{{latestActivityLink}}">{{latestActivity}}</a> <span data-livestamp="{{latestActivityDate}}"></span></div>
-      {{/if}}
       {{#if latestFeedbackDate}}
         <div><i class="fa fa-refresh"></i> latest feedback from you <span data-livestamp="{{latestFeedbackDate}}"></span></div>
+      {{/if}}
+      {{#if latestActivity}}
+        <div><i class="fa fa-{{latestActivityIcon}}"></i> <a href="{{latestActivityLink}}">{{latestActivity}}</a> <span data-livestamp="{{latestActivityDate}}"></span></div>
       {{/if}}
       <div class="actions">
         {{#unless self}}
