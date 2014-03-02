@@ -1,3 +1,12 @@
+alreadyLiked = (liked) ->
+  _.contains(_.pluck(liked.likes, 'userId'), Meteor.userId())
+
+updateLikeList = (liked, like) ->
+  if alreadyLiked(liked)
+    _.reject(liked.likes, (l) -> l.userId is Meteor.userId())
+  else
+    (liked.likes || []).concat like
+
 Meteor.methods(
   addRemoveLike: (likeAttributes) ->
     throw new Meteor.Error(401, "You need to login to like something") unless Meteor.user()
@@ -7,20 +16,18 @@ Meteor.methods(
       userId: Meteor.userId()
       createdAt: new Date()
 
-    if slack = Slack.findOne(likeAttributes.likedId)
-      if _.contains(_.pluck(slack.likes, 'userId'), Meteor.userId())
-        updatedLikes = _.reject(slack.likes, (l) -> l.userId is Meteor.userId())
-      else
-        updatedLikes = (slack.likes || []).concat like
-        createNotification({ slackId: slack._id, ownerUserId: slack.userId, userId: slack.userId, action: "likes your" })
-      updateLatestActivity('thumbs-up', 'liked a slack activity', "slack/#{slack._id}?userId=#{slack.userId}")
-      Slack.update(slack._id, { $set: {likes: updatedLikes} })
-    else if goal = Goals.findOne(likeAttributes.likedId)
-      if _.contains(_.pluck(goal.likes, 'userId'), Meteor.userId())
-        updatedLikes = _.reject(goal.likes, (l) -> l.userId is Meteor.userId())
-      else
-        updatedLikes = (goal.likes || []).concat like
-        createNotification({ goalId: goal._id, ownerUserId: goal.userId, userId: goal.userId, action: "likes your" })
-      updateLatestActivity('thumbs-up', 'liked a goal', "slack/goal/#{goal._id}?userId=#{goal.userId}")
-      Goals.update(goal._id, { $set: {likes: updatedLikes} })
+    if liked = Slack.findOne(likeAttributes.likedId)
+      Collection = Slack
+    else if liked = Goals.findOne(likeAttributes.likedId)
+      Collection = Goals
+
+    Collection.update(liked._id, { $set: {likes: updateLikeList(liked, like)} })
+
+    unless alreadyLiked(liked)
+      if Collection._name is 'slack'
+        updateLatestActivity('thumbs-up', 'liked a slack activity', "slack/#{liked._id}?userId=#{liked.userId}")
+        createNotification({ slackId: liked._id, ownerUserId: liked.userId, userId: liked.userId, action: "likes your" })
+      else if Collection._name is 'goals'
+        updateLatestActivity('thumbs-up', 'liked a goal', "slack/goal/#{liked._id}?userId=#{liked.userId}")
+        createNotification({ goalId: liked._id, ownerUserId: liked.userId, userId: liked.userId, action: "likes your" })
 )
