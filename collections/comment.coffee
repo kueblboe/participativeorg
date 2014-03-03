@@ -1,25 +1,29 @@
+otherCommenters = (commented) ->
+  _.reject(_.uniq(_.pluck(commented.comments, 'userId')), (id) -> id is commented.userId)
+
 Meteor.methods(
   addComment: (commentAttributes) ->
     throw new Meteor.Error(401, "You need to login to add a comment") unless Meteor.user()
     throw new Meteor.Error(422, "Please fill in a message") unless commentAttributes.body
     throw new Meteor.Error(422, "Can't figure out what you are trying to comment on") unless commentAttributes.commentedId
-    
-    # pick out the whitelisted keys and add userId and createdAt
-    comment = _.extend(_.pick(commentAttributes, "body"),
-      userId: Meteor.userId()
-      createdAt: new Date()
-    )
 
-    if slack = Slack.findOne(commentAttributes.commentedId)
-      Slack.update(slack._id, { $set: {comments: (slack.comments || []).concat comment} })
-      createNotification({ slackId: slack._id, ownerUserId: slack.userId, userId: slack.userId, action: "commented on your" })
-      for userId in _.reject(_.uniq(_.pluck(slack.comments, 'userId')), (id) -> id is slack.userId)
-        createNotification({ slackId: slack._id, ownerUserId: slack.userId, userId: userId, action: "also commented on" })
-      updateLatestActivity('comment-o', 'commented on a slack activity', "slack/#{slack._id}?userId=#{slack.userId}")
-    else if goal = Goals.findOne(commentAttributes.commentedId)
-      Goals.update(goal._id, { $set: {comments: (goal.comments || []).concat comment} })
-      createNotification({ goalId: goal._id, ownerUserId: goal.userId, userId: goal.userId, action: "commented on your" })
-      for userId in _.reject(_.uniq(_.pluck(goal.comments, 'userId')), (id) -> id is goal.userId)
-        createNotification({ goalId: goal._id, ownerUserId: goal.userId, userId: userId, action: "also commented on" })
-      updateLatestActivity('comment-o', 'commented on a goal', "slack/goal/#{goal._id}?userId=#{goal.userId}")
+    comment = pickWhitelistedAttributes(commentAttributes, "body")
+
+    if commented = Slack.findOne(commentAttributes.commentedId)
+      Collection = Slack
+    else if commented = Goals.findOne(commentAttributes.commentedId)
+      Collection = Goals
+
+    Collection.update commented._id, { $set: {comments: (commented.comments || []).concat comment} }, (error) ->
+      unless error
+        if Collection._name is 'slack'
+          updateLatestActivity('comment-o', 'commented on a slack activity', "slack/#{commented._id}?userId=#{commented.userId}")
+          createNotification({ slackId: commented._id, ownerUserId: commented.userId, userId: commented.userId, action: "commented on your" })
+          for userId in otherCommenters(commented)
+            createNotification({ slackId: commented._id, ownerUserId: commented.userId, userId: userId, action: "also commented on" })
+        else if Collection._name is 'goals'
+          updateLatestActivity('comment-o', 'commented on a goal', "slack/goal/#{commented._id}?userId=#{commented.userId}")
+          createNotification({ goalId: commented._id, ownerUserId: commented.userId, userId: commented.userId, action: "commented on your" })
+          for userId in otherCommenters(commented)
+            createNotification({ goalId: commented._id, ownerUserId: commented.userId, userId: userId, action: "also commented on" })
 )

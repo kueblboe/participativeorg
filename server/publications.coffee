@@ -14,11 +14,11 @@ Meteor.publish "slack", (userId, year) ->
 
 Meteor.publish "singleSlack", (slackId) ->
   slack = Slack.find(slackId)
-  if isInMyDomain(Slack.findOne(slackId).userId, @userId) then slack else []
+  if isInMyDomain(Slack.findOne(slackId)?.userId, @userId) then slack else []
 
 Meteor.publish "goal", (goalId) ->
   goal = Goals.find(goalId)
-  if isInMyDomain(Goals.findOne(goalId).userId, @userId) then goal else []
+  if isInMyDomain(Goals.findOne(goalId)?.userId, @userId) then goal else []
 
 Meteor.publish "feedback", (userId, year) ->
   if isInMyDomain(userId, @userId) and year

@@ -1,6 +1,6 @@
 @Slack = new Meteor.Collection("slack")
 
-@upsertSlackWithCopies = (slack, slackAttributes) ->
+upsertSlackWithCopies = (slack, slackAttributes) ->
   # get all the copies from the original
   if slackAttributes.copyOf
     original = Slack.findOne(slackAttributes.copyOf)
@@ -12,7 +12,10 @@
     throw new Meteor.Error(422, "Can't update other people's slack") if existingSlack._id and existingSlack.userId isnt Meteor.userId()
 
   # add / update slack
-  changes = Slack.upsert(slackAttributes._id, { $set: slack })
+  changes = Slack.upsert slackAttributes._id, { $set: slack }
+
+  slackId = changes.insertedId || slackAttributes._id
+  updateLatestActivity('flask', 'updated slack activities', "slack/#{slackId}?userId=#{Meteor.userId()}")
 
   # update number of slack activities for user when adding slack
   if slack.userId is Meteor.userId()
@@ -33,15 +36,9 @@ Meteor.methods(
     throw new Meteor.Error(401, "You need to login to add slack") unless Meteor.user()
     throw new Meteor.Error(422, "Please fill in a title") unless slackAttributes.title
 
-    # pick out the whitelisted keys and add userId and createdAt
-    slack = _.extend(_.pick(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking"),
+    slack = pickWhitelistedAttributes(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking")
+    slack = _.extend slack,
       indicatedBy: undefined
-    )
-    unless slackAttributes._id
-      slack = _.extend(slack,
-        userId: Meteor.userId()
-        createdAt: new Date()
-      )
 
     changes = upsertSlackWithCopies(slack, slackAttributes)
     slackId = changes.insertedId || slackAttributes._id
@@ -54,16 +51,13 @@ Meteor.methods(
         insert = upsertSlackWithCopies(participantSlack, participantSlackAttributes)
         createNotification({ slackId: insert.insertedId, ownerUserId: participant, userId: participant, action: "indicated that you took part in her/his", openEdit: true })
 
-    updateLatestActivity('flask', 'updated slack activities', "slack/#{slackId}?userId=#{Meteor.userId()}")
-
     changes
 
   removeSlack: (slackId) ->
     if Meteor.isServer
       slack = Slack.findOne(slackId)
       for copyId in _.pluck(slack.copies, 'slackId')
-        copy = Slack.findOne(copyId)
-        if copy
+        if copy = Slack.findOne(copyId)
           Slack.update(copyId, { $set: {copies: (c for c in copy.copies when not _.isEqual(c, {slackId: slackId, userId: Meteor.userId()}))}})
     Slack.remove(slackId)
 )

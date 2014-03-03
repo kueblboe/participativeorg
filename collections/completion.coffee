@@ -10,16 +10,10 @@ Completions.deny update: (userId, completion, fieldNames) ->
 
 Meteor.methods(
   completeYear: (completionAttributes) ->
-    # ensure the user is logged in
     throw new Meteor.Error(401, "You need to login to add a completion") unless Meteor.user()
-    
-    # pick out the whitelisted keys
-    completion = _.extend(_.pick(completionAttributes, "year"),
-      userId: Meteor.userId()
-      createdAt: new Date()
-    )
 
-    completionId = Completions.insert(completion)
-    updateLatestActivity('check', 'marked slack activities as complete', "slack?userId=#{Meteor.userId()}")
-    completionId
+    completion = pickWhitelistedAttributes(completionAttributes, "year")
+
+    Completions.insert completion, (error) ->
+      updateLatestActivity('check', 'marked slack activities as complete', "slack?userId=#{Meteor.userId()}") unless error
 )
