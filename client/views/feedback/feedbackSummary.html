@@ -9,8 +9,10 @@
     {{#if hasPreviousFeedback}}
       <span class="pull-right"><a href="#" id="last-year" class="label label-white hidden-print"><i class="fa fa-step-backward"></i> <span class="long">{{previousYear}}</span></a></span>
     {{/if}}
-    {{#unless hasOptedOutOfFeedback}}
-      <span class="pull-right"><a href="#" id="opt-out" class="label label-white secondary-action hidden-print"><i class="fa fa-ban"></i> <span class="long">opt out</span></a></span>
-    {{/unless}}
+    {{#if selectedSelf}}
+      {{#unless hasOptedOutOfFeedback}}
+        <span class="pull-right"><a href="#" id="opt-out" class="label label-white secondary-action hidden-print"><i class="fa fa-ban"></i> <span class="long">opt out</span></a></span>
+      {{/unless}}
+    {{/if}}
   </h4>
 </template>
