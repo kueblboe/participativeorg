@@ -48,3 +48,7 @@ Template.feedbackSummary.events
   'click #last-year': (e) ->
     e.preventDefault()
     Session.set('selectedYear', parseInt(@year) - 1)
+
+  "click #opt-out": (e) ->
+    Meteor.users.update(Meteor.userId(), { $set: {"profile.noFeedback": true} })
+    track('opt out feedback')
