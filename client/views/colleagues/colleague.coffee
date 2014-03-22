@@ -1,3 +1,6 @@
+latestFeedback = (receiverId) ->
+  Feedback.findOne({receiver: receiverId}, {sort: {createdAt: -1}})
+
 Template.colleague.helpers
   relationSymbol: ->
     ''
@@ -15,7 +18,13 @@ Template.colleague.helpers
     userProfile(@_id)?.latestActivity?.icon
 
   latestFeedbackDate: ->
-    Feedback.findOne({receiver: @_id}, {sort: {createdAt: -1}})?.createdAt
+    latestFeedback(@_id)?.createdAt
+
+  latestFeedbackRecommend: ->
+    latestFeedback(@_id)?.recommend
+
+  latestFeedbackKnow: ->
+    latestFeedback(@_id)?.know
 
 Template.colleague.events
   'click a.feedback': (e) ->
