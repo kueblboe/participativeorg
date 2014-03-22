@@ -81,3 +81,6 @@ Handlebars.registerHelper "isSlackNovice", ->
 Handlebars.registerHelper "hasOptedOutOfFeedback", ->
   userId = if typeof arguments[0] is "string" then arguments[0] else Session.get('selectedUserId')
   userProfile(userId)?.noFeedback
+
+Handlebars.registerHelper "isNumber", (number) ->
+  _.isNumber(number) and not _.isNaN(number)

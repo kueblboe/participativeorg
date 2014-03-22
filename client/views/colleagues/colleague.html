@@ -6,8 +6,8 @@
       <strong>{{profile.name}}</strong>
       {{#if latestFeedbackDate}}
         <div class="tags">
-          {{#if latestFeedbackRecommend}}<span><i class="fa fa-star"></i> {{latestFeedbackRecommend}}</span>{{/if}}
-          {{#if latestFeedbackKnow}}<span><i class="fa fa-users"></i> {{latestFeedbackKnow}}</span>{{/if}}
+          {{#if isNumber latestFeedbackRecommend}}<span><i class="fa fa-star"></i> {{latestFeedbackRecommend}}</span>{{/if}}
+          {{#if isNumber latestFeedbackKnow}}<span><i class="fa fa-users"></i> {{latestFeedbackKnow}}</span>{{/if}}
         </div>
         <div><i class="fa fa-refresh"></i> latest feedback from you <span data-livestamp="{{latestFeedbackDate}}"></span></div>
       {{/if}}

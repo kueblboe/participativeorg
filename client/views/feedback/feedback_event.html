@@ -1,7 +1,7 @@
 <template name="feedbackEvent">
   <div class="item {{recommendCategory}}">
     <div class="feedbackEvent">
-      {{#if recommend}}
+      {{#if isNumber recommend}}
         <span class="watermark fa-stack fa-2x">
           <i class="fa fa-star fa-stack-2x"></i>
           <i class="fa fa-inverse fa-stack-1x">{{recommend}}</i>
@@ -10,8 +10,8 @@
       <div>{{#markdown}}{{body}}{{/markdown}}</div>
       <div class="tags">
         <img class="img-circle avatar" src="{{avatar userId}}">
-        {{#if recommend}}<span><i class="fa fa-star"></i> {{recommend}}</span>{{/if}}
-        {{#if know}}<span><i class="fa fa-users"></i> {{know}}</span>{{/if}}
+        {{#if isNumber recommend}}<span><i class="fa fa-star"></i> {{recommend}}</span>{{/if}}
+        {{#if isNumber know}}<span><i class="fa fa-users"></i> {{know}}</span>{{/if}}
         <span data-livestamp="{{createdAt}}"></span>
         {{#if owns}}
           <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>
