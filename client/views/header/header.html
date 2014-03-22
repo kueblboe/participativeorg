@@ -14,7 +14,7 @@
         </div>
         <div class="navbar-collapse collapse">
           {{#if currentUser}}
-            <ul class="nav navbar-nav">
+            <ul id="main-nav" class="nav navbar-nav">
               <li class="{{activeRouteClass 'colleagues'}}"><a href="{{pathFor 'colleagues'}}"><i class="fa fa-users"></i> Colleagues</a></li>
               <li class="{{activeRouteClass 'feedback'}}"><a href="{{pathFor 'feedback'}}"><i class="fa fa-refresh"></i> Feedback</a></li>
               <li class="{{activeRouteClass 'slack' 'slackEdit' 'slackPage' 'slackNew' 'slackCopy' 'slackGoalNew' 'slackGoalPage' 'slackGoalEdit'}}"><a href="{{pathFor 'slack'}}"><i class="fa fa-flask"></i> Slack</a></li>

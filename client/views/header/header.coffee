@@ -24,6 +24,9 @@ Template.header.events
   'click #login-buttons-logout': (e) ->
     Router.go 'home'
 
+  'click #main-nav>li': (e) ->
+    Session.set('selectedUserId', Meteor.userId())
+
 Template.header.rendered = ->
   $(".navbar-fixed-top").headroom()
   if Meteor.user()?
