@@ -66,12 +66,12 @@ requireLogin = ->
     else
       @render "accessDenied", {to: 'status'}
 
-Router.before requireLogin
-Router.before clearErrors
-Router.before -> Meteor.subscribe "coworkers"
-Router.before -> Meteor.subscribe "notifications"
+Router.onBeforeAction requireLogin
+Router.onBeforeAction clearErrors
+Router.onBeforeAction -> Meteor.subscribe "coworkers"
+Router.onBeforeAction -> Meteor.subscribe "notifications"
 
-Router.load ->
+Router.onRun ->
   Session.set('selectedUserId', @params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
   Session.set('selectedYear', parseInt(@params.year) || Session.get('selectedYear') || moment().year())
 
