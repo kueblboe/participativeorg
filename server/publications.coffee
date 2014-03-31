@@ -34,6 +34,7 @@ Meteor.publish "coworkers", ->
       Meteor.users.find({ 'profile.domain': me.profile.domain }),
       # TODO: only get the latest per colleague once aggreagtions are available
       Feedback.find({userId: @userId})
+      Cells.find({ domain: me.profile.domain })
     ]
 
 Meteor.publish "notifications", ->
