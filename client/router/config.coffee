@@ -57,6 +57,10 @@ Router.map ->
     waitOn: -> Meteor.subscribe("feedback", Session.get('selectedUserId'), Session.get('selectedYear')) if Meteor.user()
     data: -> {year: Session.get('selectedYear')}
 
+  @route 'satisfaction',
+    waitOn: -> Meteor.subscribe("satisfaction", Session.get('selectedMonth')) if Meteor.user()
+    data: -> {month: Session.get('selectedMonth')}
+
   @route 'colleagues', {}
 
 requireLogin = ->
@@ -74,4 +78,5 @@ Router.onBeforeAction -> Meteor.subscribe "notifications"
 Router.onRun ->
   Session.set('selectedUserId', @params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
   Session.set('selectedYear', parseInt(@params.year) || Session.get('selectedYear') || moment().year())
+  Session.set('selectedMonth', parseInt(@params.month) || Session.get('selectedMonth') || month())
 

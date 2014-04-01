@@ -15,12 +15,7 @@ Template.feedbackEvent.helpers
     (_.defaults(reply, {userId: @userId}) for reply in @replies) if @replies
 
   recommendCategory: ->
-    if @recommend > 8
-      'promote'
-    else if @recommend < 7
-      'detract'
-    else
-      'indifferent'
+    npsCategory @recommend
 
 Template.feedbackEvent.events
   "click a.reply": (e) ->

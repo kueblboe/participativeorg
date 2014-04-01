@@ -27,6 +27,10 @@ Meteor.publish "feedback", (userId, year) ->
     else
       Feedback.find({userId: @userId, receiver: userId, createdAt: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } })
 
+Meteor.publish "satisfaction", (month) ->
+  if month
+    Satisfaction.find({domain: Meteor.users.findOne(@userId).profile.domain, month: {$in: [previousMonth(month), month, nextMonth(month)]}}, {fields: {userId: 0}})
+
 Meteor.publish "coworkers", ->
   me = Meteor.users.findOne(@userId)
   if me
@@ -35,6 +39,7 @@ Meteor.publish "coworkers", ->
       # TODO: only get the latest per colleague once aggreagtions are available
       Feedback.find({userId: @userId})
       Cells.find({ domain: me.profile.domain })
+      Satisfaction.find({userId: @userId, month: {$in: [previousMonth(month()), month(), nextMonth(month())]}})
     ]
 
 Meteor.publish "notifications", ->

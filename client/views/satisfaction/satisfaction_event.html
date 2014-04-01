@@ -1,0 +1,42 @@
+<template name="satisfactionEvent">
+  <div class="item {{scoreCategory}}">
+    <div class="satisfactionEvent">
+      {{#if isNumber score}}
+        <span class="watermark fa-stack fa-2x">
+          <i class="fa fa-star fa-stack-2x"></i>
+          <i class="fa fa-inverse fa-stack-1x">{{score}}</i>
+        </span>
+      {{/if}}
+      <div>{{#markdown}}{{body}}{{/markdown}}</div>
+      <div class="tags">
+        <img class="img-circle avatar" src="{{avatar userId}}">
+        {{#if isNumber score}}<span><i class="fa fa-star"></i> {{score}}</span>{{/if}}
+        <span data-livestamp="{{createdAt}}"></span>
+        <!-- {{#if owns}}
+          <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>
+        {{else}}
+          <a href="#" class="reply"><i class="fa fa-question-circle"></i> Ask</a>
+        {{/if}} -->
+      </div>
+    </div>
+    <!-- <ul class="replies">
+      <li class="reply">
+        <form class="reply-form" role="form">
+          <textarea rows="4" class="form-control" id="body" placeholder="{{replyPlaceholder}}"></textarea>
+          <div class="notes pull-right"><span class="long">This field</span> interprets <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a></div>
+          <img class="img-circle avatar" src="{{avatar currentUser}}">
+          <button type="submit" class="btn btn-xs btn-default">{{replyButtonText}}</button>
+        </form>
+      </li>
+      {{#each repliesWithUserIds}}
+        <li class="item">
+          <div>{{#markdown}}{{body}}{{/markdown}}</div>
+          <div class="tags">
+            <img class="img-circle avatar" src="{{avatar userId}}">
+            <span data-livestamp="{{createdAt}}"></span>
+          </div>
+        </li>
+      {{/each}}
+    </ul> -->
+  </div>
+</template>
