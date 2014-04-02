@@ -4,11 +4,14 @@
     <img class="img-circle main-avatar" src="{{avatar _id}}">
     <div class="details">
       <strong>{{profile.name}}</strong>
-      {{#if latestFeedbackDate}}
-        <div class="tags">
+      <div class="tags">
+        {{#if latestFeedbackDate}}
           {{#if isNumber latestFeedbackRecommend}}<span><i class="fa fa-star"></i> {{latestFeedbackRecommend}}</span>{{/if}}
           {{#if isNumber latestFeedbackKnow}}<span><i class="fa fa-users"></i> {{latestFeedbackKnow}}</span>{{/if}}
-        </div>
+        {{/if}}
+        {{cellNames}}
+      </div>
+      {{#if latestFeedbackDate}}
         <div><i class="fa fa-refresh"></i> latest feedback from you <span data-livestamp="{{latestFeedbackDate}}"></span></div>
       {{/if}}
       {{#if hasOptedOutOfFeedback _id}}

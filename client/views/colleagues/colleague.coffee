@@ -26,6 +26,10 @@ Template.colleague.helpers
   latestFeedbackKnow: ->
     latestFeedback(@_id)?.know
 
+  cellNames: ->
+    if cellIds = userProfile(@_id)?.cells
+      cellNames(cellIds)
+
 Template.colleague.events
   'click a.feedback': (e) ->
     e.preventDefault()

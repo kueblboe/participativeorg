@@ -11,6 +11,7 @@
       <div class="tags">
         <img class="img-circle avatar" src="{{avatar userId}}">
         {{#if isNumber score}}<span><i class="fa fa-star"></i> {{score}}</span>{{/if}}
+        <span>{{cellNames}}</span>
         <span data-livestamp="{{createdAt}}"></span>
         <!-- {{#if owns}}
           <a href="#" class="reply"><i class="fa fa-comment-o"></i> Reply</a>

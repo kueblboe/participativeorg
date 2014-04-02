@@ -1,6 +1,6 @@
 <template name="satisfaction">
   <div class="alert alert-warning">
-    Your satisfaction level is <strong>anonymous</strong>. It will appear in the cells ... Your colleagues will be able to ask clarifying questions without knowing who you are.
+    Your satisfaction level is <strong>anonymous</strong>. {{#if cellNames}}It will appear in the cells {{cellNames}}.{{/if}}
   </div>
   {{> satisfactionAdd}}
   {{> satisfactionSummary}}
