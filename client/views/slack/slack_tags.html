@@ -6,12 +6,12 @@
     <span class="{{highlightEffort}}">{{effort}} h</span>
     {{#if cost}}<span class="{{highlightCost}}">{{cost}} €</span>{{/if}}
     <span class="rating {{highlightRanking}}">
-      {{#times ranking}}
+      {{#each rankingList}}
         <i class="fa fa-star"></i>
-      {{/times}}
-      {{#times rankingNeg}}
+      {{/each}}
+      {{#each rankingNegList}}
         <i class="fa fa-star-o"></i>
-      {{/times}}
+      {{/each}}
     </span>
   </div>
 </template>

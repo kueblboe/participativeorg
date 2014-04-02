@@ -19,9 +19,6 @@ Handlebars.registerHelper "formattedDate", (date) ->
 Handlebars.registerHelper "rfcDate", (date) ->
   moment(date).format('YYYY-MM-DD')
 
-Handlebars.registerHelper "times", (n, block) ->
-  (block.fn(i) for i in [0...n]).join("")
-
 Handlebars.registerHelper "preview", (text) ->
   if text?.length > 50 then text.substring(0, 50) + '…' else text
 
@@ -56,9 +53,6 @@ Handlebars.registerHelper "categorySymbol", ->
     'users'
   else
     'question-circle'
-
-Handlebars.registerHelper "rankingNeg", ->
-  5 - @ranking
 
 Handlebars.registerHelper "liker", ->
   ({userId: userId} for userId in _.uniq(_.pluck(@likes, 'userId')))

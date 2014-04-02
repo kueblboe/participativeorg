@@ -15,3 +15,9 @@ Template.slackTags.helpers
 
   highlightRanking: ->
     'highlight' if @ranking > 4
+
+  rankingList: ->
+    [0...@ranking]
+
+  rankingNegList: ->
+    [0...(5 - @ranking)]
