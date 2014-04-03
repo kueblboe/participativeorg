@@ -7,7 +7,7 @@
     {{/if}}
     <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required autofocus>
     <textarea rows="3" class="form-control" id="description" placeholder="What I am expecting to learn / have learned and might be interesting to my colleagues...">{{description}}</textarea>
-    <div class="notes pull-right">This field interprets <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a></div>
+    {{> markdownNote}}
     <div class="btn-group btn-group-justified" id="category" data-toggle="buttons">
       <label class="btn btn-default {{isActiveCategory 'read'}}">
         <input type="radio" name="options" value="read"><i class="fa fa-book"></i> read

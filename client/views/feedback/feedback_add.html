@@ -11,7 +11,7 @@
     </div>
     <div class="notes">How well do you know {{firstnameSelectedUser}}?</div>
     <textarea class="form-control" id="body" rows="6" placeholder="Remember, the purpose of your feedback isn't to make {{firstnameSelectedUser}} feel better, but to help {{firstnameSelectedUser}} do better. So, be honest, but not rude. Try to give specific suggestions and examples."></textarea>
-    <div class="notes pull-right"><span class="long">This field</span> interprets <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a></div>
+    {{> markdownNote}}
     <img class="img-circle avatar" src="{{avatar ''}}">
     <button type="submit" class="btn btn-xs btn-default">Give feedback</button>
   </form>

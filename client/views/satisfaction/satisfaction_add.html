@@ -6,7 +6,7 @@
     </div>
     <div class="notes">How satisfied are you working here?</div>
     <textarea class="form-control" id="body" rows="6" placeholder="What needs to happen for you to give a 10?"></textarea>
-    <div class="notes pull-right"><span class="long">This field</span> interprets <a href="http://daringfireball.net/projects/markdown/syntax">markdown</a></div>
+    {{> markdownNote}}
     <img class="img-circle avatar" src="{{avatar ''}}">
     <button type="submit" class="btn btn-xs btn-default">Record satisfaction</button>
   </form>
