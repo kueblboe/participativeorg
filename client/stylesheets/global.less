@@ -44,6 +44,10 @@ li.item, li.reply {
   color: @red-bg;
 }
 
+.ignored, .ignored:hover, .ignored:focus {
+  color: @red;
+}
+
 .actions, .tags, .notes {
   color: @border-grey;
   font-size: @small-font;
@@ -71,8 +75,14 @@ input, button, select, textarea, form .input-group, .btn-group, a.btn {
   margin-top: 5px;
 }
 
-.input-group input {
-  margin-top: 0;
+.input-group {
+  input, button {
+    margin-top: 0;
+  }
+
+  .input-group-addon {
+    min-width: 38px;
+  }
 }
 
 .form-actions {
@@ -139,7 +149,7 @@ button.close {
   margin-top: -2px;
 }
 
-a.btn, button:not(.navbar-toggle):not(.close) {
+a.btn, button:not(.navbar-toggle):not(.close):not(.inline) {
   min-width: 82px;
 
   &[type="submit"] {

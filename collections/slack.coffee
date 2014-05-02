@@ -36,7 +36,7 @@ Meteor.methods(
     throw new Meteor.Error(401, "You need to login to add slack") unless Meteor.user()
     throw new Meteor.Error(422, "Please fill in a title") unless slackAttributes.title
 
-    slack = pickWhitelistedAttributes(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking")
+    slack = pickWhitelistedAttributes(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking", "ignoreEffort", "ignoreCost")
     slack = _.extend slack,
       indicatedBy: undefined
 

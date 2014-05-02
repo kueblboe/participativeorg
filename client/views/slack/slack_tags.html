@@ -3,8 +3,18 @@
     <span>{{formattedDate date}}</span>
     <span>{{category}}</span>
     {{#if hashtagSymbol}}<span><i class="fa fa-{{hashtagSymbol}}"></i></span>{{/if}}
-    <span class="{{highlightEffort}}">{{effort}} h</span>
-    {{#if cost}}<span class="{{highlightCost}}">{{cost}} €</span>{{/if}}
+    <span class="{{highlightEffort}}">
+      {{#if ignoreEffort}}({{/if}}
+      {{effort}} h
+      {{#if ignoreEffort}}){{/if}}
+    </span>
+    {{#if cost}}
+      <span class="{{highlightCost}}">
+        {{#if ignoreCost}}({{/if}}
+        {{cost}} €
+        {{#if ignoreCost}}){{/if}}
+      </span>
+    {{/if}}
     <span class="rating {{highlightRanking}}">
       {{#each rankingList}}
         <i class="fa fa-star"></i>

@@ -3,6 +3,14 @@ Template.slackEdit.helpers
     if category is @category
       'active'
 
+  isCostIgnored: ->
+    if @ignoreCost
+      'ignored'
+
+  isEffortIgnored: ->
+    if @ignoreEffort
+      'ignored'
+
   users: ->
     alreadyPartOf = _.pluck(@copies, "userId").concat(Meteor.userId()).concat(@userId)
     Meteor.users.find({ _id: { $nin: alreadyPartOf } }, {sort: {'profile.name': 1}})
@@ -31,6 +39,8 @@ Template.slackEdit.events
       url: $(e.target).find("#url").val()
       ranking: parseInt($(e.target).find("#ranking").val(), 10)
       copyOf: @copyOf
+      ignoreEffort: @ignoreEffort
+      ignoreCost: @ignoreCost
       participants: $.map($("#coworkers input:checked"), (c) -> $(c).data("participant"))
 
     Meteor.call "upsertSlack", slackProperties, (error) ->
@@ -52,3 +62,13 @@ Template.slackEdit.events
 
   "click .dropdown-menu-form": (e) ->
     e.stopPropagation()
+
+  "click #toggle-cost-sum": (e) ->
+    e.preventDefault()
+    @ignoreCost = !@ignoreCost
+    $(e.target).toggleClass("ignored")
+
+  "click #toggle-effort-sum": (e) ->
+    e.preventDefault()
+    @ignoreEffort = !@ignoreEffort
+    $(e.target).toggleClass("ignored")

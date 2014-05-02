@@ -6,10 +6,10 @@ setOrToggleSortOrder = (sortBy) ->
 
 Template.slackSummary.helpers
   totalCost: ->
-    Slack.find({date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).fetch().map((s) -> s.cost).reduce(((c, sum) -> c + sum), 0)
+    Slack.find({ignoreCost: { $not: true }, date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).fetch().map((s) -> s.cost).reduce(((c, sum) -> c + sum), 0)
 
   totalEffort: ->
-    Slack.find({date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).fetch().map((s) -> s.effort).reduce(((e, sum) -> e + sum), 0)
+    Slack.find({ignoreEffort: { $not: true }, date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).fetch().map((s) -> s.effort).reduce(((e, sum) -> e + sum), 0)
 
   nextYear: ->
     parseInt(@year) + 1
