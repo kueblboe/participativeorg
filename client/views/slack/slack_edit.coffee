@@ -66,9 +66,9 @@ Template.slackEdit.events
   "click #toggle-cost-sum": (e) ->
     e.preventDefault()
     @ignoreCost = !@ignoreCost
-    $(e.target).toggleClass("ignored")
+    $(e.target).closest('button').toggleClass("ignored")
 
   "click #toggle-effort-sum": (e) ->
     e.preventDefault()
     @ignoreEffort = !@ignoreEffort
-    $(e.target).toggleClass("ignored")
+    $(e.target).closest('button').toggleClass("ignored")
