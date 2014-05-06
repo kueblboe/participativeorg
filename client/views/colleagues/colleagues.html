@@ -1,4 +1,10 @@
 <template name="colleagues">
+  <div id="me" class="me">
+    {{#each me}}
+      {{> colleague}}
+    {{/each}}
+  </div>
+  {{> colleagueSummary}}
   <div id="colleagues" class="list">
     {{#each colleagueList}}
       {{> colleague}}
