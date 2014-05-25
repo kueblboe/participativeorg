@@ -2,6 +2,8 @@
   <h4 class="summary">
     <a href="#" id="month" class="label label-default">{{month}}</a>
     {{#if averageScore}}<a href="#" id="average-recommend" class="label label-default"><i class="fa fa-star"></i> {{averageScore}}</a>{{/if}}
+    {{#if eNps}}<a href="#" id="eNps" class="label label-default">eNPS {{eNps}}%</a>{{/if}}
+    {{#if numSatisfaction}}<a href="#" id="numSatisfaction" class="label label-default long"><i class="fa fa-users"></i> {{numSatisfaction}}</a>{{/if}}
     {{#if hasNextSatisfaction}}
       <span class="pull-right"><a href="#" id="next-month" class="label label-white hidden-print" disabled><span class="long">{{nextMonth}}</span> <i class="fa fa-step-forward"></i></a></span>
     {{/if}}

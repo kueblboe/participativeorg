@@ -1,11 +1,34 @@
-average = (mapping, month) ->
+satisfactionWithMapping = (mapping, month) ->
   satisfaction = Satisfaction.find({month: month}).fetch()
-  satisfactionWithMapping = _.filter(satisfaction.map(mapping), (x) -> x)
-  Math.round(satisfactionWithMapping.reduce(((x, sum) -> x + sum), 0) * 10 / satisfactionWithMapping.length) / 10
+  _.filter(satisfaction.map(mapping), (x) -> x)
+
+average = (mapping, month) ->
+  satisfaction = satisfactionWithMapping(mapping, month)
+  Math.round(satisfaction.reduce(((x, sum) -> x + sum), 0) * 10 / satisfaction.length) / 10
+
+nps = (month) ->
+  satisfaction = Satisfaction.find({month: month}).fetch()
+  npsCount = _.countBy(satisfaction, (sat) ->
+    if sat.score > 8
+      'promoter'
+    else if sat.score < 7
+      'detractor'
+    else
+      'neutral'
+  )
+  _.defaults(npsCount, {promoter: 0, detractor: 0})
+  console.log npsCount
+  Math.round((npsCount.promoter / satisfaction.length - npsCount.detractor / satisfaction.length) * 100)
 
 Template.satisfactionSummary.helpers
   averageScore: ->
     average(((s) -> s.score), @month)
+
+  eNps: ->
+    nps(@month)
+
+  numSatisfaction: ->
+    Satisfaction.find({month: @month}).fetch().length
 
   nextMonth: ->
     nextMonth(@month)
