@@ -7,7 +7,7 @@ setOrToggleSortOrder = (sortBy) ->
 Template.colleagueSummary.events
   'click #alphabetical': (e) ->
     e.preventDefault()
-    setOrToggleSortOrder('profile.name')
+    setOrToggleSortOrder('profile.firstname')
 
   'click #activity': (e) ->
     e.preventDefault()

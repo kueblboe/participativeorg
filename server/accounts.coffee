@@ -5,8 +5,8 @@ Accounts.onCreateUser (options, user) ->
   )
   throw userinfo.error if userinfo.error
   user.profile =
-    name: userinfo.data.name
     firstname: userinfo.data.given_name
+    lastname: userinfo.data.family_name
     avatar: userinfo.data.picture
     domain: userinfo.data.hd
 

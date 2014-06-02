@@ -57,7 +57,7 @@
         <ul id="coworkers" class="dropdown-menu dropdown-menu-form">
           {{#each users}}
             <li>
-              <label class="checkbox"><input type="checkbox" data-participant="{{_id}}"><img class="img-circle avatar" src="{{avatar _id}}"> <span>{{profile.name}}</span></label>
+              <label class="checkbox"><input type="checkbox" data-participant="{{_id}}"><img class="img-circle avatar" src="{{avatar _id}}"> <span>{{profile.firstname}} {{profile.lastname}}</span></label>
             </li>
           {{/each}}
         </ul>

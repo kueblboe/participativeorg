@@ -1,9 +1,9 @@
-Session.set('colleagueSortBy', 'profile.name')
+Session.set('colleagueSortBy', 'profile.firstname')
 Session.set('colleagueSortOrder', 1)
 
 Template.colleagues.helpers
   me: ->
-    Meteor.users.find({_id: Meteor.userId()}, {sort: {'profile.name': 1}})
+    Meteor.users.find({_id: Meteor.userId()})
 
   colleagueList: ->
     filter = {sort: {}}

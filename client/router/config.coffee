@@ -63,6 +63,9 @@ Router.map ->
 
   @route 'colleagues', {}
 
+  @route 'profile',
+    data: -> Meteor.user()
+
 requireLogin = ->
   unless Meteor.user()
     if Meteor.loggingIn()

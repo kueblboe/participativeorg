@@ -10,7 +10,7 @@ Meteor.startup ->
     return unless user?.services and user?.profile and "identify" of mixpanel
     mixpanel.identify user._id
     mixpanel.people.set
-      name: user.profile.name
+      name: user.profile.firstname + " " + user.profile.lastname
       domain: user.profile.domain
       
       # special mixpanel property names

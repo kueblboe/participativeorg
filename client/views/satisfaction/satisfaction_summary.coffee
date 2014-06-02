@@ -17,7 +17,6 @@ nps = (month) ->
       'neutral'
   )
   _.defaults(npsCount, {promoter: 0, detractor: 0})
-  console.log npsCount
   Math.round((npsCount.promoter / satisfaction.length - npsCount.detractor / satisfaction.length) * 100)
 
 Template.satisfactionSummary.helpers

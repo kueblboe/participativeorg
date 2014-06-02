@@ -1,7 +1,5 @@
-#TODO: Change this to only allow setting cells
 Meteor.users.allow
-  update: (userId, user, fieldNames, modifier) ->
-    true
+  update: ownsDocument
 
 Meteor.users.deny
   update: (userId, user, fieldNames) ->

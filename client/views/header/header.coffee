@@ -4,7 +4,7 @@ Template.header.helpers
       'active'
 
   users: ->
-    Meteor.users.find({}, {sort: {'profile.name': 1}})
+    Meteor.users.find({}, {sort: {'profile.firstname': 1, 'profile.lastname': 1}})
 
   selectedUserFirstname: ->
     userProfile(Session.get('selectedUserId'))?.firstname
@@ -19,7 +19,7 @@ Template.header.events
   'click .coworker': (e) ->
     e.preventDefault()
     Session.set('selectedUserId', @_id)
-    track('view other slack', { 'user': @profile.name }) unless @_id is Meteor.userId()
+    track('view other slack', { 'user': @profile.firstname + " " + @profile.lastname }) unless @_id is Meteor.userId()
 
   'click #login-buttons-logout': (e) ->
     Router.go 'home'
