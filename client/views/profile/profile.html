@@ -6,6 +6,13 @@
     </div>
     <input type="text" placeholder="Firstname" class="form-control" id="firstname" value="{{profile.firstname}}">
     <input type="text" placeholder="Lastname" class="form-control" id="lastname" value="{{profile.lastname}}">
-    <button type="submit" class="btn btn-xs btn-default">Save</button>
+    <div class="input-group">
+      <input type="checkbox" id="wantsEmailNotifications" checked="{{profile.wantsEmailNotifications}}">
+      Receive email notifications
+    </div>
+    <div class="form-actions">
+      <button type="submit" class="btn btn-default">Save</button>
+      <a class="btn btn-default pull-right" href="/colleagues">Cancel</a>
+    </div>
   </form>
 </template>

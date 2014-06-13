@@ -12,7 +12,8 @@ Template.profile.events
         avatar: $(e.target).find("#avatar").val()
         firstname: $(e.target).find("#firstname").val()
         lastname: $(e.target).find("#lastname").val()
+        wantsEmailNotifications: $(e.target).find("#wantsEmailNotifications").is(":checked")
 
-    console.log profileProperties
     Meteor.users.update({_id: Meteor.userId()}, {$set: {profile: profileProperties}})
     track('update profile')
+    Router.go "colleagues"

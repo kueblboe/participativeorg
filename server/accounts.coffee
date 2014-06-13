@@ -9,5 +9,6 @@ Accounts.onCreateUser (options, user) ->
     lastname: userinfo.data.family_name
     avatar: userinfo.data.picture
     domain: userinfo.data.hd
+    wantsEmailNotifications: true
 
   user

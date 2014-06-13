@@ -13,6 +13,7 @@ Meteor.methods(
         throwError error.reason
       else
         createNotification({ feedbackId: id, ownerUserId: feedback.receiver, userId: feedback.receiver, action: "gave you", anonymous: true })
+        Meteor.call "sendFeedbackEmail", feedback
 
   addReply: (replyAttributes) ->
     throw new Meteor.Error(401, "You need to login to add a reply") unless Meteor.user()
@@ -23,8 +24,9 @@ Meteor.methods(
 
     if feedback = Feedback.findOne(replyAttributes.replyTo)
       Feedback.update(feedback._id, { $set: {replies: (feedback.replies || []).concat reply} })
-      for userId in [feedback.receiver, feedback.userId]
+      for userId in [feedback.receiver, feedback.userId] when userId isnt Meteor.userId()
         createNotification({ feedbackId: feedback._id, ownerUserId: feedback.receiver, userId: userId, action: "replied to your", anonymous: replyAttributes.anonymous })
+        Meteor.call "sendFeedbackReplyEmail", reply, userId, feedback
 
   thank: (thankAttributes) ->
     throw new Meteor.Error(401, "You need to login to thank someone") unless Meteor.user()
