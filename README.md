@@ -2,14 +2,6 @@
 
 This application aims to enable decentralized decision-making within participative organizations by providing transparency about slack, peer ranking, economics and guidelines.
 
-[Desire engine](http://www.slideshare.net/nireyal/hooked-model) for slack feature
-
-- Trigger: internal (planning slack), external (email notifications)
-- Action: enter slack activities
-  - Motivation: seeking acceptance
-- Reward: Tribal recognition (like, comments)
-- Investment: data
-
 ## Contribute
 
 ### Adding features
