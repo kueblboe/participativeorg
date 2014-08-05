@@ -11,7 +11,7 @@ sendEmail = (that, to, from, subject, text) ->
       to: receiver.services.google.email
       from: from
       subject: subject
-      text: "#{text}\n\n--\nDon't want to receive these emails? Edit your profile at #{Meteor.absoluteUrl 'feedback'}/profile"
+      text: "#{text}\n\n--\nDon't want to receive these emails? Edit your profile at #{Meteor.absoluteUrl 'profile'}"
 
 Meteor.methods
   sendFeedbackEmail: (feedback) ->
