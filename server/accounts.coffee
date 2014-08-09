@@ -19,13 +19,12 @@ Accounts.onCreateUser (options, user) ->
       avatar: userinfo.data.picture
       domain: userinfo.data.hd
   else if user.services.password
-    console.log options
-    console.log user
     [email_name, domain] = user.emails[0].address.split('@')
     [firstname, middlenames..., lastname] = email_name.split('.')
     user.profile =
       firstname: capitalize(firstname)
       lastname: capitalize(lastname)
+      avatar: Gravatar.imageUrl(user.emails[0].address, {d: 'retro'})
       domain: domain
 
   user.profile.wantsEmailNotifications = true

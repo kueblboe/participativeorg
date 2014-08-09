@@ -3,6 +3,7 @@
     "mixpanel-light": {},
     "iron-router": {},
     "livestamp": {},
-    "moment": {}
+    "moment": {},
+    "gravatar": {}
   }
 }
