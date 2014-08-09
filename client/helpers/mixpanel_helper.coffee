@@ -15,7 +15,7 @@ Meteor.startup ->
       
       # special mixpanel property names
       $first_name: user.profile.firstname
-      $email: @email(user)
+      $email: email(user)
       $created: user.createdAt
 
     unless user.profile.initialized

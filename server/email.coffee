@@ -14,7 +14,7 @@ sendEmail = (that, to, from, subject, text) ->
 
   if receiver.profile.wantsEmailNotifications
     Email.send
-      to: @email(receiver)
+      to: email(receiver)
       from: from
       subject: subject
       text: "#{text}\n\n--\nDon't want to receive these emails? Edit your profile at #{Meteor.absoluteUrl 'profile'}"
