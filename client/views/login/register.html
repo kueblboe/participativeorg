@@ -1,0 +1,26 @@
+<template name="register">
+  <div id="login-buttons">
+    <button id="google-register-button" class="btn btn-default btn-main"><img src="/img/google-icon.jpg"> Sign up with Google</button>
+  </div>
+    
+  <div class="or">
+    <span class="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <span class="or-text">or</span>
+    <span class="hline">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+  </div>
+        
+  <div class="register-form register-password-form">
+    <form id="register-form" action="action">
+      <div>
+        <input type="email" id="register-email" class="form-control" placeholder="work email" />
+        <input type="password" id="register-password" class="form-control" placeholder="password" />
+        <button type="submit" id="register-button" class="btn btn-default">Sign up</button>
+     </div>
+   </form>
+
+    <div class="additional-link-container">
+      Already have an account? 
+      <a href="{{pathFor 'login'}}" class="additional-link">Log in.</a>
+    </div>
+  </div>
+</template>

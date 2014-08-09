@@ -150,16 +150,21 @@ button.close {
   margin-top: -2px;
 }
 
+.btn {
+  color: lighten(@text-grey, 40%);
+
+  &:hover {
+    color: @text-grey;
+    background-color: white;
+  }
+}
+
 a.btn, button:not(.navbar-toggle):not(.close):not(.inline) {
   min-width: 82px;
 
   &[type="submit"], &.btn-main {
     border-color: @secondary-b-1;
     font-weight: 500;
-
-    &:hover {
-      background-color: @secondary-b-bg;
-    }
   }
 
   &.pull-right {
@@ -177,14 +182,8 @@ ul > li.action {
 }
 
 .btn-danger {
-  color: @text-grey;
   background-color: white;
   border-color: @red;
-
-  &:hover {
-    color: @text-grey;
-    background-color: @red-bg;
-  }
 }
 
 .well {
