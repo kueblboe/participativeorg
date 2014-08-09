@@ -1,3 +1,9 @@
+@email = (user) ->
+  if user.services.google
+    user.services.google.email
+  else if user.services.password
+    user.emails[0].address
+
 sendEmail = (that, to, from, subject, text) ->
   check [to, from, subject, text], [String]
   
@@ -8,7 +14,7 @@ sendEmail = (that, to, from, subject, text) ->
 
   if receiver.profile.wantsEmailNotifications
     Email.send
-      to: receiver.services.google.email
+      to: email(receiver)
       from: from
       subject: subject
       text: "#{text}\n\n--\nDon't want to receive these emails? Edit your profile at #{Meteor.absoluteUrl 'profile'}"
