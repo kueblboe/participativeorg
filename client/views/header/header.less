@@ -12,28 +12,8 @@
   }
 }
 
-#login-buttons {
-  padding: 12px 15px;
-
-  .login-display-name {
-    display: none;
-  }
-
-  .login-button {
-    background-color: white;
-    background-image: none;
-    color: @nav-grey;
-    text-shadow: none;
-    box-shadow: none;
-    border-color: @border-grey;
-
-    &:hover, &:active {
-      background-color: @bg-grey;
-      background-image: none;
-    }
-  }
-
-  .avatar {
-    height: @avatar-height-sm;
+@media (min-width: 768px) {
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 0px;
   }
 }

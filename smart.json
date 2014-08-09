@@ -1,8 +1,8 @@
 {
   "packages": {
-    "momentjs": {},
-    "livestamp": {},
     "mixpanel-light": {},
-    "iron-router": {}
+    "iron-router": {},
+    "livestamp": {},
+    "moment": {}
   }
 }

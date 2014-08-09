@@ -48,8 +48,14 @@
               <li id="notifications" class="dropdown">
                 {{> notifications}}
               </li>
+              <li>
+                <button id="logout" class="btn btn-default"><img class='img-circle avatar' src='{{avatar currentUser}}'> Logout</button>
+              </li>
+            {{else}}
+              <li>
+                <button id="login" class="btn btn-default">Sign in</button>
+              </li>
             {{/if}}
-            <li>{{> loginButtons}}</li>
           </ul>
         </div>
       </div>

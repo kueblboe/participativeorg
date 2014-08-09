@@ -14,6 +14,13 @@ Router.map ->
   @route 'home',
     path: '/'
 
+  @route 'login'
+  @route 'register'
+
+  @route 'recovery',
+    path: '/recovery/:token?',
+    data: -> {token: if @params then @params.token else ''}
+
   @route 'slackNew',
     path: '/slack/new',
     template: 'slackEdit'

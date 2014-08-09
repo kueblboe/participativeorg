@@ -27,7 +27,15 @@ Template.header.events
   'click #main-nav>li': (e) ->
     Session.set('selectedUserId', Meteor.userId())
 
+  'click #login': (e) ->
+    Router.go 'login'
+
+  'click #logout': (e) ->
+    Meteor.logout (error) ->
+      if error
+        @throwError error.reason
+      else
+        Router.go 'home'
+
 Template.header.rendered = ->
   $(".navbar-fixed-top").headroom()
-  if Meteor.user()?
-    $('#login-buttons-logout').html("<img class='img-circle avatar' src='#{Meteor.user().profile.avatar}'> See ya")

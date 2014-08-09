@@ -6,12 +6,13 @@
 standard-app-packages
 coffeescript
 less
-accounts-ui
 accounts-google
-momentjs
 spiderable
-livestamp
 mixpanel-light
 showdown
 iron-router
 email
+accounts-password
+accounts-base
+moment
+livestamp

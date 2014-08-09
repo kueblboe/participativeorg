@@ -2,22 +2,12 @@
   "meteor": {},
   "dependencies": {
     "basePackages": {
-      "momentjs": {},
-      "livestamp": {},
       "mixpanel-light": {},
-      "iron-router": {}
+      "iron-router": {},
+      "livestamp": {},
+      "moment": {}
     },
     "packages": {
-      "momentjs": {
-        "git": "https://github.com/crapthings/meteor-momentjs.git",
-        "tag": "v2.1.0.2",
-        "commit": "59a762e297082eea8b8cae00374c2b7ac6f89529"
-      },
-      "livestamp": {
-        "git": "https://github.com/colllin/meteor-livestamp.git",
-        "tag": "v1.1.2.1",
-        "commit": "070821be066925e5177daf1d3398c759c45b15b4"
-      },
       "mixpanel-light": {
         "git": "https://github.com/percolatestudio/meteor-mixpanel.git",
         "tag": "v0.1.0",
@@ -25,13 +15,38 @@
       },
       "iron-router": {
         "git": "https://github.com/EventedMind/iron-router.git",
-        "tag": "v0.7.0",
-        "commit": "05f34bc48c4cad9fdaa366c1ddcabe6980232ece"
+        "tag": "v0.8.2",
+        "commit": "05415a8891ea87a00fb1e2388585f2ca5a38e0da"
+      },
+      "livestamp": {
+        "git": "https://github.com/colllin/meteor-livestamp.git",
+        "tag": "v1.1.2-3",
+        "commit": "d161b9de53d7032511ecaa13486b6b5cb11f71f3"
+      },
+      "moment": {
+        "git": "https://github.com/acreeger/meteor-moment.git",
+        "tag": "v2.6.0",
+        "commit": "26156df681750fd6e6ed77043eef32b6653ebbdf"
+      },
+      "iron-layout": {
+        "git": "https://github.com/EventedMind/iron-layout.git",
+        "tag": "v0.2.0",
+        "commit": "4a2d53e35ba036b0c189c7ceca34be494d4c6c97"
       },
       "blaze-layout": {
         "git": "https://github.com/EventedMind/blaze-layout.git",
-        "tag": "v0.2.2",
-        "commit": "8bc53798fe5965669ae67c72f91829fcfdceabfd"
+        "tag": "v0.2.5",
+        "commit": "273e3ab7d005d91a1a59c71bd224533b4dae2fbd"
+      },
+      "iron-core": {
+        "git": "https://github.com/EventedMind/iron-core.git",
+        "tag": "v0.2.0",
+        "commit": "0e48b5dc50d03f01025b7b900fb5ce2f13d52cad"
+      },
+      "iron-dynamic-template": {
+        "git": "https://github.com/EventedMind/iron-dynamic-template.git",
+        "tag": "v0.2.1",
+        "commit": "4dd1185c4d9d616c9abdb3f33e4a7d5a88db7e18"
       }
     }
   }
