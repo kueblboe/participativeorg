@@ -2,7 +2,7 @@ isInMyDomain = (userId, currentUserId) ->
   return true if userId is currentUserId
   user = Meteor.users.findOne(userId)
   me   = Meteor.users.findOne(currentUserId)
-  user and me and user.profile.domain is me.profile.domain
+  user and me and user.domain is me.domain
 
 Meteor.publish "slack", (userId, year) ->
   if isInMyDomain(userId, @userId) and year
@@ -29,16 +29,16 @@ Meteor.publish "feedback", (userId, year) ->
 
 Meteor.publish "satisfaction", (month) ->
   if month
-    Satisfaction.find({domain: Meteor.users.findOne(@userId).profile.domain, month: {$in: [previousMonth(month), month, nextMonth(month)]}}, {fields: {userId: 0}})
+    Satisfaction.find({domain: Meteor.users.findOne(@userId).domain, month: {$in: [previousMonth(month), month, nextMonth(month)]}}, {fields: {userId: 0}})
 
 Meteor.publish "coworkers", ->
   me = Meteor.users.findOne(@userId)
   if me
     [
-      Meteor.users.find({ 'profile.domain': me.profile.domain }),
+      Meteor.users.find({ 'domain': me.domain }),
       # TODO: only get the latest per colleague once aggreagtions are available
       Feedback.find({userId: @userId})
-      Cells.find({ domain: me.profile.domain })
+      Cells.find({ domain: me.domain })
       Satisfaction.find({userId: @userId, month: {$in: [previousMonth(month()), month(), nextMonth(month())]}})
     ]
 

@@ -15,7 +15,7 @@ Meteor.methods(
 
     satisfaction = pickWhitelistedAttributes(satisfactionAttributes, "score", "body")
     satisfaction = _.extend(satisfaction,
-      domain: Meteor.user().profile.domain 
+      domain: Meteor.user().domain
       cells: Meteor.user().profile.cells
       month: month
     )

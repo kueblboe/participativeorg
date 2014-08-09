@@ -11,7 +11,7 @@ Meteor.startup ->
     mixpanel.identify user._id
     mixpanel.people.set
       name: user.profile.firstname + " " + user.profile.lastname
-      domain: user.profile.domain
+      domain: user.domain
       
       # special mixpanel property names
       $first_name: user.profile.firstname

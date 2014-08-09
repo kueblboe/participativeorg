@@ -3,4 +3,4 @@
   doc and doc.userId is userId
 
 @isInDomain = (userId, doc) ->
-  doc and doc.domain is Meteor.user().profile.domain
+  doc and doc.domain is Meteor.user().domain

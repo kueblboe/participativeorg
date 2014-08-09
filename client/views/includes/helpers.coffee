@@ -38,7 +38,7 @@ Handlebars.registerHelper "firstname", (userId) ->
   userProfile(userId)?.firstname || 'someone'
 
 Handlebars.registerHelper "domain", ->
-  Meteor.user()?.profile.domain
+  Meteor.user()?.domain
 
 Handlebars.registerHelper "firstnameSelectedUser", ->
   userProfile(Session.get('selectedUserId'))?.firstname

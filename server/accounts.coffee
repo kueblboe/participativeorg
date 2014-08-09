@@ -20,7 +20,7 @@ Accounts.onCreateUser (options, user) ->
       firstname: capitalize(userinfo.data.given_name)
       lastname: capitalize(userinfo.data.family_name)
       avatar: userinfo.data.picture
-      domain: userinfo.data.hd or secondLevelDomain(user.services.google.email)
+    user.domain = userinfo.data.hd or secondLevelDomain(user.services.google.email)
   else if user.services.password
     [email_name, domain] = user.emails[0].address.split('@')
     [firstname, middlenames..., lastname] = email_name.split('.')
@@ -28,7 +28,7 @@ Accounts.onCreateUser (options, user) ->
       firstname: capitalize(firstname)
       lastname: capitalize(lastname)
       avatar: Gravatar.imageUrl(user.emails[0].address, {d: 'retro'})
-      domain: secondLevelDomain(domain)
+    user.domain = secondLevelDomain(domain)
 
   user.profile.wantsEmailNotifications = true
   user
