@@ -3,17 +3,18 @@
 # 'meteor add' and 'meteor remove' will edit this file for you,
 # but you can also edit it by hand.
 
-standard-app-packages
 coffeescript
 less
 accounts-google
 spiderable
-mixpanel-light
 showdown
-iron-router
 email
 accounts-password
 accounts-base
-moment
-livestamp
-gravatar
+mrt:moment@2.6.0
+tmeasday:gravatar@0.0.4
+iron:router
+percolatestudio:percolatestudio-mixpanel
+spacebars
+meteor-platform
+

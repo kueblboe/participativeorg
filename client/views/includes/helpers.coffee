@@ -1,28 +1,28 @@
 @userProfile = (userId) ->
   Meteor.users.findOne(userId)?.profile
 
-Handlebars.registerHelper "submitButtonText", ->
+UI.registerHelper "submitButtonText", ->
   if @_id then 'Edit' else 'Add'
 
-Handlebars.registerHelper "selectedSelf", ->
+UI.registerHelper "selectedSelf", ->
   Session.get('selectedUserId') is Meteor.userId()
 
-Handlebars.registerHelper "self", ->
+UI.registerHelper "self", ->
   @_id is Meteor.userId()
 
-Handlebars.registerHelper "owns", ->
+UI.registerHelper "owns", ->
   @userId is Meteor.userId()
 
-Handlebars.registerHelper "formattedDate", (date) ->
+UI.registerHelper "formattedDate", (date) ->
   moment(date).format('DD.MM.YYYY')
 
-Handlebars.registerHelper "rfcDate", (date) ->
+UI.registerHelper "rfcDate", (date) ->
   moment(date).format('YYYY-MM-DD')
 
-Handlebars.registerHelper "preview", (text) ->
+UI.registerHelper "preview", (text) ->
   if text?.length > 50 then text.substring(0, 50) + '…' else text
 
-Handlebars.registerHelper "avatar", (userId) ->
+UI.registerHelper "avatar", (userId) ->
   profile = userProfile(userId)
   if not userId? or not profile
     '/img/anonymous2.png'
@@ -31,22 +31,22 @@ Handlebars.registerHelper "avatar", (userId) ->
   else
     '/img/anonymous.png'
 
-Handlebars.registerHelper "name", (userId) ->
+UI.registerHelper "name", (userId) ->
   userProfile(userId)?.name || 'someone'
 
-Handlebars.registerHelper "firstname", (userId) ->
+UI.registerHelper "firstname", (userId) ->
   userProfile(userId)?.firstname || 'someone'
 
-Handlebars.registerHelper "domain", ->
+UI.registerHelper "domain", ->
   Meteor.user()?.domain
 
-Handlebars.registerHelper "firstnameSelectedUser", ->
+UI.registerHelper "firstnameSelectedUser", ->
   userProfile(Session.get('selectedUserId'))?.firstname
 
-Handlebars.registerHelper "notPartOfYet", ->
+UI.registerHelper "notPartOfYet", ->
   not @copies or not _.contains(_.pluck(@copies, 'userId'), Meteor.userId())
 
-Handlebars.registerHelper "categorySymbol", ->
+UI.registerHelper "categorySymbol", ->
   if @category is 'read'
     'book'
   else if @category is 'attend'
@@ -54,30 +54,30 @@ Handlebars.registerHelper "categorySymbol", ->
   else
     'question-circle'
 
-Handlebars.registerHelper "liker", ->
+UI.registerHelper "liker", ->
   ({userId: userId} for userId in _.uniq(_.pluck(@likes, 'userId')))
 
-Handlebars.registerHelper "commenters", ->
+UI.registerHelper "commenters", ->
   ({userId: userId} for userId in _.uniq(_.pluck(@comments, 'userId')))
 
-Handlebars.registerHelper "commentersCount", ->
+UI.registerHelper "commentersCount", ->
   _.uniq(_.pluck(@comments, 'userId')).length
 
-Handlebars.registerHelper "commentsList", ->
+UI.registerHelper "commentsList", ->
   _.sortBy(@comments, (c) -> - c.createdAt)
 
-Handlebars.registerHelper "likedByMe", ->
+UI.registerHelper "likedByMe", ->
   _.contains(_.pluck(@likes, 'userId'), Meteor.userId())
 
-Handlebars.registerHelper "unseenNotificationCount", ->
+UI.registerHelper "unseenNotificationCount", ->
   Notifications.find({seen: false}).count()
 
-Handlebars.registerHelper "isSlackNovice", ->
+UI.registerHelper "isSlackNovice", ->
   not Meteor.user()?.profile.numSlack or Meteor.user().profile.numSlack < 4
 
-Handlebars.registerHelper "hasOptedOutOfFeedback", ->
+UI.registerHelper "hasOptedOutOfFeedback", ->
   userId = if typeof arguments[0] is "string" then arguments[0] else Session.get('selectedUserId')
   userProfile(userId)?.noFeedback
 
-Handlebars.registerHelper "isNumber", (number) ->
+UI.registerHelper "isNumber", (number) ->
   _.isNumber(number) and not _.isNaN(number)

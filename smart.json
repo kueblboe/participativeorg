@@ -1,9 +1,0 @@
-{
-  "packages": {
-    "mixpanel-light": {},
-    "iron-router": {},
-    "livestamp": {},
-    "moment": {},
-    "gravatar": {}
-  }
-}
