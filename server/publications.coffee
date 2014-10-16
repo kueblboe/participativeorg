@@ -28,7 +28,7 @@ Meteor.publish "feedback", (userId, year) ->
       Feedback.find({userId: @userId, receiver: userId, createdAt: { $gte: startOfPreviousYear(year), $lte: endOfNextYear(year) } })
 
 Meteor.publish "satisfaction", (month) ->
-  if month
+  if month and @userId
     Satisfaction.find({domain: Meteor.users.findOne(@userId).domain, month: {$in: [previousMonth(month), month, nextMonth(month)]}}, {fields: {userId: 0}})
 
 Meteor.publish "coworkers", ->
