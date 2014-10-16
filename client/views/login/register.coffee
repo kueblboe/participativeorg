@@ -1,3 +1,9 @@
+Session.set('verification-email-sent', false)
+
+Template.register.helpers
+  sent: ->
+    Session.get('verification-email-sent')
+
 Template.register.events
   "submit #register-form": (e, t) ->
     e.preventDefault()
@@ -6,7 +12,10 @@ Template.register.events
     
     Accounts.createUser { email: email, password: password}, (error) ->
       if error
-        @throwError error.reason
+        if error.error is "unverified email"
+          Session.set('verification-email-sent', true)
+        else
+          @throwError error.reason
       else
         Router.go 'colleagues'
     false

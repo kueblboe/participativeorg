@@ -10,12 +10,23 @@ Router.configure
     footer:
       to: 'footer'
 
+AccountController = RouteController.extend(
+  verifyEmail: ->
+    Accounts.verifyEmail @params.token, ->
+      Router.go "/colleagues"
+)
+
 Router.map ->
   @route 'home',
     path: '/'
 
   @route 'login'
   @route 'register'
+
+  @route "verifyEmail",
+    controller: AccountController
+    path: "/verify-email/:token"
+    action: "verifyEmail"
 
   @route 'recovery',
     path: '/recovery/:token?',
@@ -77,6 +88,8 @@ requireLogin = ->
   unless Meteor.user()
     if Meteor.loggingIn()
       @render @loadingTemplate
+    else if this.path in ["/login", "/register", "/recovery"]
+      # don't show login alert if on login page
     else
       @render "accessDenied", {to: 'status'}
 
@@ -89,4 +102,3 @@ Router.onRun ->
   Session.set('selectedUserId', @params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
   Session.set('selectedYear', parseInt(@params.year) || Session.get('selectedYear') || moment().year())
   Session.set('selectedMonth', parseInt(@params.month) || Session.get('selectedMonth') || month())
-
