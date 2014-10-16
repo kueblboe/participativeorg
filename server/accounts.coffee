@@ -4,9 +4,6 @@ capitalize = (string) ->
 secondLevelDomain = (string) ->
   string.match(/[^\.\@]*\.[a-zA-Z]{2,}$/)[0]
 
-Accounts.config
-  sendVerificationEmail: true
-
 Accounts.emailTemplates.siteName = "participativeorg"
 Accounts.emailTemplates.from = "Manuel <manuel@qualityswdev.com>"
 Accounts.emailTemplates.resetPassword.text = (user, url) ->
@@ -46,5 +43,6 @@ Accounts.onCreateUser (options, user) ->
 
 Accounts.validateLoginAttempt (attempt) ->
   if attempt.user and attempt.user.emails and not attempt.user.emails[0].verified
-    throw new Meteor.Error("unverified email", "We need you to verify your email address before we can let you in. Please check your email.")
+    Accounts.sendVerificationEmail(attempt.user._id)
+    throw new Meteor.Error("unverified email", "We need you to verify your email address before we can let you in. We just sent you an email. Please check your email inbox and follow the link in the email.")
   true
