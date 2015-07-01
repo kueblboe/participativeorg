@@ -11,10 +11,10 @@ showdown
 email
 accounts-password
 accounts-base
-mrt:moment@2.6.0
 tmeasday:gravatar@0.0.4
 iron:router
 percolatestudio:percolatestudio-mixpanel
 spacebars
 meteor-platform
-
+copleykj:livestamp
+momentjs:moment
