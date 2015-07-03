@@ -5,15 +5,4 @@
       <strong><a href="{{pathFor 'slackNew'}}" class="long">Add some slack now.</a></strong>
     {{/if}}
   </div>
-  <div id="others-slack" class="message-box">
-    <img id="point-right" src="/img/arrow-point-right.png">
-    <div class="well">
-      <div><strong>Check out other people's slack.</strong></div>
-      <div>You can only see people within the</div>
-      <div>same domain as your own email.</div>
-      {{#if selectedSelf}}
-        <div><a href="{{pathFor 'slackNew'}}">Or add your own.</a></div>
-      {{/if}}
-    </div>
-  </div>
 </template>
