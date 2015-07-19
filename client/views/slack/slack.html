@@ -3,6 +3,7 @@
     {{#if isSlackNovice}}
       {{> slackHomeAlert}}
     {{/if}}
+
     {{#if hasSlackEvents}}
       {{#if hasGoals}}
         {{#each goals}}
@@ -11,13 +12,11 @@
       {{else}}
         {{> slackGoalAdd}}
       {{/if}}
-    {{/if}}
-
-    {{#if hasSlackEvents}}
       {{> slackSummary}}
     {{else}}
       {{> slackEmpty}}
     {{/if}}
+
   {{/if}}
 
   <div id="slack" class="list">
