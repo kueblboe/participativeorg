@@ -17,7 +17,7 @@ Template.slackEvent.events
 
   'click .coworker': (e) ->
     e.preventDefault()
-    Session.set('selectedUserId', @userId)
+    Router.go 'slackUser', {userId: @userId, year: moment(@date).year()}
 
 Template.slackEvent.rendered = ->
   if _.contains((Session.get('activeSlack') || []), @data._id)

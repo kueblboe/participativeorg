@@ -10,11 +10,15 @@
       {{#if url}}
       <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
       {{/if}}
-      <div class="copies">
-        {{#each copies}}
-          <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
-        {{/each}}
-      </div>
+      <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
+      {{#if copies}}
+        <span class="copies">
+          |
+          {{#each copies}}
+            <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
+          {{/each}}
+        </span>
+      {{/if}}
       <div class="actions">
         {{> likeLinks}}
         <span>
