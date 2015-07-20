@@ -2,11 +2,11 @@
   <div id="{{_id}}" class="item {{category}} {{unconfirmed}}">
     <a href="#" class="background-link"></a>
     <i class="watermark fa fa-3x fa-{{categorySymbol}} hidden-print"></i>
-    <b>{{title}}</b>
+    <b>{{{title}}}</b>
     {{> slackTags}}
-    <div class="preview">{{preview description}}</div>
+    <div class="preview">{{{preview description}}}</div>
     <div class="details">
-      <div>{{#markdown}}{{description}}{{/markdown}}</div>
+      <div>{{#markdown}}{{{description}}}{{/markdown}}</div>
       {{#if url}}
       <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
       {{/if}}

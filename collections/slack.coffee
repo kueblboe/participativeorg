@@ -39,6 +39,7 @@ Meteor.methods(
     slack = pickWhitelistedAttributes(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking", "ignoreEffort", "ignoreCost")
     slack = _.extend slack,
       indicatedBy: undefined
+      domain: Meteor.user().domain
 
     changes = upsertSlackWithCopies(slack, slackAttributes)
     slackId = changes.insertedId || slackAttributes._id

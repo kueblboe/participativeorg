@@ -39,7 +39,7 @@ Template.colleague.events
   'click a.slack': (e) ->
     e.preventDefault()
     Session.set('selectedUserId', @_id)
-    Router.go 'slack'
+    Router.go 'slackUser', {userId: @_id, year: moment().year()}
 
   'click a.profile': (e) ->
     e.preventDefault()

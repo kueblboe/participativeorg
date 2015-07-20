@@ -38,6 +38,11 @@ Router.map ->
     data: {date: new Date().toJSON().slice(0,10), category: 'other'}
 
   @route 'slack',
+    template: 'slackOverview'
+
+  @route 'slackUser',
+    path: 'slack/user/:userId/:year',
+    template: 'slack',
     waitOn: -> Meteor.subscribe("slack", Session.get('selectedUserId'), Session.get('selectedYear')) if Meteor.user()
     data: -> {year: Session.get('selectedYear')}
 

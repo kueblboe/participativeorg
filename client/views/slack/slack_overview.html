@@ -1,0 +1,27 @@
+<template name="slackOverview">
+  {{#if currentUser}}
+    {{#if isSlackNovice}}
+      {{> slackHomeAlert}}
+    {{/if}}
+
+    <input type="search" id="search-box" class="form-control" placeholder="Search slack..." autofocus>
+    <div id="search-meta">
+      {{#if isLoading}}
+        searching ...
+      {{/if}}
+    </div>
+
+    <!-- {{> slackFilter}} -->
+
+  {{/if}}
+
+  <div id="slack" class="list">
+    {{#each slackEvents}}
+      {{> slackEvent}}
+    {{/each}}
+  </div>
+
+  {{#if isSlackNovice}}
+    {{> slackMotivation}}
+  {{/if}}
+</template>

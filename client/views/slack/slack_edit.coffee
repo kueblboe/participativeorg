@@ -28,12 +28,13 @@ Template.slackEdit.helpers
 Template.slackEdit.events
   "submit form": (e) ->
     e.preventDefault()
+    date = new Date($(e.target).find("#date").val())
     slackProperties =
       _id: @_id
       title: $(e.target).find("#title").val()
       description: $(e.target).find("#description").val()
       category: $(e.target).find("#category .active input").val()
-      date: new Date($(e.target).find("#date").val())
+      date: date
       effort: parseInt($(e.target).find("#effort").val(), 10)
       cost: parseInt($(e.target).find("#cost").val(), 10)
       url: $(e.target).find("#url").val()
@@ -48,7 +49,7 @@ Template.slackEdit.events
         throwError error.reason
       else
         track('upsert slack', { 'category': slackProperties.category })
-        Router.go "slack"
+        Router.go "slackUser", {userId: Meteor.userId, year: moment(date).year()}
 
   "click .delete": (e) ->
     e.preventDefault()
@@ -58,7 +59,7 @@ Template.slackEdit.events
           throwError error.reason
         else
           track('remove slack')
-          Router.go "slack"
+          Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}
 
   "click .dropdown-menu-form": (e) ->
     e.stopPropagation()

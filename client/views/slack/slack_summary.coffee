@@ -54,14 +54,14 @@ Template.slackSummary.events
 
   'click #next-year': (e) ->
     e.preventDefault()
-    Session.set('selectedYear', parseInt(@year) + 1)
+    Router.go 'slackUser', {userId: Session.get('selectedUserId'), year: parseInt(@year) + 1}
 
   'click #last-year': (e) ->
     e.preventDefault()
-    Session.set('selectedYear', parseInt(@year) - 1)
+    Router.go 'slackUser', {userId: Session.get('selectedUserId'), year: parseInt(@year) - 1}
 
   'click #permalink': (e) ->
-    window.prompt("Copy this link to share this page with others.", $(e.target).parent('#permalink').addBack('#permalink').attr('href'))
+    window.prompt("Copy this link to share this page with others.", window.location.href)
 
   'click #complete-year': (e) ->
     e.preventDefault()
