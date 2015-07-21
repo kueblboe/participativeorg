@@ -11,17 +11,17 @@ Template.slackGoalEdit.events
         if error
           throwError error.reason
         else
-          Router.go "slack"
+          Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}
     else
       Meteor.call "addGoal", goalProperties, (error, id) ->
         if error
           throwError error.reason
         else
           track('add goal', { 'date': goalProperties.date })
-          Router.go "slack"
+          Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}
 
   "click .delete": (e) ->
     e.preventDefault()
     if confirm("Delete this goal?")
       Goals.remove @_id
-      Router.go "slack"
+      Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}
