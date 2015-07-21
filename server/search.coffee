@@ -4,19 +4,26 @@ buildRegExp = (searchText) ->
   fullExp = exps.join('') + '.+'
   new RegExp(fullExp, 'i')
 
-SearchSource.defineSource 'slack', (searchText, options) ->
-  options =
+SearchSource.defineSource 'slack', (searchText, options = {}) ->
+  options = _.defaults options,
     sort: date: -1
     limit: 20
+
+  selector = {domain: Meteor.user().domain}
+  if options.sort.ranking
+    selector = {$and: [{ranking: {$gte: 0}}, selector]}
+
+  if options.filter
+    selector = {$and: [{category: options.filter}, selector]}
+
   if searchText
     regExp = buildRegExp(searchText)
     selector = {$and: [
-      {domain: Meteor.user().domain},
+      selector,
       {$or: [
         {title: regExp},
         {description: regExp}
       ]}
     ]}
-    Slack.find(selector, options).fetch()
-  else
-    Slack.find({domain: Meteor.user().domain}, options).fetch()
+
+  Slack.find(selector, options).fetch()

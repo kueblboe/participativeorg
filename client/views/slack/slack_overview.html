@@ -5,13 +5,24 @@
     {{/if}}
 
     <input type="search" id="search-box" class="form-control" placeholder="Search slack..." autofocus>
-    <div id="search-meta">
-      {{#if isLoading}}
-        searching ...
-      {{/if}}
-    </div>
 
-    <!-- {{> slackFilter}} -->
+    <h4>
+      <span id="sort">
+        {{#if sortAsc}}<i class="fa fa-sort-amount-asc" title="sort"></i>{{/if}}
+        {{#if sortDesc}}<i class="fa fa-sort-amount-desc" title="sort"></i>{{/if}}
+        <a href="#" id="sort-date" class="label label-default"><i class="fa fa-calendar"></i></a>
+        <a href="#" id="sort-cost" class="label label-default">€</a>
+        <a href="#" id="sort-effort" class="label label-default">h</a>
+        <a href="#" id="sort-ranking" class="label label-default"><i class="fa fa-star"></i></a>
+      </span>
+      <span>|</span>
+      <span id="filter">
+        <i class="fa fa-filter" title="filter"></i>
+        <a href="#" id="filter-attend" class="label label-default"><i class="fa fa-users"></i></a>
+        <a href="#" id="filter-read" class="label label-default"><i class="fa fa-book"></i></a>
+        <a href="#" id="filter-other" class="label label-default"><i class="fa fa-question-circle"></i></a>
+      </span>
+    </h4>
 
   {{/if}}
 

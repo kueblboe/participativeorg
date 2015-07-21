@@ -1,5 +1,33 @@
 SlackSearch = new SearchSource('slack', ['title', 'description'], {keepHistory: 1000 * 60 * 5, localSearch: true})
 
+setOrToggleSortOrder = (sortBy, groupId, labelId) ->
+  if Session.equals('slackSortBy', sortBy)
+    Session.set('slackSortOrder', -Session.get('slackSortOrder'))
+  else
+    Session.set('slackSortBy', sortBy)
+  sort = {}
+  sort[Session.get('slackSortBy')] = Session.get('slackSortOrder')
+  Session.set('slackSort', sort)
+  highlightLabel(groupId, labelId)
+
+setFilter = (filterBy, groupId, labelId) ->
+  if Session.equals('slackFilterBy', filterBy)
+    Session.set('slackFilterBy', undefined)
+    removeHighlightLabel(groupId)
+  else
+    Session.set('slackFilterBy', filterBy)
+    highlightLabel(groupId, labelId)
+
+removeHighlightLabel = (groupId) ->
+  $("#{groupId} a").removeClass('label-primary')
+
+highlightLabel = (groupId, labelId) ->
+  removeHighlightLabel(groupId)
+  $("#{labelId}").addClass('label-primary')
+
+Tracker.autorun ->
+  SlackSearch.search Session.get('slackSearchTerm'), {sort: Session.get('slackSort'), filter: Session.get('slackFilterBy')}
+
 Template.slackOverview.helpers
   hasSlackEvents: ->
     SlackSearch.getData().length > 0
@@ -8,16 +36,53 @@ Template.slackOverview.helpers
     SlackSearch.getData
       transform: (matchText, regExp) ->
         matchText.replace regExp, '<u>$&</u>'
-      sort: date: -1
+      sort: Session.get('slackSort')
 
   isLoading: ->
     SlackSearch.getStatus().loading
 
-Template.slackOverview.rendered = ->
-  SlackSearch.search ''
-  return
+  sortAsc: ->
+    Session.get('slackSortOrder') > 0
 
-Template.slackOverview.events 'keyup #search-box': _.throttle(((e) ->
-  text = $(e.target).val().trim()
-  SlackSearch.search text
-), 200)
+  sortDesc: ->
+    Session.get('slackSortOrder') < 0
+
+Template.slackOverview.rendered = ->
+  Session.set('slackSearchTerm', '')
+  Session.setDefault('slackSortBy', 'date')
+  Session.setDefault('slackSortOrder', -1)
+  highlightLabel('#sort', "#sort-#{Session.get('slackSortBy')}")
+
+Template.slackOverview.events
+  'keyup #search-box': _.throttle(((e) ->
+    text = $(e.target).val().trim()
+    Session.set('slackSearchTerm', text)
+  ), 200)
+
+  'click #sort-date': (e) ->
+    e.preventDefault()
+    setOrToggleSortOrder('date', '#sort', '#sort-date')
+
+  'click #sort-cost': (e) ->
+    e.preventDefault()
+    setOrToggleSortOrder('cost', '#sort', '#sort-cost')
+
+  'click #sort-effort': (e) ->
+    e.preventDefault()
+    setOrToggleSortOrder('effort', '#sort', '#sort-effort')
+
+  'click #sort-ranking': (e) ->
+    e.preventDefault()
+    setOrToggleSortOrder('ranking', '#sort', '#sort-ranking')
+
+  'click #filter-attend': (e) ->
+    e.preventDefault()
+    setFilter('attend', '#filter', '#filter-attend')
+
+  'click #filter-read': (e) ->
+    e.preventDefault()
+    setFilter('read', '#filter', '#filter-read')
+
+  'click #filter-other': (e) ->
+    e.preventDefault()
+    setFilter('other', '#filter', '#filter-other')
