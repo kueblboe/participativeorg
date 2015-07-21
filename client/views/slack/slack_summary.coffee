@@ -1,8 +1,13 @@
-setOrToggleSortOrder = (sortBy) ->
+setOrToggleSortOrder = (sortBy, labelId) ->
   if Session.get('slackSortBy') is sortBy
     Session.set('slackSortOrder', -Session.get('slackSortOrder'))
   else
     Session.set('slackSortBy', sortBy)
+  highlightLabel(labelId)
+
+highlightLabel = (labelId) ->
+  $("#sort a").removeClass('label-primary')
+  $("#{labelId}").addClass('label-primary')
 
 Template.slackSummary.helpers
   totalCost: ->
@@ -32,18 +37,24 @@ Template.slackSummary.helpers
   completionId: ->
     Completions.findOne()._id
 
+  sortAsc: ->
+    Session.get('slackSortOrder') > 0
+
+  sortDesc: ->
+    Session.get('slackSortOrder') < 0
+
 Template.slackSummary.events
   'click #year': (e) ->
     e.preventDefault()
-    setOrToggleSortOrder('date')
+    setOrToggleSortOrder('date', '#year')
 
   'click #total-cost': (e) ->
     e.preventDefault()
-    setOrToggleSortOrder('cost')
+    setOrToggleSortOrder('cost', '#total-cost')
 
   'click #total-effort': (e) ->
     e.preventDefault()
-    setOrToggleSortOrder('effort')
+    setOrToggleSortOrder('effort', '#total-effort')
 
   'dblclick #total-effort': (e) ->
     e.preventDefault()

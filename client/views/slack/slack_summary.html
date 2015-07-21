@@ -1,8 +1,12 @@
 <template name="slackSummary">
   <h4 class="summary">
-    <a href="#" id="year" class="label label-default">{{year}}</a>
-    <a href="#" id="total-cost" class="label label-default">{{totalCost}} €</a>
-    <a href="#" id="total-effort" class="label label-default">{{totalEffort}} h</a>
+    <span id="sort">
+      {{#if sortAsc}}<i class="fa fa-sort-amount-asc" title="sort"></i>{{/if}}
+      {{#if sortDesc}}<i class="fa fa-sort-amount-desc" title="sort"></i>{{/if}}
+      <a href="#" id="year" class="label label-default">{{year}}</a>
+      <a href="#" id="total-cost" class="label label-default">{{totalCost}} €</a>
+      <a href="#" id="total-effort" class="label label-default">{{totalEffort}} h</a>
+    </span>
     <span class="pull-right"><a href="#" id="permalink" class="label label-white secondary-action hidden-print" disabled><i class="fa fa-link"></i></a></span>
     {{#if hasNextSlack}}
       <span class="pull-right"><a href="#" id="next-year" class="label label-white hidden-print" disabled><span class="long">{{nextYear}}</span> <i class="fa fa-step-forward"></i></a></span>
