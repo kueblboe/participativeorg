@@ -6,7 +6,7 @@
       </div>
     {{/if}}
     <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required autofocus>
-    <textarea rows="3" class="form-control" id="description" placeholder="What I am expecting to learn / have learned and might be interesting to my colleagues...">{{description}}</textarea>
+    <textarea rows="3" class="form-control" id="description" placeholder="What did you like? What didn't you like? What did you learn?">{{description}}</textarea>
     {{> markdownNote}}
     <div class="btn-group btn-group-justified" id="category" data-toggle="buttons">
       <label class="btn btn-default {{isActiveCategory 'read'}}">
