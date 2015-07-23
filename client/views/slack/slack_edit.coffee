@@ -49,6 +49,7 @@ Template.slackEdit.events
         throwError error.reason
       else
         track('upsert slack', { 'category': slackProperties.category })
+        SlackSearch.cleanHistory()
         Router.go "slackUser", {userId: Meteor.userId, year: moment(date).year()}
 
   "click .delete": (e) ->

@@ -1,4 +1,4 @@
-SlackSearch = new SearchSource('slack', ['title', 'description'], {keepHistory: 1000 * 60 * 5, localSearch: true})
+@SlackSearch = new SearchSource('slack', ['title', 'description'], {keepHistory: 1000 * 60 * 5, localSearch: true})
 
 setOrToggleSortOrder = (sortBy, groupId, labelId) ->
   if Session.equals('slackSortBy', sortBy)
