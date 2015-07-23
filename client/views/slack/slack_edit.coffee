@@ -62,6 +62,10 @@ Template.slackEdit.events
           track('remove slack')
           Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}
 
+  "click .cancel": (e) ->
+    e.preventDefault()
+    Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}
+
   "click .dropdown-menu-form": (e) ->
     e.stopPropagation()
 

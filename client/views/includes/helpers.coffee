@@ -32,7 +32,7 @@ UI.registerHelper "avatar", (userId) ->
     '/img/anonymous.png'
 
 UI.registerHelper "name", (userId) ->
-  userProfile(userId)?.name || 'someone'
+  "#{userProfile(userId)?.firstname} #{userProfile(userId)?.lastname}" || 'someone'
 
 UI.registerHelper "firstname", (userId) ->
   userProfile(userId)?.firstname || 'someone'

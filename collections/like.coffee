@@ -15,7 +15,7 @@ Meteor.methods(
   addRemoveLike: (likeAttributes) ->
     throw new Meteor.Error(401, "You need to login to like something") unless Meteor.user()
     throw new Meteor.Error(422, "Can't figure out what you are liking") unless likeAttributes.likedId
-    
+
     like =
       userId: Meteor.userId()
       createdAt: new Date()
@@ -28,7 +28,7 @@ Meteor.methods(
     Collection.update liked._id, { $set: {likes: updateLikeList(liked, like)} }, (error) ->
       unless error or alreadyLiked(liked)
         if Collection._name is 'slack'
-          updateLatestActivity('thumbs-up', "liked a slack activity", "#slack/#{liked._id}?userId=#{liked.userId}")
+          updateLatestActivity('thumbs-up', "liked a slack activity", "slack/#{liked._id}?userId=#{liked.userId}")
           createNotification({ slackId: liked._id, ownerUserId: liked.userId, userId: liked.userId, action: "likes your" })
         else if Collection._name is 'goals'
           updateLatestActivity('thumbs-up', "liked a goal", "slack/goal/#{liked._id}?userId=#{liked.userId}")

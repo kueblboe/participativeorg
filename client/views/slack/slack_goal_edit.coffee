@@ -25,3 +25,7 @@ Template.slackGoalEdit.events
     if confirm("Delete this goal?")
       Goals.remove @_id
       Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}
+
+  "click .cancel": (e) ->
+    e.preventDefault()
+    Router.go "slackUser", {userId: Meteor.userId, year: Session.get('selectedYear')}

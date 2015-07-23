@@ -2,6 +2,10 @@
   <div id="{{_id}}" class="goal well">
     <i class="watermark fa fa-3x fa-flag-checkered hidden-print"></i>
     <span class="description">{{#markdown}}{{description}}{{/markdown}}</span>
+    <div class="actions">
+      {{> likeLinks}}
+      {{#if owns}}<a href="{{pathFor 'slackGoalEdit'}}"><i class="fa fa-pencil"></i> Edit</a>{{/if}}
+    </div>
   </div>
 
   <ul id="comments" class="list">
