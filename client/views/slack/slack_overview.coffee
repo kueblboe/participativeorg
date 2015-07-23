@@ -5,9 +5,6 @@ setOrToggleSortOrder = (sortBy, groupId, labelId) ->
     Session.set('slackSortOrder', -Session.get('slackSortOrder'))
   else
     Session.set('slackSortBy', sortBy)
-  sort = {}
-  sort[Session.get('slackSortBy')] = Session.get('slackSortOrder')
-  Session.set('slackSort', sort)
   highlightLabel(groupId, labelId)
 
 setFilter = (filterBy, groupId, labelId) ->
@@ -24,6 +21,11 @@ removeHighlightLabel = (groupId) ->
 highlightLabel = (groupId, labelId) ->
   removeHighlightLabel(groupId)
   $("#{labelId}").addClass('label-primary')
+
+Tracker.autorun ->
+  sort = {}
+  sort[Session.get('slackSortBy')] = Session.get('slackSortOrder')
+  Session.set('slackSort', sort)
 
 Tracker.autorun ->
   SlackSearch.search Session.get('slackSearchTerm'), {sort: Session.get('slackSort'), filter: Session.get('slackFilterBy')}
@@ -58,6 +60,14 @@ Template.slackOverview.events
     text = $(e.target).val().trim()
     Session.set('slackSearchTerm', text)
   ), 200)
+
+  'click #sort-asc': (e) ->
+    e.preventDefault()
+    Session.set('slackSortOrder', -1)
+
+  'click #sort-desc': (e) ->
+    e.preventDefault()
+    Session.set('slackSortOrder', 1)
 
   'click #sort-date': (e) ->
     e.preventDefault()
