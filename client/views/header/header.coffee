@@ -1,6 +1,6 @@
 Template.header.helpers
   activeRouteClass: (args..., hash) ->
-    if _.any(args, (name) -> Router.current().route.name is name)
+    if _.any(args, (name) -> Router.current().route.getName() is name)
       'active'
 
   users: ->
