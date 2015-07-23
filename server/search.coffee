@@ -22,7 +22,8 @@ SearchSource.defineSource 'slack', (searchText, options = {}) ->
       selector,
       {$or: [
         {title: regExp},
-        {description: regExp}
+        {description: regExp},
+        {userName: regExp}
       ]}
     ]}
 

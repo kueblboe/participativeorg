@@ -40,6 +40,7 @@ Meteor.methods(
     slack = _.extend slack,
       indicatedBy: undefined
       domain: Meteor.user().domain
+      userName: "#{Meteor.user().profile.firstname} #{Meteor.user().profile.lastname}"
 
     changes = upsertSlackWithCopies(slack, slackAttributes)
     slackId = changes.insertedId || slackAttributes._id
