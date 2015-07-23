@@ -4,6 +4,10 @@
       {{> slackHomeAlert}}
     {{/if}}
 
+    <div id="owner">
+      {{> colleague}}
+    </div>
+
     {{#if hasSlackEvents}}
       {{#if hasGoals}}
         {{#each goals}}

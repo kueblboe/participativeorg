@@ -30,6 +30,9 @@ Template.colleague.helpers
     if cellIds = userProfile(@_id)?.cells
       cellNames(cellIds)
 
+  onSlackPage: ->
+    Router.current().route.getName() is 'slackUser'
+
 Template.colleague.events
   'click a.feedback': (e) ->
     e.preventDefault()

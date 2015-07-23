@@ -44,7 +44,7 @@ Router.map ->
     path: 'slack/user/:userId/:year',
     template: 'slack',
     waitOn: -> Meteor.subscribe("slack", Session.get('selectedUserId'), Session.get('selectedYear')) if Meteor.user()
-    data: -> {year: Session.get('selectedYear')}
+    data: -> Meteor.users.findOne(Session.get('selectedUserId'))
 
   @route 'slackPage',
     path: '/slack/:_id',

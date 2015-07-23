@@ -9,24 +9,28 @@ highlightLabel = (labelId) ->
   $("#sort a").removeClass('label-primary')
   $("#{labelId}").addClass('label-primary')
 
+year = -> Session.get('selectedYear')
+
 Template.slackSummary.helpers
+  year: -> year()
+
   totalCost: ->
-    Slack.find({ignoreCost: { $not: true }, date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).fetch().map((s) -> s.cost).reduce(((c, sum) -> c + sum), 0)
+    Slack.find({ignoreCost: { $not: true }, date: { $gte: startOfYear(year()), $lte: endOfYear(year()) } }).fetch().map((s) -> s.cost).reduce(((c, sum) -> c + sum), 0)
 
   totalEffort: ->
-    Slack.find({ignoreEffort: { $not: true }, date: { $gte: startOfYear(@year), $lte: endOfYear(@year) } }).fetch().map((s) -> s.effort).reduce(((e, sum) -> e + sum), 0)
+    Slack.find({ignoreEffort: { $not: true }, date: { $gte: startOfYear(year()), $lte: endOfYear(year()) } }).fetch().map((s) -> s.effort).reduce(((e, sum) -> e + sum), 0)
 
   nextYear: ->
-    parseInt(@year) + 1
+    parseInt(year()) + 1
 
   previousYear: ->
-    parseInt(@year) - 1
+    parseInt(year()) - 1
 
   hasNextSlack: ->
-    Slack.find({date: { $gte: startOfYear(@year + 1), $lte: endOfYear(@year + 1) } }).count() > 0
+    Slack.find({date: { $gte: startOfYear(year() + 1), $lte: endOfYear(year() + 1) } }).count() > 0
 
   hasPreviousSlack: ->
-    Slack.find({date: { $gte: startOfYear(@year - 1), $lte: endOfYear(@year - 1) } }).count() > 0
+    Slack.find({date: { $gte: startOfYear(year() - 1), $lte: endOfYear(year() - 1) } }).count() > 0
 
   userId: ->
     Session.get('selectedUserId')
@@ -65,22 +69,22 @@ Template.slackSummary.events
 
   'click #next-year': (e) ->
     e.preventDefault()
-    Router.go 'slackUser', {userId: Session.get('selectedUserId'), year: parseInt(@year) + 1}
+    Router.go 'slackUser', {userId: Session.get('selectedUserId'), year: parseInt(year()) + 1}
 
   'click #last-year': (e) ->
     e.preventDefault()
-    Router.go 'slackUser', {userId: Session.get('selectedUserId'), year: parseInt(@year) - 1}
+    Router.go 'slackUser', {userId: Session.get('selectedUserId'), year: parseInt(year()) - 1}
 
   'click #permalink': (e) ->
     window.prompt("Copy this link to share this page with others.", window.location.href)
 
   'click #complete-year': (e) ->
     e.preventDefault()
-    Meteor.call "completeYear", {year: @year}, (error, id) ->
+    Meteor.call "completeYear", {year: year()}, (error, id) ->
       if error
         throwError error.reason
       else
-        track('complete year', { 'year': @year })
+        track('complete year', { 'year': year() })
 
   'click .uncomplete-year': (e) ->
     e.preventDefault()
