@@ -1,0 +1,33 @@
+@import 'variables';
+
+@stylight-1: #8700ff;
+@stylight-2: darken(@stylight-1, 10%);
+@stylight-bg: fadeout(@stylight-1, 70%);
+
+body.stylight-com {
+  .jumbotron {
+    border: 4px solid @stylight-bg;
+  }
+
+  a.btn, button:not(.navbar-toggle):not(.close):not(.inline) {
+
+    &[type="submit"], &.btn-main {
+      border-color: @stylight-1;
+    }
+  }
+  .label-primary, .label-primary[href]:focus {
+    background-color: @stylight-1;
+
+    &[href]:hover {
+      background-color: @stylight-2;
+    }
+  }
+
+  #me {
+     border: 2px solid @stylight-bg !important;
+  }
+
+  .goal {
+    border: 2px solid @stylight-bg !important;
+  }
+}
