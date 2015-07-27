@@ -16,8 +16,8 @@
           {{#if currentUser}}
             <ul id="main-nav" class="nav navbar-nav">
               <li class="{{activeRouteClass 'colleagues'}}"><a href="{{pathFor 'colleagues'}}"><i class="fa fa-users"></i> Colleagues</a></li>
-              <li class="{{activeRouteClass 'feedback'}}"><a href="{{pathFor 'feedback'}}"><i class="fa fa-refresh"></i> Feedback</a></li>
-              <li class="{{activeRouteClass 'satisfaction'}}"><a href="{{pathFor 'satisfaction'}}"><i class="fa fa-smile-o"></i> Satisfaction</a></li>
+              <li id="feedback-nav" class="{{activeRouteClass 'feedback'}}"><a href="{{pathFor 'feedback'}}"><i class="fa fa-refresh"></i> Feedback</a></li>
+              <li id="satisfaction-nav" class="{{activeRouteClass 'satisfaction'}}"><a href="{{pathFor 'satisfaction'}}"><i class="fa fa-smile-o"></i> Satisfaction</a></li>
               <li class="{{activeRouteClass 'slack' 'slackUser' 'slackEdit' 'slackPage' 'slackNew' 'slackCopy' 'slackGoalNew' 'slackGoalPage' 'slackGoalEdit'}}"><a href="{{pathFor 'slack'}}"><i class="fa fa-flask"></i> Slack</a></li>
             </ul>
           {{/if}}
