@@ -1,5 +1,7 @@
 <template name="colleagueSummary">
   <h4 class="summary">
+    {{#if sortAsc}}<a href="#" id="sort-asc"><i class="fa fa-sort-amount-asc" title="sort"></i></a>{{/if}}
+    {{#if sortDesc}}<a href="#" id="sort-desc"><i class="fa fa-sort-amount-desc" title="sort"></i></a>{{/if}}
     <a href="#" id="alphabetical" class="label label-default">A-Z</a>
     <a href="#" id="activity" class="label label-default">Activity</a>
   </h4>

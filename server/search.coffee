@@ -28,3 +28,22 @@ SearchSource.defineSource 'slack', (searchText, options = {}) ->
     ]}
 
   Slack.find(selector, options).fetch()
+
+SearchSource.defineSource 'colleagues', (searchText, options = {}) ->
+  options = _.defaults options,
+    sort: {'profile.firstname': 1, 'profile.lastname': 1}
+    limit: 500
+
+  selector = {domain: Meteor.user().domain}
+
+  if searchText
+    regExp = buildRegExp(searchText)
+    selector = {$and: [
+      selector,
+      {$or: [
+        {'profile.firstname': regExp},
+        {'profile.lastname': regExp}
+      ]}
+    ]}
+
+  Meteor.users.find(selector, options).fetch()

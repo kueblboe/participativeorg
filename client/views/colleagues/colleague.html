@@ -3,7 +3,7 @@
     <i class="watermark fa fa-3x fa-{{relationSymbol}} hidden-print"></i>
     <img class="img-circle main-avatar" src="{{avatar _id}}">
     <div class="details">
-      <strong>{{profile.firstname}} {{profile.lastname}}</strong>
+      <strong>{{{profile.firstname}}} {{{profile.lastname}}}</strong>
       <div class="tags">
         {{#if latestFeedbackDate}}
           {{#if isNumber latestFeedbackRecommend}}<span><i class="fa fa-star"></i> {{latestFeedbackRecommend}}</span>{{/if}}
