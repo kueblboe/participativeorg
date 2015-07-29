@@ -1,8 +1,10 @@
 <template name="slackOverview">
   {{#if currentUser}}
     {{#if isSlackNovice}}
-      {{> slackHomeAlert}}
+      {{> slackMotivation}}
+      <div id="explanation-note" class="secondary">These explanations will move to the bottom of the page once you add 4 slack events of your own.</div>
     {{/if}}
+
 
     <input type="search" id="search-box" class="form-control" placeholder="Search slack..." autofocus>
 
@@ -35,7 +37,7 @@
     {{/each}}
   </div>
 
-  {{#if isSlackNovice}}
+  {{#unless isSlackNovice}}
     {{> slackMotivation}}
-  {{/if}}
+  {{/unless}}
 </template>
