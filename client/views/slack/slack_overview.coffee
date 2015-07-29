@@ -37,7 +37,7 @@ Template.slackOverview.helpers
   slackEvents: ->
     SlackSearch.getData
       transform: (matchText, regExp) ->
-        matchText.replace regExp, '<u>$&</u>'
+        matchText.replace regExp, '<span class="search-text">$&</span>'
       sort: Session.get('slackSort')
 
   isLoading: ->
