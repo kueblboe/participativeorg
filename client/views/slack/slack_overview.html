@@ -2,11 +2,11 @@
   {{#if currentUser}}
     {{#if isSlackNovice}}
       {{> slackMotivation}}
-      <div id="explanation-note" class="secondary">These explanations will move to the bottom of the page once you add 4 slack events of your own.</div>
+      <div id="explanation-note" class="secondary">These explanations will move to the bottom of the page once you add 4 personal development activities of your own.</div>
     {{/if}}
 
 
-    <input type="search" id="search-box" class="form-control" placeholder="Search slack..." autofocus>
+    <input type="search" id="search-box" class="form-control" placeholder="Search personal development..." autofocus>
 
     <h4>
       <span id="sort">
@@ -26,7 +26,7 @@
       </span>
       {{#if isLoading}}<span>{{> spinner}}</span>{{/if}}
       <span class="pull-right">
-        <a class="label label-primary hidden-print" href="{{pathFor 'slackNew'}}"><i class="fa fa-plus"></i> <span class="long">Add slack</span></a>
+        <a class="label label-primary hidden-print" href="{{pathFor 'slackNew'}}"><i class="fa fa-plus"></i> <span class="long">Add activity</span></a>
       </span>
     </h4>
 

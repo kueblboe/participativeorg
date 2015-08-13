@@ -11,7 +11,7 @@ Template.notification.helpers
 
   actedOnItem: ->
     if @slackId
-      "slack activity"
+      "personal development activity"
     else if @goalId
       "goal"
     else if @feedbackId

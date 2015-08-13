@@ -19,7 +19,7 @@ Template.header.events
   'click .coworker': (e) ->
     e.preventDefault()
     Session.set('selectedUserId', @_id)
-    track('view other slack', { 'user': @profile.firstname + " " + @profile.lastname }) unless @_id is Meteor.userId()
+    track('view other personal development', { 'user': @profile.firstname + " " + @profile.lastname }) unless @_id is Meteor.userId()
 
   'click #login-buttons-logout': (e) ->
     Router.go 'home'

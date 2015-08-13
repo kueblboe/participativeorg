@@ -2,7 +2,7 @@
 
 Goals.allow
   update: (userId, goal) ->
-    updateLatestActivity('flag-checkered', 'updated slack goal', "slack/goal/#{goal._id}?userId=#{Meteor.userId()}")
+    updateLatestActivity('flag-checkered', 'updated personal development goal', "pd/goal/#{goal._id}?userId=#{Meteor.userId()}")
     ownsDocument(userId, goal)
   remove: ownsDocument
 
@@ -18,5 +18,5 @@ Meteor.methods(
     goal = pickWhitelistedAttributes(goalAttributes, "description", "date")
 
     Goals.insert goal, (error, id) ->
-      updateLatestActivity('flag-checkered', 'updated slack goal', "slack/goal/#{id}?userId=#{Meteor.userId()}") unless error
+      updateLatestActivity('flag-checkered', 'updated personal development goal', "pd/goal/#{id}?userId=#{Meteor.userId()}") unless error
 )

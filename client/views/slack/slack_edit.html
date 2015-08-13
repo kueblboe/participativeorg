@@ -2,10 +2,10 @@
   <form role="form">
     {{#if indicatedBy}}
       <div class="alert alert-warning">
-        <img class="img-circle avatar" src="{{avatar indicatedBy}}"> {{name indicatedBy}} indicated that you took part in this as well. This is your <strong>personal copy</strong>. You can edit or even delete it. It won't affect other people's slack.
+        <img class="img-circle avatar" src="{{avatar indicatedBy}}"> {{name indicatedBy}} indicated that you took part in this as well. This is your <strong>personal copy</strong>. You can edit or even delete it. It won't affect other people's copies.
       </div>
     {{/if}}
-    <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest slack" required autofocus>
+    <input type="text" class="form-control" id="title" value="{{title}}" placeholder="My latest activity" required autofocus>
     <textarea rows="3" class="form-control" id="description" placeholder="What did you like? What didn't you like? What did you learn?">{{description}}</textarea>
     {{> markdownNote}}
     <div class="btn-group btn-group-justified" id="category" data-toggle="buttons">
@@ -64,7 +64,7 @@
         </span>
       {{/if}}
       {{#if hasCopies}}
-        <div class="notes">This is your personal copy of this slack activity. You can edit or even delete it. It won't affect other people's slack.</div>
+        <div class="notes">This is your personal copy of this personal development activity. You can edit or even delete it. It won't affect other people's copies.</div>
       {{/if}}
     </div>
     {{> editButtons}}

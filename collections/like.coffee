@@ -28,9 +28,9 @@ Meteor.methods(
     Collection.update liked._id, { $set: {likes: updateLikeList(liked, like)} }, (error) ->
       unless error or alreadyLiked(liked)
         if Collection._name is 'slack'
-          updateLatestActivity('thumbs-up', "liked a slack activity", "slack/#{liked._id}?userId=#{liked.userId}")
+          updateLatestActivity('thumbs-up', "liked a personal development activity", "pd/#{liked._id}?userId=#{liked.userId}")
           createNotification({ slackId: liked._id, ownerUserId: liked.userId, userId: liked.userId, action: "likes your" })
         else if Collection._name is 'goals'
-          updateLatestActivity('thumbs-up', "liked a goal", "slack/goal/#{liked._id}?userId=#{liked.userId}")
+          updateLatestActivity('thumbs-up', "liked a goal", "pd/goal/#{liked._id}?userId=#{liked.userId}")
           createNotification({ goalId: liked._id, ownerUserId: liked.userId, userId: liked.userId, action: "likes your" })
 )

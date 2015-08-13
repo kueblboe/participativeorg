@@ -1,6 +1,6 @@
 # participative*org*
 
-This application aims to enable decentralized decision-making within participative organizations by providing transparency about slack, peer ranking, economics and guidelines.
+This application aims to enable decentralized decision-making within participative organizations by providing transparency about personal development, peer ranking, economics and guidelines.
 
 Try it at [participativeorg.meteor.com](http://participativeorg.meteor.com/)
 

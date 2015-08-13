@@ -15,5 +15,5 @@ Meteor.methods(
     completion = pickWhitelistedAttributes(completionAttributes, "year")
 
     Completions.insert completion, (error) ->
-      updateLatestActivity('check', 'marked slack activities as complete', "slack/user/#{Meteor.userId()}/#{completion.year}") unless error
+      updateLatestActivity('check', 'marked personal development activities as complete', "pd/user/#{Meteor.userId()}/#{completion.year}") unless error
 )

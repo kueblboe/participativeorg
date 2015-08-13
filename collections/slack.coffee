@@ -9,13 +9,13 @@ upsertSlackWithCopies = (slack, slackAttributes) ->
   # check if own slack
   if slackAttributes._id
     existingSlack = Slack.findOne(slackAttributes._id)
-    throw new Meteor.Error(422, "Can't update other people's slack") if existingSlack._id and existingSlack.userId isnt Meteor.userId()
+    throw new Meteor.Error(422, "Can't update other people's activities") if existingSlack._id and existingSlack.userId isnt Meteor.userId()
 
   # add / update slack
   changes = Slack.upsert slackAttributes._id, { $set: slack }
 
   slackId = changes.insertedId || slackAttributes._id
-  updateLatestActivity('flask', 'updated slack activities', "slack/#{slackId}?userId=#{Meteor.userId()}")
+  updateLatestActivity('flask', 'updated personal development activities', "pd/#{slackId}?userId=#{Meteor.userId()}")
 
   # update number of slack activities for user when adding slack
   if slack.userId is Meteor.userId()
@@ -33,7 +33,7 @@ upsertSlackWithCopies = (slack, slackAttributes) ->
 
 Meteor.methods(
   upsertSlack: (slackAttributes) ->
-    throw new Meteor.Error(401, "You need to login to add slack") unless Meteor.user()
+    throw new Meteor.Error(401, "You need to login to add an activity") unless Meteor.user()
     throw new Meteor.Error(422, "Please fill in a title") unless slackAttributes.title
 
     slack = pickWhitelistedAttributes(slackAttributes, "title", "description", "category", "date", "effort", "cost", "url", "ranking", "ignoreEffort", "ignoreCost")

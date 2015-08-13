@@ -17,12 +17,12 @@ Meteor.methods(
     Collection.update commented._id, { $set: {comments: (commented.comments || []).concat comment} }, (error) ->
       unless error
         if Collection._name is 'slack'
-          updateLatestActivity('comment-o', 'commented on a slack activity', "slack/#{commented._id}?userId=#{commented.userId}")
+          updateLatestActivity('comment-o', 'commented on a personal development activity', "pd/#{commented._id}?userId=#{commented.userId}")
           createNotification({ slackId: commented._id, ownerUserId: commented.userId, userId: commented.userId, action: "commented on your" })
           for userId in otherCommenters(commented)
             createNotification({ slackId: commented._id, ownerUserId: commented.userId, userId: userId, action: "also commented on" })
         else if Collection._name is 'goals'
-          updateLatestActivity('comment-o', 'commented on a goal', "slack/goal/#{commented._id}?userId=#{commented.userId}")
+          updateLatestActivity('comment-o', 'commented on a goal', "pd/goal/#{commented._id}?userId=#{commented.userId}")
           createNotification({ goalId: commented._id, ownerUserId: commented.userId, userId: commented.userId, action: "commented on your" })
           for userId in otherCommenters(commented)
             createNotification({ goalId: commented._id, ownerUserId: commented.userId, userId: userId, action: "also commented on" })
