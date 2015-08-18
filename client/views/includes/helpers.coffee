@@ -41,7 +41,7 @@ UI.registerHelper "domain", ->
   Meteor.user()?.domain
 
 UI.registerHelper "domainString", ->
-  Meteor.user()?.domain?.replace(/\./g,'-')
+  Meteor.user()?.domain?.replace(/\./g,'-') or Session.get "domainString"
 
 UI.registerHelper "firstnameSelectedUser", ->
   userProfile(Session.get('selectedUserId'))?.firstname

@@ -119,4 +119,5 @@ Router.onRun ->
   Session.set('selectedUserId', @params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
   Session.set('selectedYear', parseInt(@params.year) || Session.get('selectedYear') || moment().year())
   Session.set('selectedMonth', parseInt(@params.month) || Session.get('selectedMonth') || month())
+  Session.set('domainString', @params.query.domain)
   @next()
