@@ -5,11 +5,13 @@ buildRegExp = (searchText) ->
   new RegExp(fullExp, 'i')
 
 SearchSource.defineSource 'slack', (searchText, options = {}) ->
+  domain = Meteor.user()?.domain
+  return [] unless domain
   options = _.defaults options,
     sort: date: -1
     limit: 20
 
-  selector = {domain: Meteor.user()?.domain}
+  selector = {domain: domain}
   if options.sort.ranking
     selector = {$and: [{ranking: {$gte: 0}}, selector]}
 
@@ -30,11 +32,13 @@ SearchSource.defineSource 'slack', (searchText, options = {}) ->
   Slack.find(selector, options).fetch()
 
 SearchSource.defineSource 'colleagues', (searchText, options = {}) ->
+  domain = Meteor.user()?.domain
+  return [] unless domain
   options = _.defaults options,
     sort: {'profile.firstname': 1, 'profile.lastname': 1}
     limit: 500
 
-  selector = {domain: Meteor.user()?.domain}
+  selector = {domain: domain}
 
   if searchText
     regExp = buildRegExp(searchText)
