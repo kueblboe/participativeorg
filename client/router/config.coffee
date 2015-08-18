@@ -2,7 +2,7 @@ Router.configure
   layoutTemplate: 'layout'
   notFoundTemplate: '404'
   loadingTemplate: 'loading'
-  yieldTemplates:
+  yieldRegions:
     header:
       to: 'header'
     errors:
@@ -94,14 +94,15 @@ requireLogin = ->
   unless Meteor.user()
     if Meteor.loggingIn()
       @render @loadingTemplate
-    else if this.path in ["/login", "/register", "/recovery"]
-      # don't show login alert if on login page
     else
+      @render "header", {to: 'header'}
       @render "accessDenied", {to: 'status'}
+      @render "footer", {to: 'footer'}
+      @render "/login"
+  else
+    @next()
 
-Router.onBeforeAction ->
-  requireLogin
-  @next()
+Router.onBeforeAction(requireLogin, {except: ['home', 'login', 'register', 'recovery', 'verifyEmail']})
 
 Router.onBeforeAction ->
   clearErrors
@@ -119,5 +120,5 @@ Router.onRun ->
   Session.set('selectedUserId', @params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
   Session.set('selectedYear', parseInt(@params.year) || Session.get('selectedYear') || moment().year())
   Session.set('selectedMonth', parseInt(@params.month) || Session.get('selectedMonth') || month())
-  Session.set('domainString', @params.query.domain)
+  Session.set('domainString', @params.query.domain) if @params.query.domain
   @next()

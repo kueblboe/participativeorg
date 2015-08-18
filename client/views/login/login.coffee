@@ -3,11 +3,11 @@ Template.login.events
     e.preventDefault()
     email = t.find("#login-email").value
     password = t.find("#login-password").value
-    
+
     Meteor.loginWithPassword email, password, (error) ->
       if error
         @throwError error.reason
-      else
+      else if Router.current().route.getName() is 'login'
         Router.go 'colleagues'
     false
 
@@ -16,5 +16,5 @@ Template.login.events
     Meteor.loginWithGoogle (error) ->
       if error
         @throwError error.reason
-      else
+      else if Router.current().route.getName() is 'login'
         Router.go 'colleagues'
