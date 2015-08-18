@@ -9,7 +9,7 @@ SearchSource.defineSource 'slack', (searchText, options = {}) ->
     sort: date: -1
     limit: 20
 
-  selector = {domain: Meteor.user().domain}
+  selector = {domain: Meteor.user()?.domain}
   if options.sort.ranking
     selector = {$and: [{ranking: {$gte: 0}}, selector]}
 
@@ -34,7 +34,7 @@ SearchSource.defineSource 'colleagues', (searchText, options = {}) ->
     sort: {'profile.firstname': 1, 'profile.lastname': 1}
     limit: 500
 
-  selector = {domain: Meteor.user().domain}
+  selector = {domain: Meteor.user()?.domain}
 
   if searchText
     regExp = buildRegExp(searchText)
