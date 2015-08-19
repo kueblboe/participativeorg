@@ -6,10 +6,12 @@
   </div>
   <input type="search" id="search-box" class="form-control" placeholder="Search colleagues..." autofocus>
   <h4 class="summary">
-    {{#if sortAsc}}<a href="#" id="sort-asc"><i class="fa fa-sort-amount-asc" title="sort"></i></a>{{/if}}
-    {{#if sortDesc}}<a href="#" id="sort-desc"><i class="fa fa-sort-amount-desc" title="sort"></i></a>{{/if}}
-    <a href="#" id="alphabetical" class="label label-default" title="sort alphabetically">A-Z</a>
-    <a href="#" id="activity" class="label label-default" title="sort by latest activity">Activity</a>
+    <span id="sort">
+      {{#if sortAsc}}<a href="#" id="sort-asc"><i class="fa fa-sort-amount-asc" title="sort"></i></a>{{/if}}
+      {{#if sortDesc}}<a href="#" id="sort-desc"><i class="fa fa-sort-amount-desc" title="sort"></i></a>{{/if}}
+      <a href="#" id="alphabetical" class="label label-default" title="sort alphabetically">A-Z</a>
+      <a href="#" id="activity" class="label label-default" title="sort by latest activity">Activity</a>
+    </span>
     {{#if isLoading}}<span>{{> spinner}}</span>{{/if}}
   </h4>
 

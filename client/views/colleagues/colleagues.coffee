@@ -3,11 +3,19 @@
 Session.set('colleagueSortBy', 'profile.firstname')
 Session.set('colleagueSortOrder', 1)
 
-setOrToggleSortOrder = (sortBy) ->
+setOrToggleSortOrder = (sortBy, groupId, labelId) ->
   if Session.get('colleagueSortBy') is sortBy
     Session.set('colleagueSortOrder', -Session.get('colleagueSortOrder'))
   else
     Session.set('colleagueSortBy', sortBy)
+  highlightLabel(groupId, labelId)
+
+removeHighlightLabel = (groupId) ->
+  $("#{groupId} a").removeClass('label-primary')
+
+highlightLabel = (groupId, labelId) ->
+  removeHighlightLabel(groupId)
+  $("#{labelId}").addClass('label-primary')
 
 Tracker.autorun ->
   sort = {}
@@ -52,8 +60,8 @@ Template.colleagues.events
 
   'click #alphabetical': (e) ->
     e.preventDefault()
-    setOrToggleSortOrder('profile.firstname')
+    setOrToggleSortOrder('profile.firstname', '#sort', '#alphabetical')
 
   'click #activity': (e) ->
     e.preventDefault()
-    setOrToggleSortOrder('profile.latestActivity.date')
+    setOrToggleSortOrder('profile.latestActivity.date', '#sort', '#activity')
