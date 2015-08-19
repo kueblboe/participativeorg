@@ -6,8 +6,9 @@ buildRegExp = (searchText) ->
 
 SearchSource.defineSource 'slack', (searchText, options = {}) ->
   domain = Meteor.user()?.domain
-  return [] unless domain
+  return null unless domain
   options = _.defaults options,
+    domain: domain
     sort: date: -1
     limit: 20
 
@@ -33,8 +34,9 @@ SearchSource.defineSource 'slack', (searchText, options = {}) ->
 
 SearchSource.defineSource 'colleagues', (searchText, options = {}) ->
   domain = Meteor.user()?.domain
-  return [] unless domain
+  return null unless domain
   options = _.defaults options,
+    domain: domain
     sort: {'profile.firstname': 1, 'profile.lastname': 1}
     limit: 500
 

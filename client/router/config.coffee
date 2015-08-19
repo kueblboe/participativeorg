@@ -85,7 +85,8 @@ Router.map ->
     waitOn: -> Meteor.subscribe("satisfaction", Session.get('selectedMonth')) if Meteor.user()
     data: -> {month: Session.get('selectedMonth')}
 
-  @route 'colleagues', {}
+  @route 'colleagues',
+    waitOn: -> ColleagueSearch.search Session.get('colleagueSearchTerm'), {sort: Session.get('colleagueSort')}
 
   @route 'profile',
     data: -> Meteor.user()
