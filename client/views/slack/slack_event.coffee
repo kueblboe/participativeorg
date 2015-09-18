@@ -16,7 +16,7 @@ Template.slackEvent.helpers
 
   description: ->
     if _.isArray @description
-      ({text: (markEmptyDescriptions text), userId: @copies[i].userId, userName: @copies[i].userName} for text, i in @description)
+      ({text: (markEmptyDescriptions text), userId: @copies[i].userId, userName: @copies[i].userName, ranking: @rankings[i]} for text, i in @description)
     else
       [{text: (markEmptyDescriptions @description), userId: @userId, userName: @userName}]
 

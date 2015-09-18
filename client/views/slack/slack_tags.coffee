@@ -18,16 +18,3 @@ Template.slackTags.helpers
 
   highlightCost: ->
     'highlight' if @cost > 500
-
-  highlightRanking: ->
-    'highlight' if @ranking > 4
-
-  rankingList: ->
-    [0...Math.round(@ranking)]
-
-  rankingNegList: ->
-    [0...(5 - Math.round(@ranking))] if @ranking
-
-  numberOfRankings: ->
-    actualRankings = _.filter(@rankings, (r) -> r)
-    actualRankings.length unless @userId or actualRankings.length <= 1

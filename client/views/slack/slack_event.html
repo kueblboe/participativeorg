@@ -13,6 +13,7 @@
             <div class="tags">
               <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
               <span>{{name userId}}</span>
+              <span>{{> starRating}}</span>
             </div>
           {{/if}}
         </div>
@@ -21,13 +22,13 @@
       <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
       {{/if}}
       {{#if userId}}
-      {{#if copies}}
-        <span class="copies">
-          {{#each copies}}
-            <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
-          {{/each}}
-        </span>
-      {{/if}}
+        {{#if copies}}
+          <span class="copies">
+            {{#each copies}}
+              <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
+            {{/each}}
+          </span>
+        {{/if}}
         <div class="actions">
           {{> likeLinks}}
           <span>

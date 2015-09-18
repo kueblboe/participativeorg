@@ -5,6 +5,7 @@ upsertSlackWithCopies = (slack, slackAttributes) ->
   slack.ranking = null unless slack.ranking
   slack.effort = null unless slack.effort
   slack.cost = null unless slack.cost
+  slack.description = "" unless slack.description
 
   # get all the copies from the original
   if slackAttributes.copyOf

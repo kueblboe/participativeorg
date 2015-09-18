@@ -1,0 +1,13 @@
+<template name="starRating">
+  <span class="rating {{highlightRanking}}">
+    {{#each rankingList}}
+      <i class="fa fa-star"></i>
+    {{/each}}
+    {{#each rankingNegList}}
+      <i class="fa fa-star-o"></i>
+    {{/each}}
+    {{#if numberOfRankings}}
+      <span class="numberOfRatings">({{numberOfRankings}})</span>
+    {{/if}}
+  </span>
+</template>
