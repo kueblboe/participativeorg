@@ -1,10 +1,17 @@
 @Slack = new Meteor.Collection("slack")
 
 upsertSlackWithCopies = (slack, slackAttributes) ->
+  # don't store NaN, it messes up avgerages in Mongo aggregations
+  slack.ranking = null unless slack.ranking
+  slack.effort = null unless slack.effort
+  slack.cost = null unless slack.cost
+
   # get all the copies from the original
   if slackAttributes.copyOf
     original = Slack.findOne(slackAttributes.copyOf)
     slack.copies = _.without(_.union(original.copies, {slackId: original._id, userId: original.userId}), null, undefined)
+    copiedSlack = Slack.findOne(slackAttributes.copyOf)
+    slack.masterId = copiedSlack.masterId
 
   # check if own slack
   if slackAttributes._id
@@ -23,11 +30,15 @@ upsertSlackWithCopies = (slack, slackAttributes) ->
     Meteor.users.update({_id: Meteor.userId()}, { $set: {'profile.numSlack': numSlack} })
 
   # update all copies with new copy
-  if slackAttributes.copyOf and changes.insertedId
-    for copy in slack.copies
-      copiedSlack = Slack.findOne(copy.slackId)
-      newSlack = Slack.findOne(changes.insertedId)
-      Slack.update(copiedSlack._id, { $set: {copies: _.without(_.union(copiedSlack.copies, {slackId: newSlack._id, userId: newSlack.userId}), null, undefined)} })
+  if Meteor.isServer
+    if changes.insertedId
+      if slackAttributes.copyOf
+        for copy in slack.copies
+          copiedSlack = Slack.findOne(copy.slackId)
+          newSlack = Slack.findOne(changes.insertedId)
+          Slack.update(copiedSlack._id, { $set: {copies: _.without(_.union(copiedSlack.copies, {slackId: newSlack._id, userId: newSlack.userId}), null, undefined)} })
+      else
+        Slack.update(changes.insertedId, { $set: {masterId: changes.insertedId}})
 
   changes
 

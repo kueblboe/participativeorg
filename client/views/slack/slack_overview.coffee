@@ -22,6 +22,9 @@ highlightLabel = (groupId, labelId) ->
   removeHighlightLabel(groupId)
   $("#{labelId}").addClass('label-primary')
 
+highlightSearchText = (regExp, text) ->
+  text.replace regExp, '<span class="search-text">$&</span>'
+
 Tracker.autorun ->
   sort = {}
   sort[Session.get('slackSortBy')] = Session.get('slackSortOrder')
@@ -37,7 +40,11 @@ Template.slackOverview.helpers
   slackEvents: ->
     SlackSearch.getData
       transform: (matchText, regExp) ->
-        matchText.replace regExp, '<span class="search-text">$&</span>'
+        if _.isArray matchText
+          for text in matchText
+            highlightSearchText regExp, text
+        else
+          highlightSearchText regExp, matchText
       sort: Session.get('slackSort')
 
   isLoading: ->

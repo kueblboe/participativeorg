@@ -4,32 +4,42 @@
     <i class="watermark fa fa-3x fa-{{categorySymbol}} hidden-print"></i>
     <b>{{{title}}}</b>
     {{> slackTags}}
-    <div class="preview">{{{preview description}}}</div>
+    <div class="preview">{{{preview descriptionText}}}</div>
     <div class="details">
-      <div>{{#markdown}}{{{description}}}{{/markdown}}</div>
+      {{#each description}}
+        <div class="item">
+          {{#markdown}}{{{text}}}{{/markdown}}
+          {{#if text}}
+            <div class="tags">
+              <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
+              <span>{{name userId}}</span>
+            </div>
+          {{/if}}
+        </div>
+      {{/each}}
       {{#if url}}
       <div><i class="fa fa-globe"></i> <a href="{{url}}" target="_blank">{{url}}</a></div>
       {{/if}}
-      <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}" title="{{userName}}"></a>
+      {{#if userId}}
       {{#if copies}}
         <span class="copies">
-          |
           {{#each copies}}
             <a href="#" class="coworker"><img class="img-circle avatar" src="{{avatar userId}}"></a>
           {{/each}}
         </span>
       {{/if}}
-      <div class="actions">
-        {{> likeLinks}}
-        <span>
-          <a href="{{pathFor 'slackPage'}}"><i class="fa fa-comment-o"></i>{{> commentLinkText}}</a>
-        </span>
-        {{#if owns}}
-          <a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>
-        {{else}}
-          {{#if notPartOfYet}}<a href="{{pathFor 'slackCopy'}}"><i class="fa fa-copy"></i> Copy to my personal development</a>{{/if}}
-        {{/if}}
-      </div>
+        <div class="actions">
+          {{> likeLinks}}
+          <span>
+            <a href="{{pathFor 'slackPage'}}"><i class="fa fa-comment-o"></i>{{> commentLinkText}}</a>
+          </span>
+          {{#if owns}}
+            <a href="{{pathFor 'slackEdit'}}"><i class="fa fa-pencil"></i> Edit</a>
+          {{else}}
+            {{#if notPartOfYet}}<a href="{{pathFor 'slackCopy'}}"><i class="fa fa-copy"></i> Copy to my personal development</a>{{/if}}
+          {{/if}}
+        </div>
+      {{/if}}
     </div>
   </div>
 </template>

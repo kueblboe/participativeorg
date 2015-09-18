@@ -30,7 +30,12 @@ SearchSource.defineSource 'slack', (searchText, options = {}) ->
       ]}
     ]}
 
-  Slack.find(selector, options).fetch()
+  pipeline = [
+    {$match: selector},
+    {$group: {_id: "$masterId", title: {$first: "$title"}, category: {$first: "$category"}, url: {$first: "$url"}, date: {$first: "$date"}, domain: {$first: "$domain"}, description: {$push: "$description"}, ranking: {$avg: "$ranking"}, rankings: {$push: "$ranking"}, effort: {$avg: "$effort"}, cost: {$avg: "$cost"}, copies: {$push: {userId: "$userId", userName: "$userName", slackId: "$_id"}}}}
+  ]
+
+  Slack.aggregate(pipeline)
 
 SearchSource.defineSource 'colleagues', (searchText, options = {}) ->
   domain = Meteor.user()?.domain

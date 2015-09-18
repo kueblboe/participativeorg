@@ -22,6 +22,9 @@
       {{#each rankingNegList}}
         <i class="fa fa-star-o"></i>
       {{/each}}
+      {{#if numberOfRankings}}
+        <span class="numberOfRatings">({{numberOfRankings}})</span>
+      {{/if}}
     </span>
   </div>
 </template>

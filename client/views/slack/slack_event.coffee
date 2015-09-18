@@ -1,6 +1,24 @@
+markEmptyDescriptions = (description) ->
+  if description
+    description
+  else
+    '_no description here yet_'
+
 Template.slackEvent.helpers
   unconfirmed: ->
     if !!@indicatedBy then 'unconfirmed'
+
+  descriptionText: ->
+    if _.isArray @description
+      @description.join "---"
+    else
+      @description
+
+  description: ->
+    if _.isArray @description
+      ({text: (markEmptyDescriptions text), userId: @copies[i].userId, userName: @copies[i].userName} for text, i in @description)
+    else
+      [{text: (markEmptyDescriptions @description), userId: @userId, userName: @userName}]
 
 Template.slackEvent.events
   'click a.background-link': (e) ->
