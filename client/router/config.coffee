@@ -109,14 +109,6 @@ Router.onBeforeAction ->
   clearErrors
   @next()
 
-Router.onBeforeAction ->
-  Meteor.subscribe "coworkers"
-  @next()
-
-Router.onBeforeAction ->
-  Meteor.subscribe "notifications"
-  @next()
-
 Router.onRun ->
   Session.set('selectedUserId', @params.userId || Session.get('selectedUserId') || Meteor.userId() || null)
   Session.set('selectedYear', parseInt(@params.year) || Session.get('selectedYear') || moment().year())
